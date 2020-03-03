@@ -29,4 +29,39 @@ public class ArrayStringSolution {
         }
         return -1;
     }
+
+    //    In a given integer array nums, there is always exactly one largest element.
+//
+//    Find whether the largest element in the array is at least twice as much as every other number in the array.
+//
+//    If it is, return the index of the largest element, otherwise return -1.
+//    https://leetcode.com/explore/learn/card/array-and-string/201/introduction-to-array/1147/
+    public int dominantIndex(int[] nums) {
+        if (nums.length == 0) {
+            return -1;
+        }
+        if (nums.length == 1) {
+            return 0;
+        }
+        int maxIndex = 0;
+        int nextMaxIndex = 1;
+        if (nums[1] > nums[0]) {
+            maxIndex = 1;
+            nextMaxIndex = 0;
+        }
+        for (int i = 2; i < nums.length; i++) {
+            if (nums[i] > nums[maxIndex]) {
+                nextMaxIndex = maxIndex;
+                maxIndex = i;
+            } else {
+                if (nums[i] > nums[nextMaxIndex]) {
+                    nextMaxIndex = i;
+                }
+            }
+        }
+        if (nums[maxIndex] >= 2 * nums[nextMaxIndex]) {
+            return maxIndex;
+        }
+        return -1;
+    }
 }

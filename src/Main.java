@@ -5,6 +5,7 @@ public class Main {
 	// write your code here
         ArrayStringTest arrayStringTest=new ArrayStringTest();
         arrayStringTest.testPivotIndex();
+        arrayStringTest.testDominantIndex();
 
     }
 }
