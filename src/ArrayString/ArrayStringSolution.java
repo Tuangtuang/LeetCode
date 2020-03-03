@@ -64,4 +64,28 @@ public class ArrayStringSolution {
         }
         return -1;
     }
+
+    //
+//    Given a non-empty array of digits representing a non-negative integer, plus one to the integer.
+//
+//    The digits are stored such that the most significant digit is at the head of the list, and each element in the array contain a single digit.
+//
+//    You may assume the integer does not contain any leading zero, except the number 0 itself.
+//    https://leetcode.com/explore/learn/card/array-and-string/201/introduction-to-array/1148/
+    public int[] plusOne(int[] digits) {
+        int size = digits.length;
+        int i = size - 1;
+        digits[i] += 1;
+        while (digits[i] > 9 && i >= 1) {
+            digits[i] = 0;
+            digits[i - 1] += 1;
+            i--;
+        }
+        if (i == 0 && digits[i] > 9) {
+            int[] res = new int[size + 1];
+            res[0] = 1;
+            return res;
+        }
+        return digits;
+    }
 }
