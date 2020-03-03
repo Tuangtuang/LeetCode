@@ -8,6 +8,7 @@ public class Main {
         arrayStringTest.testPivotIndex();
         arrayStringTest.testDominantIndex();
         arrayStringTest.testPlusOne();
+        arrayStringTest.testFindDiagonalOrder();
 
     }
 }

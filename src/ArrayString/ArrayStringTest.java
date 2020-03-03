@@ -26,4 +26,16 @@ public class ArrayStringTest {
         }
         System.out.println();
     }
+
+    public void testFindDiagonalOrder() {
+        System.out.println("Test Find Diagonal Order...");
+        int[][] array = {};
+        ArrayStringSolution arrayStringSolution = new ArrayStringSolution();
+        arrayStringSolution.findDiagonalOrder(array);
+        int[] res = arrayStringSolution.findDiagonalOrder(array);
+        for (int i = 0; i < res.length; i++) {
+            System.out.print(res[i] + " ");
+        }
+        System.out.println();
+    }
 }

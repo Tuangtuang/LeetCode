@@ -88,4 +88,60 @@ public class ArrayStringSolution {
         }
         return digits;
     }
+
+    //    Given a matrix of M x N elements (M rows, N columns), return all elements of the matrix in diagonal order as shown in the below image.
+//    https://leetcode.com/explore/learn/card/array-and-string/202/introduction-to-2d-array/1167/
+    public int[] findDiagonalOrder(int[][] matrix) {
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            return new int[0];
+        }
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+        int[] res = new int[rows * cols];
+        int i = 0, j = 0;
+        int resIndex = 0;
+        res[resIndex] = matrix[i][j];
+        resIndex++;
+        boolean flag = false;
+        while (resIndex < rows * cols) {
+            if (flag == false) {
+                i--;
+                j++;
+            } else {
+                i++;
+                j--;
+            }
+            if (i >= 0 && j >= 0 && i < rows && j < cols) {
+                res[resIndex] = matrix[i][j];
+                resIndex++;
+                continue;
+            }
+            if (i < 0 && j >= cols) {
+                i += 2;
+                j = cols - 1;
+            }
+            if (i >= rows && j < 0) {
+                j += 2;
+                i = rows - 1;
+            }
+            if (i < 0) {
+                i = 0;
+            }
+            if (i >= rows) {
+                i = rows - 1;
+                j += 2;
+            }
+            if (j < 0) {
+                j = 0;
+            }
+            if (j >= cols) {
+                j = cols - 1;
+                i += 2;
+            }
+            flag = !flag;
+            res[resIndex] = matrix[i][j];
+            resIndex++;
+        }
+        return res;
+    }
 }
