@@ -9,6 +9,7 @@ public class Main {
         arrayStringTest.testDominantIndex();
         arrayStringTest.testPlusOne();
         arrayStringTest.testFindDiagonalOrder();
+        arrayStringTest.testSpiralOrder();
 
     }
 }

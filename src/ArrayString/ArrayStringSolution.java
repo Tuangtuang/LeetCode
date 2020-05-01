@@ -1,5 +1,8 @@
 package ArrayString;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class ArrayStringSolution {
     //    Given an array of integers nums, write a method that returns the "pivot" index of this array.
 //    We define the pivot index as the index where the sum of the numbers to the left of the index is equal to the sum of the numbers to the right of the index.
@@ -143,5 +146,53 @@ public class ArrayStringSolution {
             resIndex++;
         }
         return res;
+    }
+
+
+//    Given a matrix of m x n elements (m rows, n columns), return all elements of the matrix in spiral order.
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> result = new LinkedList<>();
+        if(matrix==null){
+            return null;
+        }
+        int rows=matrix.length;
+        if(rows==0){
+            return result;
+        }
+        int cols=matrix[0].length;
+        if(cols==0){
+            return result;
+        }
+        int [][]tagMatrix=new int[rows][cols];
+        int j=0,i=0;
+        result.add(matrix[0][0]);
+        tagMatrix[0][0]=1;
+        int count=1;
+        int max=rows*cols;
+        while(count<=max){
+            while(!(j==cols-1||tagMatrix[i][j+1]==1)){
+                j++;
+                result.add(matrix[i][j]);
+                tagMatrix[i][j]=1;
+            }
+            while(!(i==rows-1||tagMatrix[i+1][j]==1)){
+                i++;
+                result.add(matrix[i][j]);
+                tagMatrix[i][j]=1;
+            }
+            while(!(i==0||tagMatrix[i-1][j]==1)){
+                i--;
+                result.add(matrix[i][j]);
+                tagMatrix[i][j]=1;
+            }
+            while(!(j==0||tagMatrix[i][j-1]==1)){
+                j--;
+                result.add(matrix[i][j]);
+                tagMatrix[i][j]=1;
+            }
+            count++;
+        }
+        return result;
+
     }
 }
