@@ -1,5 +1,7 @@
 package ArrayString;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -193,6 +195,33 @@ public class ArrayStringSolution {
             count++;
         }
         return result;
+    }
 
+//    Given a non-negative integer numRows, generate the first numRows of Pascal's triangle.
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> res=new ArrayList<>();
+        if(numRows==0){
+            return res;
+        }
+        List<Integer> temp=new ArrayList<>(1);
+        temp.add(1);
+        res.add(temp);
+        if(numRows==1){
+            return res;
+        }
+        temp=new ArrayList<>(1);
+        temp.add(1);
+        temp.add(1);
+        res.add(temp);
+        for(int i=2;i<numRows;i++){
+            List<Integer> tmp=new ArrayList<>();
+            tmp.add(1);
+            for(int j=1;j<i;j++){
+                tmp.add(res.get(i-1).get(j-1)+res.get(i-1).get(j));
+            }
+            tmp.add(1);
+            res.add(tmp);
+        }
+        return res;
     }
 }

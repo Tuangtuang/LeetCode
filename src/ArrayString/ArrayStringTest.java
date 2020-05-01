@@ -57,4 +57,16 @@ public class ArrayStringTest {
         }
         System.out.println();
     }
+
+    public void testGenerate(){
+        System.out.println("Test Generate....");
+        ArrayStringSolution arrayStringSolution=new ArrayStringSolution();
+        List<List<Integer>> res=arrayStringSolution.generate(5);
+        for(int i=0;i<res.size();i++){
+            for(int j=0;j<res.get(i).size();j++){
+                System.out.print(res.get(i).get(j)+" ");
+            }
+            System.out.println();
+        }
+    }
 }

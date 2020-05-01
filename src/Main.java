@@ -10,6 +10,7 @@ public class Main {
         arrayStringTest.testPlusOne();
         arrayStringTest.testFindDiagonalOrder();
         arrayStringTest.testSpiralOrder();
+        arrayStringTest.testGenerate();
 
     }
 }
