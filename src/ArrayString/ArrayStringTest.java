@@ -59,7 +59,7 @@ public class ArrayStringTest {
     }
 
     public void testGenerate(){
-        System.out.println("Test Generate....");
+        System.out.println("\nTest Generate....");
         ArrayStringSolution arrayStringSolution=new ArrayStringSolution();
         List<List<Integer>> res=arrayStringSolution.generate(5);
         for(int i=0;i<res.size();i++){
@@ -68,5 +68,11 @@ public class ArrayStringTest {
             }
             System.out.println();
         }
+    }
+
+    public void testAddBinary(){
+        System.out.println("\nTest Add Binary...");
+        ArrayStringSolution arrayStringSolution=new ArrayStringSolution();
+        System.out.println(arrayStringSolution.addBinary("1111","11"));
     }
 }

@@ -11,6 +11,7 @@ public class Main {
         arrayStringTest.testFindDiagonalOrder();
         arrayStringTest.testSpiralOrder();
         arrayStringTest.testGenerate();
+        arrayStringTest.testAddBinary();
 
     }
 }

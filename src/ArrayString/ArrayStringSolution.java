@@ -151,77 +151,126 @@ public class ArrayStringSolution {
     }
 
 
-//    Given a matrix of m x n elements (m rows, n columns), return all elements of the matrix in spiral order.
+    //    Given a matrix of m x n elements (m rows, n columns), return all elements of the matrix in spiral order.
     public List<Integer> spiralOrder(int[][] matrix) {
         List<Integer> result = new LinkedList<>();
-        if(matrix==null){
+        if (matrix == null) {
             return null;
         }
-        int rows=matrix.length;
-        if(rows==0){
+        int rows = matrix.length;
+        if (rows == 0) {
             return result;
         }
-        int cols=matrix[0].length;
-        if(cols==0){
+        int cols = matrix[0].length;
+        if (cols == 0) {
             return result;
         }
-        int [][]tagMatrix=new int[rows][cols];
-        int j=0,i=0;
+        int[][] tagMatrix = new int[rows][cols];
+        int j = 0, i = 0;
         result.add(matrix[0][0]);
-        tagMatrix[0][0]=1;
-        int count=1;
-        int max=rows*cols;
-        while(count<=max){
-            while(!(j==cols-1||tagMatrix[i][j+1]==1)){
+        tagMatrix[0][0] = 1;
+        int count = 1;
+        int max = rows * cols;
+        while (count <= max) {
+            while (!(j == cols - 1 || tagMatrix[i][j + 1] == 1)) {
                 j++;
                 result.add(matrix[i][j]);
-                tagMatrix[i][j]=1;
+                tagMatrix[i][j] = 1;
             }
-            while(!(i==rows-1||tagMatrix[i+1][j]==1)){
+            while (!(i == rows - 1 || tagMatrix[i + 1][j] == 1)) {
                 i++;
                 result.add(matrix[i][j]);
-                tagMatrix[i][j]=1;
+                tagMatrix[i][j] = 1;
             }
-            while(!(i==0||tagMatrix[i-1][j]==1)){
+            while (!(i == 0 || tagMatrix[i - 1][j] == 1)) {
                 i--;
                 result.add(matrix[i][j]);
-                tagMatrix[i][j]=1;
+                tagMatrix[i][j] = 1;
             }
-            while(!(j==0||tagMatrix[i][j-1]==1)){
+            while (!(j == 0 || tagMatrix[i][j - 1] == 1)) {
                 j--;
                 result.add(matrix[i][j]);
-                tagMatrix[i][j]=1;
+                tagMatrix[i][j] = 1;
             }
             count++;
         }
         return result;
     }
 
-//    Given a non-negative integer numRows, generate the first numRows of Pascal's triangle.
+    //    Given a non-negative integer numRows, generate the first numRows of Pascal's triangle.
     public List<List<Integer>> generate(int numRows) {
-        List<List<Integer>> res=new ArrayList<>();
-        if(numRows==0){
+        List<List<Integer>> res = new ArrayList<>();
+        if (numRows == 0) {
             return res;
         }
-        List<Integer> temp=new ArrayList<>(1);
+        List<Integer> temp = new ArrayList<>(1);
         temp.add(1);
         res.add(temp);
-        if(numRows==1){
+        if (numRows == 1) {
             return res;
         }
-        temp=new ArrayList<>(1);
+        temp = new ArrayList<>(1);
         temp.add(1);
         temp.add(1);
         res.add(temp);
-        for(int i=2;i<numRows;i++){
-            List<Integer> tmp=new ArrayList<>();
+        for (int i = 2; i < numRows; i++) {
+            List<Integer> tmp = new ArrayList<>();
             tmp.add(1);
-            for(int j=1;j<i;j++){
-                tmp.add(res.get(i-1).get(j-1)+res.get(i-1).get(j));
+            for (int j = 1; j < i; j++) {
+                tmp.add(res.get(i - 1).get(j - 1) + res.get(i - 1).get(j));
             }
             tmp.add(1);
             res.add(tmp);
         }
         return res;
+    }
+
+
+    //    Given two binary strings, return their sum (also a binary string).
+//
+//    The input strings are both non-empty and contains only characters 1 or 0.
+    public String addBinary(String a, String b) {
+        int i = a.length() - 1;
+        int j = b.length() - 1;
+        StringBuilder result = new StringBuilder();
+        int carry = 0;
+        while (i >= 0 && j >= 0) {
+            int add = a.charAt(i) - '0' + b.charAt(j) - '0' + carry;
+            if (add > 1) {
+                carry = 1;
+                result.append(add % 2);
+            } else {
+                carry = 0;
+                result.append(add);
+            }
+            i--;
+            j--;
+        }
+        while (i >= 0) {
+            int add = a.charAt(i) - '0' + carry;
+            if (add > 1) {
+                carry = 1;
+                result.append(add % 2);
+            } else {
+                carry = 0;
+                result.append(add);
+            }
+            i--;
+        }
+        while (j >= 0) {
+            int add = b.charAt(j) - '0' + carry;
+            if (add > 1) {
+                carry = 1;
+                result.append(add % 2);
+            } else {
+                carry = 0;
+                result.append(add);
+            }
+            j--;
+        }
+        if (carry != 0) {
+            result.append(carry);
+        }
+        return result.reverse().toString();
     }
 }
