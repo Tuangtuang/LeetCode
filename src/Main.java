@@ -12,6 +12,7 @@ public class Main {
         arrayStringTest.testSpiralOrder();
         arrayStringTest.testGenerate();
         arrayStringTest.testAddBinary();
+        arrayStringTest.testStrStr();
 
     }
 }

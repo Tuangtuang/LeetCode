@@ -75,4 +75,11 @@ public class ArrayStringTest {
         ArrayStringSolution arrayStringSolution=new ArrayStringSolution();
         System.out.println(arrayStringSolution.addBinary("1111","11"));
     }
+
+    public void testStrStr(){
+        System.out.println("\nTest str Str...");
+        ArrayStringSolution arrayStringSolution=new ArrayStringSolution();
+        System.out.println(arrayStringSolution.strStr("Hello","ll"));
+
+    }
 }
