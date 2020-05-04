@@ -275,10 +275,44 @@ public class ArrayStringSolution {
     }
 
 
-//    Implement strStr().
+    //    Implement strStr().
 //
 //    Return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
     public int strStr(String haystack, String needle) {
         return haystack.indexOf(needle);
+    }
+
+    //    Write a function to find the longest common prefix string amongst an array of strings.
+//
+//    If there is no common prefix, return an empty string "".
+    public String longestCommonPrefix(String[] strs) {
+        if (strs.length == 1) {
+            return strs[0];
+        }
+        if (strs.length == 0) {
+            return "";
+        }
+        int shortestIndex = 0;
+        for (int i = 1; i < strs.length; i++) {
+            if (strs[i].length() < strs[shortestIndex].length()) {
+                shortestIndex = i;
+            }
+        }
+        String shortestString = strs[shortestIndex];
+        int j = shortestString.length();
+        while (j >= 0) {
+            String temp = shortestString.substring(0, j);
+            boolean tag = true;
+            for (int i = 0; i < strs.length; i++) {
+                if (!strs[i].substring(0, temp.length()).equals(temp)) {
+                    tag = false;
+                }
+            }
+            if (tag) {
+                return temp;
+            }
+            j--;
+        }
+        return "";
     }
 }

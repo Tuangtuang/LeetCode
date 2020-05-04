@@ -13,6 +13,7 @@ public class Main {
         arrayStringTest.testGenerate();
         arrayStringTest.testAddBinary();
         arrayStringTest.testStrStr();
+        arrayStringTest.testLongestCommonPrefix();
 
     }
 }

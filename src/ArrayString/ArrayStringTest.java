@@ -80,6 +80,14 @@ public class ArrayStringTest {
         System.out.println("\nTest str Str...");
         ArrayStringSolution arrayStringSolution=new ArrayStringSolution();
         System.out.println(arrayStringSolution.strStr("Hello","ll"));
+    }
 
+    public void testLongestCommonPrefix(){
+        System.out.println("\nTest Longest Common Prefix...");
+        ArrayStringSolution arrayStringSolution=new ArrayStringSolution();
+        String []strs=new String[]{
+                "Hello","He","n"
+        };
+        System.out.println(arrayStringSolution.longestCommonPrefix(strs));
     }
 }
