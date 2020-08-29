@@ -14,6 +14,9 @@ public class Main {
         arrayStringTest.testAddBinary();
         arrayStringTest.testStrStr();
         arrayStringTest.testLongestCommonPrefix();
+        arrayStringTest.testReverseString();
+        arrayStringTest.testArrayPairSum();
+        arrayStringTest.testTwoSum();
 
     }
 }

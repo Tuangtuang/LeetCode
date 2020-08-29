@@ -315,4 +315,81 @@ public class ArrayStringSolution {
         }
         return "";
     }
+
+    //    Write a function that reverses a string. The input string is given as an array of characters char[].
+//
+//    Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
+//
+//    You may assume all the characters consist of printable ascii characters.
+    public void reverseString(char[] s) {
+        if (s.length == 0) {
+            return;
+        }
+        int start = 0, end = s.length-1;
+        while (start <= end) {
+            // swap start and end elements
+            char temp = s[start];
+            s[start] = s[end];
+            s[end] = temp;
+            start++;
+            end--;
+        }
+        return;
+    }
+
+//    Given an array of 2n integers, your task is to group these integers into n pairs of integer, say (a1, b1), (a2, b2), ..., (an, bn) which makes sum of min(ai, bi) for all i from 1 to n as large as possible.
+    public int arrayPairSum(int[] nums) {
+        int sum=0;
+        if(nums.length==0){
+            return sum;
+        }
+        Arrays.sort(nums);
+        for(int i=0;i<nums.length;i+=2){
+            sum+=nums[i];
+        }
+        return sum;
+    }
+
+
+//    Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.
+//
+//    The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2.
+    public int[] twoSum(int[] numbers, int target) {
+        int []result=new int[2];
+        for(int i=0;i<numbers.length-1;i++){
+            int searchTarget=target-numbers[i];
+            int index=binarySearch(numbers,searchTarget,i+1,numbers.length-1);
+            if(index==-1){
+                continue;
+            }else{
+                result[0]=i+1;
+                result[1]=index+1;
+            }
+        }
+        return result;
+    }
+
+    public int binarySearch(int[] vector,int target,int start,int end){
+        if(vector==null||vector.length==0){
+            return -1;
+        }
+        if(vector[start]>target||vector[end]<target){
+            return -1;
+        }
+        if(start>end){
+            return -1;
+        }
+        while (start<=end){
+            int mid=(start+end)/2;
+            if(vector[mid]>target){
+                end=mid-1;
+            }else if(vector[mid]<target){
+                start=mid+1;
+            }else{
+                return mid;
+            }
+        }
+        return -1;
+
+    }
 }

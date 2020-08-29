@@ -1,5 +1,6 @@
 package ArrayString;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ArrayStringTest {
@@ -89,5 +90,36 @@ public class ArrayStringTest {
                 "Hello","He","n"
         };
         System.out.println(arrayStringSolution.longestCommonPrefix(strs));
+    }
+
+    public void testReverseString(){
+        System.out.println("\nTest Reverse String...");
+        ArrayStringSolution arrayStringSolution=new ArrayStringSolution();
+        char[] str=new char[]{'h','e','l','l','o'};
+        arrayStringSolution.reverseString(str);
+        for(int i=0;i<str.length;i++){
+            System.out.print(str[i]+" ");
+        }
+        System.out.println();
+    }
+
+    public void testArrayPairSum(){
+        System.out.println("\nTest Array Pair Sum...");
+        ArrayStringSolution arrayStringSolution=new ArrayStringSolution();
+        int []nums=new int[]{1,3,2,3};
+        System.out.println(arrayStringSolution.arrayPairSum(nums));
+    }
+
+
+    public void testTwoSum(){
+        System.out.println("\nTest Two Sum...");
+        ArrayStringSolution arrayStringSolution=new ArrayStringSolution();
+        int []numbers = new int[]{2, 6, 7, 15};
+        int target=9;
+        int []res = arrayStringSolution.twoSum(numbers, target);
+        for(int i=0;i<res.length;i++){
+            System.out.print(res[i]+" ");
+        }
+        System.out.println();
     }
 }
