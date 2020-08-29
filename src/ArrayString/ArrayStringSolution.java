@@ -355,17 +355,31 @@ public class ArrayStringSolution {
 //
 //    The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2.
     public int[] twoSum(int[] numbers, int target) {
+//        int []result=new int[2];
+//        for(int i=0;i<numbers.length-1;i++){
+//            int searchTarget=target-numbers[i];
+//            int index=binarySearch(numbers,searchTarget,i+1,numbers.length-1);
+//            if(index==-1){
+//                continue;
+//            }else{
+//                result[0]=i+1;
+//                result[1]=index+1;
+//            }
+//        }
+//        return result;
         int []result=new int[2];
-        for(int i=0;i<numbers.length-1;i++){
-            int searchTarget=target-numbers[i];
-            int index=binarySearch(numbers,searchTarget,i+1,numbers.length-1);
-            if(index==-1){
-                continue;
-            }else{
-                result[0]=i+1;
-                result[1]=index+1;
+        int i=0,j=numbers.length-1;
+        while (i<j){
+            if(numbers[i]+numbers[j]>target){
+                j--;
+            }else if(numbers[i]+numbers[j]<target){
+                i++;
+            }else {
+                break;
             }
         }
+        result[0]=i+1;
+        result[1]=j+1;
         return result;
     }
 

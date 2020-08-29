@@ -114,7 +114,7 @@ public class ArrayStringTest {
     public void testTwoSum(){
         System.out.println("\nTest Two Sum...");
         ArrayStringSolution arrayStringSolution=new ArrayStringSolution();
-        int []numbers = new int[]{2, 6, 7, 15};
+        int []numbers = new int[]{2, 7, 11, 15};
         int target=9;
         int []res = arrayStringSolution.twoSum(numbers, target);
         for(int i=0;i<res.length;i++){

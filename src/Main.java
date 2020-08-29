@@ -2,6 +2,7 @@ import ArrayString.ArrayStringTest;
 
 public class Main {
 
+    //LeetCode English, login in Github account TuangTuang
     public static void main(String[] args) {
         // write your code here
         ArrayStringTest arrayStringTest = new ArrayStringTest();
