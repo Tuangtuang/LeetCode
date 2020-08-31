@@ -122,4 +122,15 @@ public class ArrayStringTest {
         }
         System.out.println();
     }
+
+    public void testRemoveElement(){
+        System.out.println("\nTest Remove Element...");
+        ArrayStringSolution arrayStringSolution=new ArrayStringSolution();
+        int []numbers=new int[]{3};
+        int length=arrayStringSolution.removeElement(numbers,3);
+        for(int i=0;i<length;i++){
+            System.out.print(numbers[i]+" ");
+        }
+        System.out.println();
+    }
 }

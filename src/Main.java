@@ -18,6 +18,7 @@ public class Main {
         arrayStringTest.testReverseString();
         arrayStringTest.testArrayPairSum();
         arrayStringTest.testTwoSum();
+        arrayStringTest.testRemoveElement();
 
     }
 }
