@@ -325,7 +325,7 @@ public class ArrayStringSolution {
         if (s.length == 0) {
             return;
         }
-        int start = 0, end = s.length-1;
+        int start = 0, end = s.length - 1;
         while (start <= end) {
             // swap start and end elements
             char temp = s[start];
@@ -337,21 +337,21 @@ public class ArrayStringSolution {
         return;
     }
 
-//    Given an array of 2n integers, your task is to group these integers into n pairs of integer, say (a1, b1), (a2, b2), ..., (an, bn) which makes sum of min(ai, bi) for all i from 1 to n as large as possible.
+    //    Given an array of 2n integers, your task is to group these integers into n pairs of integer, say (a1, b1), (a2, b2), ..., (an, bn) which makes sum of min(ai, bi) for all i from 1 to n as large as possible.
     public int arrayPairSum(int[] nums) {
-        int sum=0;
-        if(nums.length==0){
+        int sum = 0;
+        if (nums.length == 0) {
             return sum;
         }
         Arrays.sort(nums);
-        for(int i=0;i<nums.length;i+=2){
-            sum+=nums[i];
+        for (int i = 0; i < nums.length; i += 2) {
+            sum += nums[i];
         }
         return sum;
     }
 
 
-//    Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.
+    //    Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.
 //
 //    The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2.
     public int[] twoSum(int[] numbers, int target) {
@@ -367,39 +367,39 @@ public class ArrayStringSolution {
 //            }
 //        }
 //        return result;
-        int []result=new int[2];
-        int i=0,j=numbers.length-1;
-        while (i<j){
-            if(numbers[i]+numbers[j]>target){
+        int[] result = new int[2];
+        int i = 0, j = numbers.length - 1;
+        while (i < j) {
+            if (numbers[i] + numbers[j] > target) {
                 j--;
-            }else if(numbers[i]+numbers[j]<target){
+            } else if (numbers[i] + numbers[j] < target) {
                 i++;
-            }else {
+            } else {
                 break;
             }
         }
-        result[0]=i+1;
-        result[1]=j+1;
+        result[0] = i + 1;
+        result[1] = j + 1;
         return result;
     }
 
-    public int binarySearch(int[] vector,int target,int start,int end){
-        if(vector==null||vector.length==0){
+    public int binarySearch(int[] vector, int target, int start, int end) {
+        if (vector == null || vector.length == 0) {
             return -1;
         }
-        if(vector[start]>target||vector[end]<target){
+        if (vector[start] > target || vector[end] < target) {
             return -1;
         }
-        if(start>end){
+        if (start > end) {
             return -1;
         }
-        while (start<=end){
-            int mid=(start+end)/2;
-            if(vector[mid]>target){
-                end=mid-1;
-            }else if(vector[mid]<target){
-                start=mid+1;
-            }else{
+        while (start <= end) {
+            int mid = (start + end) / 2;
+            if (vector[mid] > target) {
+                end = mid - 1;
+            } else if (vector[mid] < target) {
+                start = mid + 1;
+            } else {
                 return mid;
             }
         }
@@ -407,24 +407,44 @@ public class ArrayStringSolution {
 
     }
 
-//    Given an array nums and a value val, remove all instances of that value in-place and return the new length.
+    //    Given an array nums and a value val, remove all instances of that value in-place and return the new length.
 //
 //    Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
 //
 //    The order of elements can be changed. It doesn't matter what you leave beyond the new length.
     public int removeElement(int[] nums, int val) {
-        if(nums==null||nums.length==0){
+        if (nums == null || nums.length == 0) {
             return 0;
         }
-        int i=0,j=nums.length-1;
-        while(i<=j){
-            if(nums[i]==val){
-                nums[i]=nums[j];
+        int i = 0, j = nums.length - 1;
+        while (i <= j) {
+            if (nums[i] == val) {
+                nums[i] = nums[j];
                 j--;
-            }else{
+            } else {
                 i++;
             }
         }
-        return j+1;
+        return j + 1;
+    }
+
+    //    Given a binary array, find the maximum number of consecutive 1s in this array.
+    public int findMaxConsecutiveOnes(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        int max = 0;
+        int count = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == 1) {
+                count++;
+            } else {
+                if (count > max) {
+                    max = count;
+                }
+                count = 0;
+            }
+        }
+        return max > count ? max : count;
     }
 }

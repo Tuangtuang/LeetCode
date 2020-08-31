@@ -133,4 +133,13 @@ public class ArrayStringTest {
         }
         System.out.println();
     }
+
+
+    public void testFindMaxConsecutiveOnes(){
+        System.out.println("\nTest Find Max Consecutive Ones...");
+        ArrayStringSolution arrayStringSolution=new ArrayStringSolution();
+        int []numbers=new int[]{1,1,0,1,1,1};
+        int max=arrayStringSolution.findMaxConsecutiveOnes(numbers);
+        System.out.println(max);
+    }
 }

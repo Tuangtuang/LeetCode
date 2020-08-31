@@ -19,6 +19,7 @@ public class Main {
         arrayStringTest.testArrayPairSum();
         arrayStringTest.testTwoSum();
         arrayStringTest.testRemoveElement();
+        arrayStringTest.testFindMaxConsecutiveOnes();
 
     }
 }
