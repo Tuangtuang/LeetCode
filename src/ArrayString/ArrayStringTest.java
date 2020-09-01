@@ -180,4 +180,10 @@ public class ArrayStringTest {
         System.out.println(arrayStringSolution.reverseWords("  hello world!  "));
     }
 
+    public void testReverseWords2(){
+        System.out.println("\nTest Reverse Words 2...");
+        ArrayStringSolution arrayStringSolution=new ArrayStringSolution();
+        System.out.println(arrayStringSolution.reverseWords2("Let's take LeetCode contest"));
+    }
+
 }

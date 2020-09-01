@@ -24,6 +24,7 @@ public class Main {
         arrayStringTest.testRotate();
         arrayStringTest.testGetRow();
         arrayStringTest.testReverseWords();
+        arrayStringTest.testReverseWords2();
 
     }
 }

@@ -489,7 +489,7 @@ public class ArrayStringSolution {
 
     }
 
-    public void reverseArray(int []arr,int start,int end){
+    public  void reverseArray(int []arr,int start,int end){
         if(arr==null||arr.length==0||arr.length==1){
             return;
         }
@@ -554,5 +554,39 @@ public class ArrayStringSolution {
 
     }
 
+//    Given a string, you need to reverse the order of characters in each word within a sentence while still preserving whitespace and initial word
+//    Note: In the string, each word is separated by single space and there will not be any extra space in the string.
+    public String reverseWords2(String s) {
+        char []str=s.toCharArray();
+        int start=0,end=0;
+        for(;end<str.length;){
+            if(str[end]==' '){
+                reverseArrayChar(str,start,end);
+                end++;
+                start=end;
+            }else {
+                end++;
+            }
+        }
+        reverseArrayChar(str,start,end);
+        return new String(str);
+    }
 
+    public  void reverseArrayChar(char []arr,int start,int end){
+        if(arr==null||arr.length==0||arr.length==1){
+            return;
+        }
+        if(start<0||end>arr.length){
+            return;
+        }
+        int i=start,j=end-1;
+        while (i<j){
+            // swap arr[i] and arr[j]
+            char temp=arr[i];
+            arr[i]=arr[j];
+            arr[j]=temp;
+            i++;
+            j--;
+        }
+    }
 }
