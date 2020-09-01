@@ -21,6 +21,7 @@ public class Main {
         arrayStringTest.testRemoveElement();
         arrayStringTest.testFindMaxConsecutiveOnes();
         arrayStringTest.testMinSubArrayLen();
+        arrayStringTest.testRotate();
 
     }
 }

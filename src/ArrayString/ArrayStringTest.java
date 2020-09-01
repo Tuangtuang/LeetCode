@@ -152,4 +152,15 @@ public class ArrayStringTest {
         System.out.println(min);
     }
 
+    public void  testRotate(){
+        System.out.println("\nTest Rotate...");
+        ArrayStringSolution arrayStringSolution=new ArrayStringSolution();
+        int []numbers=new int[]{1,2,3,4,5,6,7};
+        arrayStringSolution.rotate(numbers,3);
+        for(int i=0;i<numbers.length;i++){
+            System.out.print(numbers[i]+" ");
+        }
+        System.out.print("\n");
+    }
+
 }

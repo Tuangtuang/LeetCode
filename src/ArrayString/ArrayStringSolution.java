@@ -473,4 +473,38 @@ public class ArrayStringSolution {
         }
         return minLength==Integer.MAX_VALUE?0:minLength;
     }
+
+//    Given an array, rotate the array to the right by k steps, where k is non-negative.
+    public void rotate(int[] nums, int k) {
+        if(nums==null||nums.length==0||nums.length==1){
+            return;
+        }
+        int pos=k%nums.length;
+        reverseArray(nums,0,nums.length);
+
+        reverseArray(nums,0,pos);
+
+        reverseArray(nums,pos,nums.length);
+
+
+    }
+
+    public void reverseArray(int []arr,int start,int end){
+        if(arr==null||arr.length==0||arr.length==1){
+            return;
+        }
+        if(start<0||end>arr.length){
+            return;
+        }
+        int i=start,j=end-1;
+        while (i<j){
+            // swap arr[i] and arr[j]
+            int temp=arr[i];
+            arr[i]=arr[j];
+            arr[j]=temp;
+            i++;
+            j--;
+        }
+    }
+
 }
