@@ -163,4 +163,13 @@ public class ArrayStringTest {
         System.out.print("\n");
     }
 
+    public void testGetRow(){
+        System.out.println("\nTest Get Row...");
+        ArrayStringSolution arrayStringSolution=new ArrayStringSolution();
+        List<Integer> res=arrayStringSolution.getRow(5);
+        for(Integer item:res){
+            System.out.print(item);
+        }
+    }
+
 }

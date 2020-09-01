@@ -22,6 +22,7 @@ public class Main {
         arrayStringTest.testFindMaxConsecutiveOnes();
         arrayStringTest.testMinSubArrayLen();
         arrayStringTest.testRotate();
+        arrayStringTest.testGetRow();
 
     }
 }

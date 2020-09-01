@@ -507,4 +507,36 @@ public class ArrayStringSolution {
         }
     }
 
+    public List<Integer> getRow(int rowIndex) {
+        if(rowIndex<0){
+            return null;
+        }
+        Integer []res=new Integer[rowIndex+1];
+        res[0]=1;
+        if(rowIndex==0){
+            return new ArrayList<Integer>(Arrays.asList(res));
+        }
+        res[1]=1;
+        if(rowIndex==1){
+            return new ArrayList<Integer>(Arrays.asList(res));
+        }
+        int i=2;
+        while (i<=rowIndex){
+            res[i]=1;
+            int j=1;
+            int lastRes=0;
+            while(j<=i){
+                int curRes=res[j]+res[j-1];
+                if(lastRes!=0){
+                    res[j-1]=lastRes;
+                }
+                lastRes=curRes;
+                j++;
+            }
+            i++;
+        }
+        return new ArrayList<Integer>(Arrays.asList(res));
+
+    }
+
 }
