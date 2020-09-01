@@ -142,4 +142,14 @@ public class ArrayStringTest {
         int max=arrayStringSolution.findMaxConsecutiveOnes(numbers);
         System.out.println(max);
     }
+
+
+    public void testMinSubArrayLen(){
+        System.out.println("\nTest Min Sub Array Len...");
+        ArrayStringSolution arrayStringSolution=new ArrayStringSolution();
+        int []numbers=new int[]{2,3,1,2,4,3};
+        int min=arrayStringSolution.minSubArrayLen(7,numbers);
+        System.out.println(min);
+    }
+
 }

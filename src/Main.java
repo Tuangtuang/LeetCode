@@ -20,6 +20,7 @@ public class Main {
         arrayStringTest.testTwoSum();
         arrayStringTest.testRemoveElement();
         arrayStringTest.testFindMaxConsecutiveOnes();
+        arrayStringTest.testMinSubArrayLen();
 
     }
 }

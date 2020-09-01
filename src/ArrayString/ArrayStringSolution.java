@@ -447,4 +447,30 @@ public class ArrayStringSolution {
         }
         return max > count ? max : count;
     }
+
+//    Given an array of n positive integers and a positive integer s, find the minimal length of a contiguous subarray of which the sum ≥ s. If there isn't one, return 0 instead.
+    public int minSubArrayLen(int s, int[] nums) {
+        if(nums==null||nums.length==0){
+            return 0;
+        }
+        // 滑动窗口
+        int low=0,high=0,currSum=0,minLength=Integer.MAX_VALUE;
+        while(low<nums.length&&high<nums.length){
+            if(currSum<s){
+                currSum+=nums[high];
+                high++;
+            }else{
+                minLength=Integer.min(high-low,minLength);
+                currSum-=nums[low];
+                low++;
+            }
+        }
+        // 可能仍有多余项
+        while (currSum>=s){
+            minLength=Integer.min(high-low,minLength);
+            currSum-=nums[low];
+            low++;
+        }
+        return minLength==Integer.MAX_VALUE?0:minLength;
+    }
 }
