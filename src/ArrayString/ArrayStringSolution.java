@@ -539,4 +539,20 @@ public class ArrayStringSolution {
 
     }
 
+//    Given an input string, reverse the string word by word.
+    public String reverseWords(String s) {
+       if(s==null){
+           return null;
+       }
+       String []arr=s.split("\\s{1,}");
+       StringBuilder res = new StringBuilder();
+       for(int i=arr.length-1;i>=0;i--){
+           res.append(arr[i]);
+           res.append(" ");
+       }
+       return res.toString().trim();
+
+    }
+
+
 }

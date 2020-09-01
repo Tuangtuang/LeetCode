@@ -23,6 +23,7 @@ public class Main {
         arrayStringTest.testMinSubArrayLen();
         arrayStringTest.testRotate();
         arrayStringTest.testGetRow();
+        arrayStringTest.testReverseWords();
 
     }
 }

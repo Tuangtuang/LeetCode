@@ -170,6 +170,14 @@ public class ArrayStringTest {
         for(Integer item:res){
             System.out.print(item);
         }
+        System.out.print("\n");
+    }
+
+
+    public void testReverseWords(){
+        System.out.println("\nTest Reverse Words...");
+        ArrayStringSolution arrayStringSolution=new ArrayStringSolution();
+        System.out.println(arrayStringSolution.reverseWords("  hello world!  "));
     }
 
 }
