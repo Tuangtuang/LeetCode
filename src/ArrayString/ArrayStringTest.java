@@ -236,4 +236,17 @@ public class ArrayStringTest {
         }
         System.out.print("\n");
     }
+
+
+    public void testMerge(){
+        System.out.println("\nTest Merge...");
+        ArrayStringSolution arrayStringSolution=new ArrayStringSolution();
+        int []nums1=new int[]{1,2,4,0,0};
+        int []nums2=new int[]{3,5};
+        arrayStringSolution.merge(nums1,3,nums2,2);
+        for(int i=0;i<nums1.length;i++){
+            System.out.print(nums1[i]+" ");
+        }
+        System.out.print("\n");
+    }
 }

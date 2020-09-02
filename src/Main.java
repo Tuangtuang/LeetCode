@@ -30,6 +30,7 @@ public class Main {
         arrayStringTest.testFindNumbers();
         arrayStringTest.testSortedSquares();
         arrayStringTest.testDuplicateZeros();
+        arrayStringTest.testMerge();
 
     }
 }
