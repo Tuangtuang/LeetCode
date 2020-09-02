@@ -27,6 +27,7 @@ public class Main {
         arrayStringTest.testReverseWords2();
         arrayStringTest.testRemoveDuplicates();
         arrayStringTest.testMoveZeroes();
+        arrayStringTest.testFindNumbers();
 
     }
 }

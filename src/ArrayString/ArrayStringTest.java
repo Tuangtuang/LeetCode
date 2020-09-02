@@ -208,4 +208,10 @@ public class ArrayStringTest {
         System.out.print("\n");
     }
 
+    public void testFindNumbers(){
+        System.out.println("\nTest Find Numbers...");
+        ArrayStringSolution arrayStringSolution=new ArrayStringSolution();
+        int []numbers=new int[]{555,901,482,1771};
+        System.out.println(arrayStringSolution.findNumbers(numbers));
+    }
 }
