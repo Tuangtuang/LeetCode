@@ -589,4 +589,29 @@ public class ArrayStringSolution {
             j--;
         }
     }
+
+//    Given a sorted array nums, remove the duplicates in-place such that each element appear only once and return the new length.
+//
+//    Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
+    public int removeDuplicates(int[] nums) {
+        if(nums==null||nums.length==0){
+            return 0;
+        }
+        if(nums.length==1){
+            return 1;
+        }
+        int i=1,j=1;
+        int curNum=nums[0];
+        while (j<nums.length){
+            if(nums[j]==curNum){
+                j++;
+            }else {
+                curNum=nums[j];
+                nums[i]=nums[j];
+                i++;
+                j++;
+            }
+        }
+        return i;
+    }
 }

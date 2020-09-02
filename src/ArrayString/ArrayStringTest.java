@@ -186,4 +186,15 @@ public class ArrayStringTest {
         System.out.println(arrayStringSolution.reverseWords2("Let's take LeetCode contest"));
     }
 
+    public void testRemoveDuplicates(){
+        System.out.println("\nTest Remove Duplicates...");
+        ArrayStringSolution arrayStringSolution=new ArrayStringSolution();
+        int []numbers=new int[]{0,0,1,1,1,2,2,3,3,4};
+        int length = arrayStringSolution.removeDuplicates(numbers);
+        for(int i=0;i<length;i++){
+            System.out.print(numbers[i]+" ");
+        }
+        System.out.print("\n");
+    }
+
 }
