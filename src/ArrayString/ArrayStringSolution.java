@@ -675,4 +675,42 @@ public class ArrayStringSolution {
         }
         return result;
     }
+
+
+//    Given a fixed length array arr of integers, duplicate each occurrence of zero, shifting the remaining elements to the right.
+//
+//    Note that elements beyond the length of the original array are not written.
+    public void duplicateZeros(int[] arr) {
+        if(arr==null||arr.length==0||arr.length==1){
+            return;
+        }
+        // count possible zeros
+        int length=arr.length-1;
+        int zeros=0;
+        for(int i=0;i+zeros<=length;i++){
+            if(arr[i]==0){
+                if(i==length-zeros){
+                    arr[length]=0;
+                    length--;
+                    break;
+                }
+                zeros++;
+            }
+        }
+        if(zeros==0){
+            return;
+        }
+        int curLength=length-zeros;
+        for(int j=curLength;j>=0;j--){
+            if(arr[j]==0){
+                arr[j+zeros]=0;
+                zeros--;
+                arr[j+zeros]=0;
+            }else {
+                arr[j+zeros]=arr[j];
+            }
+        }
+        return;
+
+    }
 }

@@ -29,6 +29,7 @@ public class Main {
         arrayStringTest.testMoveZeroes();
         arrayStringTest.testFindNumbers();
         arrayStringTest.testSortedSquares();
+        arrayStringTest.testDuplicateZeros();
 
     }
 }

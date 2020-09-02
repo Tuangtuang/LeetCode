@@ -225,4 +225,15 @@ public class ArrayStringTest {
         }
         System.out.print("\n");
     }
+
+    public void testDuplicateZeros(){
+        System.out.println("\nTest Duplicate Zeros...");
+        ArrayStringSolution arrayStringSolution=new ArrayStringSolution();
+        int []numbers=new int[]{1,0,2,3,0,4,5,0};
+        arrayStringSolution.duplicateZeros(numbers);
+        for(int i=0;i<numbers.length;i++){
+            System.out.print(numbers[i]+" ");
+        }
+        System.out.print("\n");
+    }
 }
