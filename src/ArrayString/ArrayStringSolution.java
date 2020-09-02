@@ -614,4 +614,20 @@ public class ArrayStringSolution {
         }
         return i;
     }
+
+//    Given an array nums, write a function to move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+    public void moveZeroes(int[] nums) {
+        if(nums==null||nums.length==0||nums.length==1){
+            return;
+        }
+        int i=0,j=0;
+        for(;j<nums.length;j++){
+            if(nums[j]!=0){
+                int temp=nums[i];
+                nums[i]=nums[j];
+                nums[j]=temp;
+                i++;
+            }
+        }
+    }
 }

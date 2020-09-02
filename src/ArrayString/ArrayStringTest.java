@@ -197,4 +197,15 @@ public class ArrayStringTest {
         System.out.print("\n");
     }
 
+    public void testMoveZeroes(){
+        System.out.println("\nTest Move Zeros...");
+        ArrayStringSolution arrayStringSolution=new ArrayStringSolution();
+        int []numbers=new int[]{4,2,4,0,0,3,0,5,1,0};
+        arrayStringSolution.moveZeroes(numbers);
+        for(int i=0;i<numbers.length;i++){
+            System.out.print(numbers[i]+" ");
+        }
+        System.out.print("\n");
+    }
+
 }
