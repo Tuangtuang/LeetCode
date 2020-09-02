@@ -28,6 +28,7 @@ public class Main {
         arrayStringTest.testRemoveDuplicates();
         arrayStringTest.testMoveZeroes();
         arrayStringTest.testFindNumbers();
+        arrayStringTest.testSortedSquares();
 
     }
 }

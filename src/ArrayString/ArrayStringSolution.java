@@ -653,4 +653,26 @@ public class ArrayStringSolution {
         }
         return count;
     }
+
+//    Given an array of integers A sorted in non-decreasing order, return an array of the squares of each number, also in sorted non-decreasing order.
+    public int[] sortedSquares(int[] A) {
+        if(A==null){
+            return null;
+        }
+        int []result=new int[A.length];
+        int low=0,high=A.length-1;
+        int i=A.length-1;
+        while (i>=0){
+            if(Math.abs(A[low])>Math.abs(A[high])){
+                result[i]=A[low]*A[low];
+                i--;
+                low++;
+            }else {
+                result[i]=A[high]*A[high];
+                i--;
+                high--;
+            }
+        }
+        return result;
+    }
 }
