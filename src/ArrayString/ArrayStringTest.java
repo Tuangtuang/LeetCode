@@ -256,4 +256,12 @@ public class ArrayStringTest {
         int []nums=new int[]{3,5,5};
         System.out.println(arrayStringSolution.validMountainArray(nums));
     }
+
+
+    public void testCheckIfExist(){
+        System.out.println("\nTest Check If Exist...");
+        ArrayStringSolution arrayStringSolution=new ArrayStringSolution();
+        int []nums=new int[]{3,1,7,11};
+        System.out.println(arrayStringSolution.checkIfExist(nums));
+    }
 }

@@ -1,9 +1,6 @@
 package ArrayString;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class ArrayStringSolution {
     //    Given an array of integers nums, write a method that returns the "pivot" index of this array.
@@ -774,5 +771,22 @@ public class ArrayStringSolution {
             }
         }
         return j==A.length;
+    }
+
+//    Given an array arr of integers, check if there exists two integers N and M such that N is the double of M ( i.e. N = 2 * M).
+    public boolean checkIfExist(int[] arr) {
+        if(arr==null||arr.length==0||arr.length==1){
+            return false;
+        }
+        HashSet<Integer> set = new HashSet<>();
+        for(int i=0;i<arr.length;i++){
+            if(set.contains(arr[i]*2)||arr[i]%2==0&&set.contains(arr[i]/2)||arr[i]==0&&set.contains(0)){
+                return true;
+            }else{
+                set.add(arr[i]);
+            }
+        }
+        return false;
+
     }
 }

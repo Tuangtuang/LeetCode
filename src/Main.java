@@ -32,6 +32,7 @@ public class Main {
         arrayStringTest.testDuplicateZeros();
         arrayStringTest.testMerge();
         arrayStringTest.testValidMountainArray();
+        arrayStringTest.testCheckIfExist();
 
     }
 }
