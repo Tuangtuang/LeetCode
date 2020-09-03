@@ -31,6 +31,7 @@ public class Main {
         arrayStringTest.testSortedSquares();
         arrayStringTest.testDuplicateZeros();
         arrayStringTest.testMerge();
+        arrayStringTest.testValidMountainArray();
 
     }
 }

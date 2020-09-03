@@ -745,4 +745,34 @@ public class ArrayStringSolution {
         }
 
     }
+
+//    Given an array A of integers, return true if and only if it is a valid mountain array.
+    public boolean validMountainArray(int[] A) {
+        if(A==null){
+            return false;
+        }
+        if(A.length<3){
+            return false;
+        }
+        int i=1;
+        for(;i<A.length;){
+            if(A[i]<=A[i-1]){
+                break;
+            }
+            i++;
+        }
+        if(i==1){
+            return false;
+        }
+        if(i==A.length){
+            return false;
+        }
+        int j=i;
+        for(;j<A.length;j++){
+            if(A[j]>=A[j-1]){
+                break;
+            }
+        }
+        return j==A.length;
+    }
 }

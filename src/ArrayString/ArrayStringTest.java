@@ -249,4 +249,11 @@ public class ArrayStringTest {
         }
         System.out.print("\n");
     }
+
+    public void testValidMountainArray(){
+        System.out.println("\nTest Valid Mountain Array...");
+        ArrayStringSolution arrayStringSolution=new ArrayStringSolution();
+        int []nums=new int[]{3,5,5};
+        System.out.println(arrayStringSolution.validMountainArray(nums));
+    }
 }
