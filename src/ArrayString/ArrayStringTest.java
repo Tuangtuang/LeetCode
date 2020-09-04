@@ -275,4 +275,16 @@ public class ArrayStringTest {
         }
         System.out.print("\n");
     }
+
+
+    public void testSortArrayByParity(){
+        System.out.println("\nTest Sort Array Parity...");
+        ArrayStringSolution arrayStringSolution=new ArrayStringSolution();
+        int []nums=new int[]{0,2};
+        nums = arrayStringSolution.sortArrayByParity(nums);
+        for(int i=0;i<nums.length;i++){
+            System.out.print(nums[i]+" ");
+        }
+        System.out.print("\n");
+    }
 }

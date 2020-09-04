@@ -836,4 +836,30 @@ public class ArrayStringSolution {
         arr[arr.length-1]=-1;
         return arr;
     }
+
+
+//    Given an array A of non-negative integers, return an array consisting of all the even elements of A, followed by all the odd elements of A.
+    public int[] sortArrayByParity(int[] A) {
+        if(A==null||A.length==1){
+            return A;
+        }
+        int low=0,high=A.length-1;
+//        3,1,2,4
+        while (low<high&&low<A.length&&high>=0){
+            while (high>=0&&A[high]%2==1){
+                high--;
+            }
+            while (low<A.length&&A[low]%2==0){
+                low++;
+            }
+            // swap high and low
+            if(low<high){
+                int temp = A[high];
+                A[high] = A[low];
+                A[low]=temp;
+            }
+
+        }
+        return A;
+    }
 }

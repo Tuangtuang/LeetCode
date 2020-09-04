@@ -34,6 +34,7 @@ public class Main {
         arrayStringTest.testValidMountainArray();
         arrayStringTest.testCheckIfExist();
         arrayStringTest.testReplaceElements();
+        arrayStringTest.testSortArrayByParity();
 
     }
 }
