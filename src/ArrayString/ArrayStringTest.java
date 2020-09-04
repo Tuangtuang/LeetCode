@@ -264,4 +264,15 @@ public class ArrayStringTest {
         int []nums=new int[]{3,1,7,11};
         System.out.println(arrayStringSolution.checkIfExist(nums));
     }
+
+    public void testReplaceElements(){
+        System.out.println("\nTest Replace Elements...");
+        ArrayStringSolution arrayStringSolution=new ArrayStringSolution();
+        int []nums=new int[]{17,18,5,4,6,1};
+        nums=arrayStringSolution.replaceElements(nums);
+        for(int i=0;i<nums.length;i++){
+            System.out.print(nums[i]+" ");
+        }
+        System.out.print("\n");
+    }
 }

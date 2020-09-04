@@ -33,6 +33,7 @@ public class Main {
         arrayStringTest.testMerge();
         arrayStringTest.testValidMountainArray();
         arrayStringTest.testCheckIfExist();
+        arrayStringTest.testReplaceElements();
 
     }
 }

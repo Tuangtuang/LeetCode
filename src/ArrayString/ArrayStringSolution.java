@@ -789,4 +789,51 @@ public class ArrayStringSolution {
         return false;
 
     }
+
+//    Given an array arr, replace every element in that array with the greatest element among the elements to its right, and replace the last element with -1.
+    public int[] replaceElements(int[] arr) {
+        if(arr==null){
+            return null;
+        }
+        if(arr.length==1){
+            arr[0]=-1;
+            return arr;
+        }
+//        // find the max num and pos
+//        int max=Integer.MIN_VALUE,pos=-1;
+//        for(int i=1;i<arr.length;i++){
+//            if(arr[i]>max){
+//                max = arr[i];
+//                pos=i;
+//            }
+//        }
+//        arr[0]=max;
+//        for(int i=1;i<arr.length-1;i++){
+//            if(i<pos){
+//                arr[i]=max;
+//            }else{
+//                // refind the max number
+//                max=Integer.MIN_VALUE;
+//                for(int j=i+1;j<arr.length;j++){
+//                    if(arr[j]>max){
+//                        max=arr[j];
+//                        pos=j;
+//                    }
+//                }
+//                arr[i]=max;
+//            }
+//        }
+//        arr[arr.length-1]=-1;
+//        return arr;
+        int max=arr[arr.length-1];
+        for(int i=arr.length-1;i>=0;i--){
+            int temp=max;
+            if(arr[i]>max){
+                max=arr[i];
+            }
+            arr[i]=temp;
+        }
+        arr[arr.length-1]=-1;
+        return arr;
+    }
 }
