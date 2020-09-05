@@ -37,6 +37,7 @@ public class Main {
         arrayStringTest.testSortArrayByParity();
         arrayStringTest.testHeightChecker();
         arrayStringTest.testThirdMax();
+        arrayStringTest.testFindDisappearedNumbers();
 
     }
 }
