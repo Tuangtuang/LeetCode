@@ -287,4 +287,19 @@ public class ArrayStringTest {
         }
         System.out.print("\n");
     }
+
+
+    public  void testHeightChecker(){
+        System.out.println("\nTest Height Checker...");
+        ArrayStringSolution arrayStringSolution=new ArrayStringSolution();
+        int[] nums = new int[]{1, 1, 4, 2, 1, 3};
+        System.out.println(arrayStringSolution.heightChecker(nums));
+    }
+
+    public void testThirdMax(){
+        System.out.println("\nTest Third Max...");
+        ArrayStringSolution arrayStringSolution=new ArrayStringSolution();
+        int[] nums = new int[]{1,1,2};
+        System.out.println(arrayStringSolution.thirdMax(nums));
+    }
 }

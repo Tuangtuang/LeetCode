@@ -862,4 +862,53 @@ public class ArrayStringSolution {
         }
         return A;
     }
+
+
+//    Students are asked to stand in non-decreasing order of heights for an annual photo.
+//    Return the minimum number of students that must move in order for all students to be standing in non-decreasing order of height.
+    public int heightChecker(int[] heights) {
+        if(heights==null||heights.length==0||heights.length==1){
+            return 0;
+        }
+        int[] init = new int[heights.length];
+        for(int i=0;i<heights.length;i++){
+            init[i] = heights[i];
+        }
+        Arrays.sort(heights);
+        int count=0;
+        for(int i=0;i<heights.length;i++){
+            if(init[i]!=heights[i]){
+                count++;
+            }
+        }
+        return count;
+    }
+
+
+//    Given a non-empty array of integers, return the third maximum number in this array. If it does not exist, return the maximum number. The time complexity must be in O(n).
+    public int thirdMax(int[] nums) {
+        if(nums==null||nums.length==0){
+            return -1;
+        }
+        if(nums.length==1){
+            return nums[0];
+        }
+        Arrays.sort(nums);
+        if(nums.length==2){
+            return nums[1];
+        }else {
+            int count=1;
+            int j=nums.length-2;
+            for(;j>=0;j--){
+                if(nums[j]!=nums[j+1]){
+                    count++;
+                }
+                if(count==3){
+                    break;
+                }
+            }
+
+            return j!=-1?nums[j]:nums[nums.length-1];
+        }
+    }
 }

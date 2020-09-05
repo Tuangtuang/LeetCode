@@ -35,6 +35,8 @@ public class Main {
         arrayStringTest.testCheckIfExist();
         arrayStringTest.testReplaceElements();
         arrayStringTest.testSortArrayByParity();
+        arrayStringTest.testHeightChecker();
+        arrayStringTest.testThirdMax();
 
     }
 }
