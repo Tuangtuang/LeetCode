@@ -43,6 +43,7 @@ public class Main {
 //        Linked list
         LinkedListTest linkedListTest=new LinkedListTest();
         linkedListTest.testHasCycle();
+        linkedListTest.testDetectCycle();
 
     }
 }

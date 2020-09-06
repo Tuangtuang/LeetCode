@@ -23,4 +23,31 @@ public class LinkedListSolution {
         }
         return true;
     }
+
+//    Given a linked list, return the node where the cycle begins. If there is no cycle, return null.
+    public ListNode detectCycle(ListNode head) {
+        if(head==null||head.next==null){
+            // no cycle
+            return null;
+        }
+        ListNode slow=head,fast=head;
+        while(fast != null && fast.next != null){
+            fast = fast.next.next;
+            slow = slow.next;
+            if(fast == slow){
+                break;
+            }
+        }
+        if(fast == null || fast.next == null){
+            return null;
+        }
+        // has cycle
+        // 两个指针分别从链表头和相遇点出发，最后一定相遇于环入口。
+        slow=head;
+        while (slow!=fast){
+            slow=slow.next;
+            fast=fast.next;
+        }
+        return fast;
+    }
 }

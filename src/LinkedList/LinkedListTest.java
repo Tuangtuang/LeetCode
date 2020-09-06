@@ -44,7 +44,16 @@ public class LinkedListTest {
         ListNode head=createLinkedList(nums,pos);
         boolean res=linkedListSolution.hasCycle(head);
         System.out.println(res);
+    }
 
+    public void testDetectCycle(){
+        System.out.println("\nTest Detect Cycle...");
+        LinkedListSolution linkedListSolution=new LinkedListSolution();
+        int []nums=new int[]{3,2,0,-4};
+        int pos=1;
+        ListNode head=createLinkedList(nums,pos);
+        ListNode entrance = linkedListSolution.detectCycle(head);
+        System.out.println(entrance!=null?entrance.val:null);
     }
 
 
