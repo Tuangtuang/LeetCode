@@ -57,4 +57,18 @@ public class LinkedListTest {
     }
 
 
+    public void testRemoveNthFromEnd(){
+        System.out.println("\nTest Remove Nth From End...");
+        LinkedListSolution linkedListSolution=new LinkedListSolution();
+        int []nums=new int[]{1,2};
+        int n=1;
+        ListNode head=createLinkedList(nums,-1);
+        head=linkedListSolution.removeNthFromEnd(head,n);
+        while (head!=null){
+            System.out.print(head.val+" ");
+            head=head.next;
+        }
+
+    }
+
 }

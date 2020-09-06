@@ -94,4 +94,31 @@ public class LinkedListSolution {
         return null;
     }
 
+//    Given a linked list, remove the n-th node from the end of list and return its head.
+//    Given n will always be valid.
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        if(head==null){
+            return null;
+        }
+        // make i go n+1 step
+        ListNode front=head,back=head;
+        while (n>=0&&front!=null){
+            front=front.next;
+            n--;
+        }
+        // the first one is the deleted one
+        if(front==null&&n>=0){
+            head=head.next;
+        }
+        while (front!=null){
+            front=front.next;
+            back=back.next;
+        }
+        //back.next is the node we want to delete
+        if(back.next!=null){
+            back.next=back.next.next;
+        }
+        return head;
+    }
+
 }

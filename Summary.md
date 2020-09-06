@@ -412,3 +412,42 @@
 
 ### Fixed Distance Between 2 Pointers
 
+- Remove Nth Node From End of List
+
+  - Given a linked list, remove the *n*-th node from the end of list and return its head.
+
+  - ```
+    Given linked list: 1->2->3->4->5, and n = 2.
+    After removing the second node from the end, the linked list becomes 1->2->3->5.
+    ```
+
+  - 前指针先走N+1步，之后前后指针一起走，等前指针null时，后指针的后一个就是要删除的
+
+  - ```java
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+            if(head==null){
+                return null;
+            }
+            // make i go n+1 step
+            ListNode front=head,back=head;
+            while (n>=0&&front!=null){
+                front=front.next;
+                n--;
+            }
+            // the first one is the deleted one
+            if(front==null&&n>=0){
+                head=head.next;
+            }
+            while (front!=null){
+                front=front.next;
+                back=back.next;
+            }
+            //back.next is the node we want to delete
+            if(back.next!=null){
+                back.next=back.next.next;
+            }
+            return head;
+    }
+    ```
+
+  
