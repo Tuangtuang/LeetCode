@@ -358,3 +358,57 @@
 
 ......
 
+# Linked List
+
+## Two Pointer Technique
+
+### Dynamic Distance Between 2 Pointers
+
+- Linked List Cycle
+
+  - Given a linked list, return the node where the cycle begins. If there is no cycle, return `null`.
+
+    To represent a cycle in the given linked list, we use an integer `pos` which represents the position (0-indexed) in the linked list where tail connects to. If `pos` is `-1`, then there is no cycle in the linked list.
+
+  - ```
+    Input: head = [3,2,0,-4], pos = 1
+    Output: tail connects to node index 1
+    Explanation: There is a cycle in the linked list, where tail connects to the second node.
+    ```
+
+  - **设置快慢指针，假如有环，他们最后一定相遇。**
+
+    **两个指针分别从链表头和相遇点继续出发，每次走一步，最后一定相遇与环入口。**
+
+    https://www.jianshu.com/p/888f574925c3
+
+  - ```java
+    public ListNode detectCycle(ListNode head) {
+            if(head==null||head.next==null){
+                // no cycle
+                return null;
+            }
+            ListNode slow=head,fast=head;
+            while(fast != null && fast.next != null){
+                fast = fast.next.next;
+                slow = slow.next;
+                if(fast == slow){
+                    break;
+                }
+            }
+            if(fast == null || fast.next == null){
+                return null;
+            }
+            // has cycle
+            // 两个指针分别从链表头和相遇点出发，最后一定相遇于环入口。
+            slow=head;
+            while (slow!=fast){
+                slow=slow.next;
+                fast=fast.next;
+            }
+            return fast;
+    }
+    ```
+
+### Fixed Distance Between 2 Pointers
+

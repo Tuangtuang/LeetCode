@@ -50,4 +50,48 @@ public class LinkedListSolution {
         }
         return fast;
     }
+
+//    Write a program to find the node at which the intersection of two singly linked lists begins.
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        if(headA==null||headB==null){
+            return null;
+        }
+        int countA=0;
+        ListNode p=headA;
+        while (p!=null){
+            countA++;
+            p=p.next;
+        }
+        int countB=0;
+        p=headB;
+        while (p!=null){
+            countB++;
+            p=p.next;
+        }
+        int diff = Math.abs(countA - countB);
+        p=headA;
+        ListNode q=headB;
+        if(countA>countB){
+            // make p move diff
+            while (diff>0){
+                p=p.next;
+                diff--;
+            }
+        }else {
+            // make q move diff
+            while (diff>0){
+                q=q.next;
+                diff--;
+            }
+        }
+        while (p!=null&&q!=null){
+            if(p==q){
+                return p;
+            }
+            p=p.next;
+            q=q.next;
+        }
+        return null;
+    }
+
 }
