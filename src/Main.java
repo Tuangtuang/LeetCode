@@ -1,4 +1,5 @@
 import ArrayString.ArrayStringTest;
+import LinkedList.LinkedListTest;
 
 public class Main {
 
@@ -38,6 +39,10 @@ public class Main {
         arrayStringTest.testHeightChecker();
         arrayStringTest.testThirdMax();
         arrayStringTest.testFindDisappearedNumbers();
+
+//        Linked list
+        LinkedListTest linkedListTest=new LinkedListTest();
+        linkedListTest.testHasCycle();
 
     }
 }
