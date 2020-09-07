@@ -46,6 +46,7 @@ public class Main {
         linkedListTest.testDetectCycle();
         linkedListTest.testRemoveNthFromEnd();
         linkedListTest.testReverseList();
+        linkedListTest.testRemoveElements();
 
     }
 }

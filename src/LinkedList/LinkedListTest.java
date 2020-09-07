@@ -88,4 +88,18 @@ public class LinkedListTest {
         System.out.println();
     }
 
+
+    public void testRemoveElements(){
+        System.out.println("\nTest Remove Elements...");
+        LinkedListSolution linkedListSolution=new LinkedListSolution();
+        int []nums=new int[]{1,1};
+        ListNode head=createLinkedList(nums,-1);
+        head = linkedListSolution.removeElements(head, 1);
+        while (head!=null){
+            System.out.print(head.val+" ");
+            head=head.next;
+        }
+        System.out.println();
+    }
+
 }

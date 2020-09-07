@@ -136,4 +136,27 @@ public class LinkedListSolution {
         head.next=null;
         return p;
     }
+
+//    Remove all elements from a linked list of integers that have value val.
+    public ListNode removeElements(ListNode head, int val) {
+        if(head==null){
+            return head;
+        }
+        ListNode p=head;
+        if(head.next==null&&head.val==val){
+            return null;
+        }
+        while (p!=null&&p.next!=null){
+            if(p.next.val==val){
+                p.next=p.next.next;
+            }else{
+                p=p.next;
+            }
+        }
+        // 此时head的值还没有判断过
+        if(head.val==val){
+            head=head.next;
+        }
+        return head;
+    }
 }
