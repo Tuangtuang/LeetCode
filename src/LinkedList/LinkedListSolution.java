@@ -121,4 +121,19 @@ public class LinkedListSolution {
         return head;
     }
 
+//    Reverse a singly linked list.
+    public ListNode reverseList(ListNode head) {
+        if(head==null||head.next==null){
+            return head;
+        }
+        ListNode p=head,q=head.next;
+        while (q!=null&&p!=null){
+            ListNode temp=q.next;
+            q.next=p;
+            p=q;
+            q=temp;
+        }
+        head.next=null;
+        return p;
+    }
 }

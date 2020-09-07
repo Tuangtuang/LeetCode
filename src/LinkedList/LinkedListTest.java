@@ -68,7 +68,24 @@ public class LinkedListTest {
             System.out.print(head.val+" ");
             head=head.next;
         }
+        System.out.println();
+    }
 
+    public void testReverseList(){
+        System.out.println("\nTest Reverse List...");
+        LinkedListSolution linkedListSolution=new LinkedListSolution();
+        int []nums=new int[]{1,2};
+        ListNode head=createLinkedList(nums,-1);
+//        while (head!=null){
+//            System.out.print(head.val+" ");
+//            head=head.next;
+//        }
+        head = linkedListSolution.reverseList(head);
+        while (head!=null){
+            System.out.print(head.val+" ");
+            head=head.next;
+        }
+        System.out.println();
     }
 
 }
