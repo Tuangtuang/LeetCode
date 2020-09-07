@@ -159,4 +159,28 @@ public class LinkedListSolution {
         }
         return head;
     }
+
+//    Given a singly linked list, group all odd nodes together followed by the even nodes. Please note here we are talking about the node number and not the value in the nodes.
+    public ListNode oddEvenList(ListNode head) {
+        if(head==null||head.next==null){
+            return head;
+        }
+        ListNode p=head,q=head.next,evenStart=head.next;
+        while (q!=null&&p!=null){
+            if(p.next!=null){
+                p.next=p.next.next;
+            }
+            if(q.next!=null){
+                q.next=q.next.next;
+            }
+            p=p.next;
+            q=q.next;
+        }
+        p=head;
+        while (p.next!=null){
+            p=p.next;
+        }
+        p.next=evenStart;
+        return head;
+    }
 }

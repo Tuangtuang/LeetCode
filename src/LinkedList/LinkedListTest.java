@@ -102,4 +102,19 @@ public class LinkedListTest {
         System.out.println();
     }
 
+
+    public void testOddEvenList(){
+        System.out.println("\nTest Odd Even List...");
+        LinkedListSolution linkedListSolution=new LinkedListSolution();
+        int []nums=new int[]{1,2,3,4};
+        ListNode head=createLinkedList(nums,-1);
+        head = linkedListSolution.oddEvenList(head);
+
+        while (head!=null){
+            System.out.print(head.val+" ");
+            head=head.next;
+        }
+        System.out.println();
+    }
+
 }
