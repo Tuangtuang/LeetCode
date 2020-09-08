@@ -141,4 +141,21 @@ public class LinkedListTest {
 
     }
 
+
+    public void testAddTwoNumbers(){
+        System.out.println("\nMerge Two Numbers...");
+        LinkedListSolution linkedListSolution=new LinkedListSolution();
+        int []nums1=new int[]{9,9};
+        ListNode head1=createLinkedList(nums1,-1);
+        int []nums2=new int[]{1,8,9,9};
+        ListNode head2=createLinkedList(nums2,-1);
+        ListNode head=linkedListSolution.addTwoNumbers(head1,head2);
+        while (head!=null){
+            System.out.print(head.val+" ");
+            head=head.next;
+        }
+        System.out.println();
+
+    }
+
 }

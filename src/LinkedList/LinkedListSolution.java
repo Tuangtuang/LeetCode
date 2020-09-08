@@ -249,4 +249,52 @@ public class LinkedListSolution {
         }
         return resHead;
     }
+
+//    You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode p=l1,q=l2;
+        ListNode res=new ListNode((p.val+q.val)%10);
+        int carrier=0;
+        if(p.val+q.val>=10){
+            carrier=1;
+        }
+        p=p.next;
+        q=q.next;
+        ListNode pos=res;
+        while (p!=null&&q!=null){
+            pos.next=new ListNode((p.val+q.val+carrier)%10);
+            if(p.val+q.val+carrier>=10){
+                carrier=1;
+            }else {
+                carrier=0;
+            }
+            pos=pos.next;
+            p=p.next;
+            q=q.next;
+        }
+        while (p!=null){
+            pos.next=new ListNode((p.val+carrier)%10);
+            if(p.val+carrier>=10){
+                carrier=1;
+            }else {
+                carrier=0;
+            }
+            pos=pos.next;
+            p=p.next;
+        }
+        while (q!=null){
+            pos.next=new ListNode((q.val+carrier)%10);
+            if(q.val+carrier>=10){
+                carrier=1;
+            }else {
+                carrier=0;
+            }
+            pos=pos.next;
+            q=q.next;
+        }
+        if(carrier!=0){
+            pos.next = new ListNode(1);
+        }
+        return res;
+    }
 }

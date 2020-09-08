@@ -50,6 +50,7 @@ public class Main {
         linkedListTest.testOddEvenList();
         linkedListTest.testIsPalindrome();
         linkedListTest.testMergeTwoLists();
+        linkedListTest.testAddTwoNumbers();
 
     }
 }
