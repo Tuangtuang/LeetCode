@@ -183,4 +183,70 @@ public class LinkedListSolution {
         p.next=evenStart;
         return head;
     }
+
+//    Given a singly linked list, determine if it is a palindrome.
+    public boolean isPalindrome(ListNode head) {
+        if(head==null||head.next==null){
+            return true;
+        }
+        int countNode=0;
+        ListNode p=head;
+        while (p!=null){
+            countNode++;
+            p = p.next;
+        }
+        int mid = (int)Math.ceil((double)countNode / 2);
+        countNode=0;
+        p=head;
+        while (countNode!=mid){
+            countNode++;
+            p=p.next;
+        }
+        ListNode lastHalf=reverseList(p),q=lastHalf;
+        p=head;
+        while (q!=null){
+            if(p.val!=q.val){
+                return false;
+            }
+            q=q.next;
+            p=p.next;
+        }
+        return true;
+    }
+//    Merge two sorted linked lists and return it as a new sorted list. The new list should be made by splicing together the nodes of the first two lists.
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        if(l1==null){
+            return l2;
+        }
+        if(l2==null){
+            return l1;
+        }
+        ListNode p=l1,q=l2;
+        ListNode resHead=null;
+        if(p.val<q.val){
+            resHead=p;
+            p=p.next;
+        }else{
+            resHead=q;
+            q=q.next;
+        }
+        ListNode k=resHead;
+        while (p!=null&&q!=null){
+            if(p.val<q.val){
+                k.next=p;
+                p=p.next;
+            }else {
+                k.next=q;
+                q=q.next;
+            }
+            k=k.next;
+        }
+        if(p!=null){
+            k.next=p;
+        }
+        if(q!=null){
+            k.next=q;
+        }
+        return resHead;
+    }
 }

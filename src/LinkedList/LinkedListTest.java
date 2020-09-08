@@ -117,4 +117,28 @@ public class LinkedListTest {
         System.out.println();
     }
 
+    public void testIsPalindrome(){
+        System.out.println("\nTest Is Palindrome...");
+        LinkedListSolution linkedListSolution=new LinkedListSolution();
+        int []nums=new int[]{1,2,2,1};
+        ListNode head=createLinkedList(nums,-1);
+        System.out.println(linkedListSolution.isPalindrome(head));
+    }
+
+    public void testMergeTwoLists(){
+        System.out.println("\nMerge Two Lists...");
+        LinkedListSolution linkedListSolution=new LinkedListSolution();
+        int []nums1=new int[]{1,2,3};
+        ListNode head1=createLinkedList(nums1,-1);
+        int []nums2=new int[]{1,3};
+        ListNode head2=createLinkedList(nums2,-1);
+        ListNode head = linkedListSolution.mergeTwoLists(head1, head2);
+        while (head!=null){
+            System.out.print(head.val+" ");
+            head=head.next;
+        }
+        System.out.println();
+
+    }
+
 }

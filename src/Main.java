@@ -48,6 +48,8 @@ public class Main {
         linkedListTest.testReverseList();
         linkedListTest.testRemoveElements();
         linkedListTest.testOddEvenList();
+        linkedListTest.testIsPalindrome();
+        linkedListTest.testMergeTwoLists();
 
     }
 }
