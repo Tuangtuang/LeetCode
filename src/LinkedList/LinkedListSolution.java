@@ -333,5 +333,34 @@ public class LinkedListSolution {
         return res;
     }
 
-    
+//    Given a linked list, rotate the list to the right by k places, where k is non-negative.
+    public ListNode rotateRight(ListNode head, int k) {
+        if(head==null||head.next==null||k==0){
+            return head;
+        }
+        int countLength=0;
+        ListNode p=head;
+        while (p!=null){
+            countLength++;
+            p=p.next;
+        }
+        if(k%countLength==0){
+            return head;
+        }
+        int movePos=countLength-k%countLength;
+        int count=0;
+        p=head;
+        while (count!=movePos-1){
+            count++;
+            p=p.next;
+        }
+        ListNode newHead=p.next;
+        p.next=null;
+        p=newHead;
+        while (p.next!=null){
+            p=p.next;
+        }
+        p.next=head;
+        return newHead;
+    }
 }

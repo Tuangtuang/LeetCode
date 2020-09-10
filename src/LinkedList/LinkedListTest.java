@@ -168,4 +168,17 @@ public class LinkedListTest {
 
     }
 
+    public void testRotateRight(){
+        System.out.println("\nCopy Random Lists...");
+        LinkedListSolution linkedListSolution=new LinkedListSolution();
+        int []nums=new int[]{1,2};
+        ListNode head=createLinkedList(nums,-1);
+        head=linkedListSolution.rotateRight(head,2);
+        while (head!=null){
+            System.out.print(head.val+" ");
+            head=head.next;
+        }
+        System.out.println();
+    }
+
 }

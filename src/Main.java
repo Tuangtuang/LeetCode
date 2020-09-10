@@ -51,6 +51,7 @@ public class Main {
         linkedListTest.testIsPalindrome();
         linkedListTest.testMergeTwoLists();
         linkedListTest.testAddTwoNumbers();
+        linkedListTest.testRotateRight();
 
     }
 }
