@@ -297,4 +297,41 @@ public class LinkedListSolution {
         }
         return res;
     }
+
+//    A linked list is given such that each node contains an additional random pointer which could point to any node in the list or null.
+//    Return a deep copy of the list.
+    public Node copyRandomList(Node head) {
+        Node p=head;
+        // mock the node after every node
+        while(p!=null){
+            Node temp=new Node(p.val);
+            temp.next=p.next;
+            temp.random=p.random;
+            p.next=temp;
+            p=temp.next;
+        }
+        Node res=head.next;
+        p=res;
+        // get the new linkedlist
+        while(p!=null){
+            if(p.random!=null){
+                p.random=p.random.next;
+            }
+            if(p.next!=null){
+                p.next=p.next.next;
+            }else{
+                p.next=null;
+            }
+            p=p.next;
+        }
+        // recover the fomer linkedlist
+        p=head;
+        while(p.next.next!=null){
+            p.next=p.next.next;
+            p=p.next;
+        }
+        return res;
+    }
+
+    
 }

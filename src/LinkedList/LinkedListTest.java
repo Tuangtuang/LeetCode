@@ -36,6 +36,9 @@ public class LinkedListTest {
         return head;
     }
 
+    // create random linked list
+
+
     public void testHasCycle(){
         System.out.println("\nTest Has Cycle...");
         LinkedListSolution linkedListSolution=new LinkedListSolution();
@@ -155,6 +158,13 @@ public class LinkedListTest {
             head=head.next;
         }
         System.out.println();
+
+    }
+
+    public void testCopyRandomList(){
+        System.out.println("\nCopy Random Lists...");
+        LinkedListSolution linkedListSolution=new LinkedListSolution();
+        int []nums1=new int[]{9,9};
 
     }
 
