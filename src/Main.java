@@ -1,5 +1,6 @@
 import ArrayString.ArrayStringTest;
 import LinkedList.LinkedListTest;
+import QueueStack.QueueStackTest;
 
 public class Main {
 
@@ -52,6 +53,10 @@ public class Main {
         linkedListTest.testMergeTwoLists();
         linkedListTest.testAddTwoNumbers();
         linkedListTest.testRotateRight();
+
+//        queue stack
+        QueueStackTest queueStackTest=new QueueStackTest();
+        queueStackTest.testNumIslands();
 
     }
 }
