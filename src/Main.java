@@ -57,6 +57,6 @@ public class Main {
 //        queue stack
         QueueStackTest queueStackTest=new QueueStackTest();
         queueStackTest.testNumIslands();
-
+        queueStackTest.testOpenLock();
     }
 }

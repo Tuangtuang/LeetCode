@@ -1,7 +1,6 @@
 package QueueStack;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * @program: LeetCode
@@ -10,6 +9,9 @@ import java.util.Queue;
  * @create: 2020-09-23 11:09
  **/
 public class QueueStackSolution {
+    //    Number of Islands
+//    Given a 2d grid map of '1's (land) and '0's (water), count the number of islands. An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically.
+//    You may assume all four edges of the grid are all surrounded by water.
     public int numIslands(char[][] grid) {
         if(grid==null||grid.length==0||grid[0].length==0){
             return 0;
@@ -67,5 +69,52 @@ public class QueueStackSolution {
             return false;
         }
         return true;
+    }
+
+
+//    Open the Lock
+    public int openLock(String[] deadends, String target) {
+        Set<String> deadSet=new HashSet<String>();
+        Collections.addAll(deadSet, deadends);
+        Set<String> visited = new HashSet<>();
+        if(deadSet.contains(target)||deadSet.contains("0000")){
+            return -1;
+        }
+        Queue<String> q = new LinkedList<>();
+        String mark = "*";
+        q.offer("0000");
+        q.offer(mark);
+        int depth=0;
+        while (!q.isEmpty()){
+            String curNode=q.poll();
+            if(target.equals(curNode)){
+                return depth;
+            }
+            if(deadSet.contains(curNode)||visited.contains(curNode)){
+                continue;
+            }
+            if (curNode.equals(mark)&&q.isEmpty()) {
+                return -1;
+            }
+            if(curNode.equals(mark)){
+                q.offer(mark);
+                depth++;
+            }else {
+                visited.add(curNode);
+                q.addAll(getNextLevel(curNode));
+            }
+        }
+
+        return depth;
+
+    }
+
+    public LinkedList<String> getNextLevel(String str){
+        LinkedList<String> res=new LinkedList<>();
+        for(int i=0;i<str.length();i++){
+            res.add(str.substring(0, i) + (str.charAt(i) == '0' ? 9 :  str.charAt(i) - '0' - 1) + str.substring(i+1));
+            res.add(str.substring(0, i) + (str.charAt(i) == '9' ? 0 :  str.charAt(i) - '0' + 1) + str.substring(i+1));
+        }
+        return res;
     }
 }

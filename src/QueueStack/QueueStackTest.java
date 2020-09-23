@@ -20,4 +20,17 @@ public class QueueStackTest {
         int res=queueStackSolution.numIslands(map);
         System.out.println(res);
     }
+
+
+    public void testOpenLock(){
+        System.out.println("\nTest Open Lock...");
+        QueueStackSolution queueStackSolution=new QueueStackSolution();
+        String []deadEnds=new String[]{"0201","0101","0102","1212","2002"};
+        String target="0202";
+        int res=queueStackSolution.openLock(deadEnds, target);
+        System.out.println(res);
+
+    }
+
+
 }
