@@ -60,6 +60,7 @@ public class Main {
         queueStackTest.testNumIslands();
         queueStackTest.testOpenLock();
         queueStackTest.testNumSquares();
+        queueStackTest.testBracketValid();
 
         MinStackTest minStackTest =new MinStackTest();
         minStackTest.testMinStack();

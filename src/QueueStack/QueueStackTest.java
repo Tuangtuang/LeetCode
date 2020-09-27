@@ -38,5 +38,12 @@ public class QueueStackTest {
         System.out.println(queueStackSolution.numSquares(n));
     }
 
+    public void testBracketValid(){
+        System.out.println("\nTest Bracket Valid...");
+        QueueStackSolution queueStackSolution=new QueueStackSolution();
+        String testString="([)]";
+        System.out.println(queueStackSolution.isValid(testString));
+    }
+
 
 }

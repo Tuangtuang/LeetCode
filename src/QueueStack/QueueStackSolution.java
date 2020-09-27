@@ -218,4 +218,31 @@ public class QueueStackSolution {
         }
         return nextLevel;
     }
+
+    // stack
+
+//    Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+    public boolean isValid(String s) {
+        Stack<Character> stack=new Stack<>();
+        for(int i=0;i<s.length();i++){
+            if(stack.isEmpty()||!match(stack.peek(),s.charAt(i))){
+                stack.push(s.charAt(i));
+            }else {
+                stack.pop();
+            }
+        }
+        if(stack.isEmpty()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public boolean match(char left,char right){
+        if(left=='{'&&right=='}'||left=='['&&right==']'||left=='('&&right==')'){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
