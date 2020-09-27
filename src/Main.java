@@ -58,5 +58,6 @@ public class Main {
         QueueStackTest queueStackTest=new QueueStackTest();
         queueStackTest.testNumIslands();
         queueStackTest.testOpenLock();
+        queueStackTest.testNumSquares();
     }
 }

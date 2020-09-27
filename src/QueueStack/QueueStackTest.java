@@ -29,7 +29,13 @@ public class QueueStackTest {
         String target="0202";
         int res=queueStackSolution.openLock(deadEnds, target);
         System.out.println(res);
+    }
 
+    public void testNumSquares(){
+        System.out.println("\nTest Num Squares...");
+        QueueStackSolution queueStackSolution=new QueueStackSolution();
+        int n=13;
+        System.out.println(queueStackSolution.numSquares(n));
     }
 
 

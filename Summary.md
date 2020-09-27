@@ -451,3 +451,113 @@
     ```
 
   
+
+# Queue & BFS
+
+## BFS  template
+
+```java
+/**
+ * Return the length of the shortest path between root and target node.
+ */
+int BFS(Node root, Node target) {
+    Queue<Node> queue;  // store all nodes which are waiting to be processed
+    int step = 0;       // number of steps neeeded from root to current node
+    // initialize
+    add root to queue;
+    // BFS
+    while (queue is not empty) {
+        step = step + 1;
+        // iterate the nodes which are already in the queue
+        int size = queue.size();
+        for (int i = 0; i < size; ++i) {
+            Node cur = the first node in queue;
+            return step if cur is target;
+            for (Node next : the neighbors of cur) {
+                add next to queue;
+            }
+            remove the first node from queue;
+        }
+    }
+    return -1;          // there is no path from root to target
+}
+```
+
+- never visit a node twice
+
+  ```java
+  int BFS(Node root, Node target) {
+      Queue<Node> queue;  // store all nodes which are waiting to be processed
+      Set<Node> visited;  // store all the nodes that we've visited
+      int step = 0;       // number of steps neeeded from root to current node
+      // initialize
+      add root to queue;
+      add root to visited;
+      // BFS
+      while (queue is not empty) {
+          step = step + 1;
+          // iterate the nodes which are already in the queue
+          int size = queue.size();
+          for (int i = 0; i < size; ++i) {
+              Node cur = the first node in queue;
+              return step if cur is target;
+              for (Node next : the neighbors of cur) {
+                  if (next is not in used) {
+                      add next to queue;
+                      add next to visited;
+                  }
+              }
+              remove the first node from queue;
+          }
+      }
+      return -1;          // there is no path from root to target
+  }
+  ```
+
+## Perfect Square
+
+- Given a positive integer *n*, find the least number of perfect square numbers (for example, `1, 4, 9, 16, ...`) which sum to *n*.
+
+  ```java
+   public int numSquares(int n) {
+          Set<Integer> visited=new HashSet<>();
+          int mark=-1;
+          int depth=0;
+          Queue<Integer> q = new LinkedList<>();
+          q.offer(n);
+          q.offer(mark);
+          while (!q.isEmpty()){
+              int curNode = q.poll();
+              if(curNode==0){
+                  return depth;
+              }
+              if(curNode==mark&&q.isEmpty()){
+                  return -1;
+              }
+              if(visited.contains(curNode)){
+                  continue;
+              }
+              if(curNode==mark){
+                  q.offer(mark);
+                  depth++;
+              }else{
+                  visited.add(curNode);
+                  q.addAll(generateNextSquare(curNode));
+              }
+          }
+          return depth;
+      }
+  
+      public LinkedList<Integer> generateNextSquare(int n){
+          LinkedList<Integer> nextLevel = new LinkedList<>();
+          int i=1;
+          int temp;
+          while ((temp=n-i*i)>=0){
+              nextLevel.add(temp);
+              i++;
+          }
+          return nextLevel;
+      }
+  ```
+
+  

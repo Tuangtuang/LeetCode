@@ -117,4 +117,105 @@ public class QueueStackSolution {
         }
         return res;
     }
+
+//    Given a positive integer n, find the least number of perfect square numbers (for example, 1, 4, 9, 16, ...) which sum to n.
+//    public int numSquares(int n) {
+//        int minDepth=Integer.MAX_VALUE;
+//        int i=1;
+//        LinkedList<Integer> numbers = new LinkedList<>();
+//        while (i*i<=n){
+//            numbers.add(i*i);
+//            i++;
+//        }
+//        Collections.reverse(numbers);
+//        for(Integer item:numbers){
+//            System.out.println(item+" ");
+//            int depth=BFSNumSquares(n,item);
+//            if(depth!=-1&&depth<minDepth){
+//                minDepth=depth;
+//            }
+//        }
+//        return minDepth;
+//    }
+//
+//    public int BFSNumSquares(int target,int root){
+//        Set<Integer> visited = new HashSet<>();
+//        Queue<Integer> q = new LinkedList<>();
+//        int mark=-1;
+//        int depth=1;
+//        q.offer(root);
+//        q.offer(-1);
+//        while (!q.isEmpty()){
+//            int curNode=q.poll();
+//            if(curNode==target){
+//                return depth;
+//            }
+//            if(curNode==-1&&q.isEmpty()){
+//                return -1;
+//            }
+//            if(curNode==mark){
+//                q.offer(mark);
+//                depth++;
+//            }else{
+//                visited.add(curNode);
+//                q.addAll(generateNext(curNode,target,visited));
+//            }
+//        }
+//        return depth;
+//    }
+//
+//    public LinkedList<Integer> generateNext(int n,int target,Set<Integer> visited){
+//        LinkedList res = new LinkedList();
+//        int i=1;
+//        int tmp=0;
+//        while (tmp<=target){
+//            tmp=n+i*i;
+//            i++;
+//            if(!visited.contains(tmp)){
+//                res.add(tmp);
+//                visited.add(tmp);
+//            }
+//        }
+//        return res;
+//    }
+
+    public int numSquares(int n) {
+        Set<Integer> visited=new HashSet<>();
+        int mark=-1;
+        int depth=0;
+        Queue<Integer> q = new LinkedList<>();
+        q.offer(n);
+        q.offer(mark);
+        while (!q.isEmpty()){
+            int curNode = q.poll();
+            if(curNode==0){
+                return depth;
+            }
+            if(curNode==mark&&q.isEmpty()){
+                return -1;
+            }
+            if(visited.contains(curNode)){
+                continue;
+            }
+            if(curNode==mark){
+                q.offer(mark);
+                depth++;
+            }else{
+                visited.add(curNode);
+                q.addAll(generateNextSquare(curNode));
+            }
+        }
+        return depth;
+    }
+
+    public LinkedList<Integer> generateNextSquare(int n){
+        LinkedList<Integer> nextLevel = new LinkedList<>();
+        int i=1;
+        int temp;
+        while ((temp=n-i*i)>=0){
+            nextLevel.add(temp);
+            i++;
+        }
+        return nextLevel;
+    }
 }
