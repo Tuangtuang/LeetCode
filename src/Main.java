@@ -1,8 +1,7 @@
 import ArrayString.ArrayStringTest;
 import LinkedList.LinkedListTest;
-import QueueStack.MinStack;
 import QueueStack.QueueStackTest;
-import QueueStack.TestMinStack;
+import QueueStack.MinStackTest;
 
 public class Main {
 
@@ -62,7 +61,7 @@ public class Main {
         queueStackTest.testOpenLock();
         queueStackTest.testNumSquares();
 
-        TestMinStack testMinStack=new TestMinStack();
-        testMinStack.testMinStack();
+        MinStackTest minStackTest =new MinStackTest();
+        minStackTest.testMinStack();
     }
 }

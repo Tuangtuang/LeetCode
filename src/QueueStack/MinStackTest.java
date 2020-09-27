@@ -6,7 +6,7 @@ package QueueStack;
  * @author: tyq
  * @create: 2020-09-27 11:32
  **/
-public class TestMinStack {
+public class MinStackTest {
 
     public void testMinStack(){
         System.out.println("\nTest Min Stack...");
