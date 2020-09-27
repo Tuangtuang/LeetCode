@@ -1,6 +1,8 @@
 import ArrayString.ArrayStringTest;
 import LinkedList.LinkedListTest;
+import QueueStack.MinStack;
 import QueueStack.QueueStackTest;
+import QueueStack.TestMinStack;
 
 public class Main {
 
@@ -59,5 +61,8 @@ public class Main {
         queueStackTest.testNumIslands();
         queueStackTest.testOpenLock();
         queueStackTest.testNumSquares();
+
+        TestMinStack testMinStack=new TestMinStack();
+        testMinStack.testMinStack();
     }
 }
