@@ -245,4 +245,29 @@ public class QueueStackSolution {
             return false;
         }
     }
+
+//    Daily Temperatures
+//    Given a list of daily temperatures T, return a list such that, for each day in the input, tells you how many days you would have to wait until a warmer temperature. If there is no future day for which this is possible, put 0 instead.
+    public int[] dailyTemperatures(int[] T) {
+        if(T==null){
+            return null;
+        }
+        int []res=new int[T.length];
+        if(T.length==0){
+            return res;
+        }
+//        top is least, bottom is maximum
+        Stack<Integer> decreasingStack=new Stack<>();
+//        push index to the stack
+        decreasingStack.push(0);
+        for(int i=1;i<T.length;i++){
+            // if top is less than T[i], we find the latest temperature larger than top
+            while (!decreasingStack.isEmpty()&&T[i]>T[decreasingStack.peek()]){
+                int index=decreasingStack.pop();
+                res[index]=i-index;
+            }
+            decreasingStack.push(i);
+        }
+        return res;
+    }
 }

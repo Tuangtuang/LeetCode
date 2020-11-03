@@ -45,5 +45,15 @@ public class QueueStackTest {
         System.out.println(queueStackSolution.isValid(testString));
     }
 
+    public void testDailyTemperatures(){
+        System.out.println("\nTest Daily Temperature...");
+        QueueStackSolution queueStackSolution=new QueueStackSolution();
+        int []arr=new int[]{73, 74, 75, 71, 69, 72, 76, 73};
+        int []res=queueStackSolution.dailyTemperatures(arr);
+        for(int i=0;i<res.length;i++){
+            System.out.print(res[i]+" ");
+        }
+        System.out.println();
+    }
 
 }
