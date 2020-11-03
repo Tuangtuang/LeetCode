@@ -1,5 +1,7 @@
 package QueueStack;
 
+import com.sun.corba.se.impl.orbutil.graph.Graph;
+
 import java.util.*;
 
 /**
@@ -326,5 +328,66 @@ public class QueueStackSolution {
             }
 
         }
+    }
+
+//    Number of Islands DFS
+    public int numIslandsDFS(char[][] grid) {
+        if(grid==null||grid.length==0||grid[0].length==0){
+            return 0;
+        }
+        int rows=grid.length;
+        int cols=grid[0].length;
+        int res=0;
+        boolean [][]visited=new boolean[rows][cols];
+        for(int i=0;i<rows;i++){
+            for(int j=0;j<cols;j++){
+                if(!visited[i][j]&&grid[i][j]=='1'){
+                    DFSIsland(grid,visited,i,j,rows,cols);
+                    res++;
+                }
+            }
+        }
+        return res;
+    }
+
+    public void DFSIsland(char [][]grid,boolean [][]visited,int rowIndex,int colIndex,int row,int col){
+        if(rowIndex>=row||colIndex>=col||rowIndex<0||colIndex<0||grid[rowIndex][colIndex]=='0'||visited[rowIndex][colIndex]==true){
+            return;
+        }
+        visited[rowIndex][colIndex]=true;
+//        right
+        DFSIsland(grid,visited,rowIndex+1,colIndex,row,col);
+//        left
+        DFSIsland(grid,visited,rowIndex-1,colIndex,row,col);
+//        up
+        DFSIsland(grid,visited,rowIndex,colIndex-1,row,col);
+//        down
+        DFSIsland(grid,visited,rowIndex,colIndex+1,row,col);
+
+    }
+
+//    Given a reference of a node in a connected undirected graph.
+//
+//    Return a deep copy (clone) of the graph.
+//    hash map declaration must outside the function, otherwise it will be always new while recur
+    HashMap<GraphNode, GraphNode> map = new HashMap<>();
+    public GraphNode cloneGraph(GraphNode node) {
+        if(node==null){
+            return null;
+        }
+//        HashMap<GraphNode, GraphNode> map = new HashMap<>();
+        GraphNode newNode=new GraphNode();
+        newNode.val=node.val;
+        map.put(node,newNode);
+        for(GraphNode item: node.neighbors){
+            GraphNode tmp=null;
+            if(map.containsKey(item)){
+                tmp=map.get(item);
+            }else{
+                tmp=cloneGraph(item);
+            }
+            newNode.neighbors.add(tmp);
+        }
+        return newNode;
     }
 }

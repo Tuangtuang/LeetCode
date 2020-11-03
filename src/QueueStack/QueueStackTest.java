@@ -12,10 +12,10 @@ public class QueueStackTest {
         System.out.println("\nTest Num Islands...");
         QueueStackSolution queueStackSolution=new QueueStackSolution();
         char map[][]=new char[][]{
-                {'1', '0', '1', '1', '0','1','1'},
-//                {'1', '1', '0', '1', '0'},
-//                {'1', '1', '0', '0', '0'},
-//                {'0', '0', '0', '1', '1'}
+                {'1', '0', '1', '1', '0'},
+                {'1', '1', '0', '1', '0'},
+                {'1', '1', '0', '0', '0'},
+                {'0', '0', '0', '1', '1'}
         };
         int res=queueStackSolution.numIslands(map);
         System.out.println(res);
@@ -61,6 +61,18 @@ public class QueueStackTest {
         QueueStackSolution queueStackSolution=new QueueStackSolution();
         String []polish=new String[]{"4", "13", "5", "/", "+"};
         System.out.println(queueStackSolution.evalRPN(polish));
+    }
+
+    public void testNumIslandsDFS(){
+        System.out.println("\nTest Test Num Island...");
+        QueueStackSolution queueStackSolution=new QueueStackSolution();
+        char [][] island=new char[][]{
+                {'1', '1', '1', '1', '0'},
+                {'1', '1', '0', '1', '0'},
+                {'1', '1', '0', '0', '0'},
+                {'0', '0', '0', '0', '0'}
+        };
+        System.out.println(queueStackSolution.numIslandsDFS(island));
     }
 
 }
