@@ -56,4 +56,11 @@ public class QueueStackTest {
         System.out.println();
     }
 
+    public void testEvalRPN(){
+        System.out.println("\nTest Evaluate Reverse Polish Notation...");
+        QueueStackSolution queueStackSolution=new QueueStackSolution();
+        String []polish=new String[]{"4", "13", "5", "/", "+"};
+        System.out.println(queueStackSolution.evalRPN(polish));
+    }
+
 }

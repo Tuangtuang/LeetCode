@@ -270,4 +270,61 @@ public class QueueStackSolution {
         }
         return res;
     }
+
+//  Evaluate Reverse Polish Notation
+//  Evaluate the value of an arithmetic expression in Reverse Polish Notation.
+//  Valid operators are +, -, *, /. Each operand may be an integer or another expression.
+    public int evalRPN(String[] tokens) {
+        if(tokens==null||tokens.length==0){
+            return 0;
+        }
+        Stack<Integer> s=new Stack<>();
+        for(int i=0;i<tokens.length;i++){
+            Integer tmp=parseNumber(tokens[i]);
+            if(tmp!=null){
+//                number
+                s.push(tmp);
+            }else{
+//                operator
+                int right=s.pop();
+                int left=s.pop();
+                if(tokens[i].equals("+")){
+                    s.push(left+right);
+                }else if(tokens[i].equals("-")){
+                    s.push(left-right);
+                }else if(tokens[i].equals("*")){
+                    s.push(left*right);
+                }else{
+                    s.push(left/right);
+                }
+            }
+        }
+        return s.pop();
+    }
+
+    public Integer parseNumber(String str){
+        if(str.length()==0||str==null){
+            return null;
+        }
+        if(str.length()!=1){
+//            not operator
+            if(str.charAt(0)=='-'){
+//                negative number
+                int temp=Integer.parseInt(str.substring(1));
+                return temp*-1;
+            } else{
+//                positive number
+                return Integer.parseInt(str);
+            }
+        }else{
+//            one digit num
+            if(str.charAt(0)>='0'&&str.charAt(0)<='9'){
+                return str.charAt(0)-'0';
+            } else{
+//                operator
+                return null;
+            }
+
+        }
+    }
 }

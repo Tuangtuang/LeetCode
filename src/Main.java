@@ -62,6 +62,7 @@ public class Main {
         queueStackTest.testNumSquares();
         queueStackTest.testBracketValid();
         queueStackTest.testDailyTemperatures();
+        queueStackTest.testEvalRPN();
 
         MinStackTest minStackTest =new MinStackTest();
         minStackTest.testMinStack();
