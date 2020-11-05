@@ -560,4 +560,155 @@ int BFS(Node root, Node target) {
       }
   ```
 
+# Stack and DFS
+
+## Stack
+
+### Mining stack
+
+- Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.
+
+  - push(x) -- Push element x onto stack.
+  - pop() -- Removes the element on top of the stack.
+  - top() -- Get the top element.
+  - getMin() -- Retrieve the minimum element in the stack.
+
+  ```java
+  class MinStack {
+  
+      /** initialize your data structure here. */
+      int min;
+      Stack<Integer> minStack;
+      public MinStack() {
+          minStack = new Stack<>();
+          min=Integer.MAX_VALUE;
+      }
+  
+      public void push(int x) {
+          minStack.add(x);
+          if(x<=min){
+              // update minIndex
+              min=x;
+          }
+  
+      }
+  
+      public void pop() {
+          if(minStack.isEmpty()){
+              return;
+          }
+          if(minStack.peek()!=min){
+              minStack.pop();
+          }else{
+              minStack.pop();
+              min = Integer.MAX_VALUE;
+              for(Integer item:minStack){
+                  if(item<=min){
+                      min=item;
+                  }
+              }
+          }
+      }
+  
+      public int top() {
+          return minStack.peek();
+      }
+  
+      public int getMin() {
+          return min;
+      }
+  }
+  
+  /**
+   * Your MinStack object will be instantiated and called as such:
+   * MinStack obj = new MinStack();
+   * obj.push(x);
+   * obj.pop();
+   * int param_3 = obj.top();
+   * int param_4 = obj.getMin();
+   */
+  ```
+
+### Descresing Stack(Temperature problem)
+
+- Daily Temperatures
+
+  - Given a list of daily temperatures `T`, return a list such that, for each day in the input, tells you how many days you would have to wait until a warmer temperature. If there is no future day for which this is possible, put `0` instead.
+
+  - For example, given the list of temperatures `T = [73, 74, 75, 71, 69, 72, 76, 73]`, your output should be `[1, 1, 4, 2, 1, 1, 0, 0]`.
+
+    ```java
+    public int[] dailyTemperatures(int[] T) {
+            if(T==null){
+                return null;
+            }
+            int []res=new int[T.length];
+            if(T.length==0){
+                return res;
+            }
+    //        top is least, bottom is maximum
+            Stack<Integer> decreasingStack=new Stack<>();
+    //        push index to the stack
+            decreasingStack.push(0);
+            for(int i=1;i<T.length;i++){
+                // if top is less than T[i], we find the latest temperature larger than top
+                while (!decreasingStack.isEmpty()&&T[i]>T[decreasingStack.peek()]){
+                    int index=decreasingStack.pop();
+                    res[index]=i-index;
+                }
+                decreasingStack.push(i);
+            }
+            return res;
+        }
+    ```
+
+## BFS
+
+### Template 1
+
+```java
+/*
+ * Return true if there is a path from cur to target.
+ */
+boolean DFS(Node cur, Node target, Set<Node> visited) {
+    return true if cur is target;
+    for (next : each neighbor of cur) {
+        if (next is not in visited) {
+            add next to visted;
+            return true if DFS(next, target, visited) == true;
+        }
+    }
+    return false;
+}
+```
+
+
+
+### Templete2
+
+- The advantage of the recursion solution is that it is easier to implement. However, there is a huge disadvantage: if the depth of recursion is too high, you will suffer from `stack overflow`. In that case, you might want to use BFS instead or implement DFS using an explicit stack.
+
+  ```java
+  /*
+   * Return true if there is a path from cur to target.
+   */
+  boolean DFS(int root, int target) {
+      Set<Node> visited;
+      Stack<Node> stack;
+      add root to stack;
+      while (s is not empty) {
+          Node cur = the top element in stack;
+          remove the cur from the stack;
+          return true if cur is target;
+          for (Node next : the neighbors of cur) {
+              if (next is not in visited) {
+                  add next to visited;
+                  add next to stack;
+              }
+          }
+      }
+      return false;
+  }
+  ```
+
   
