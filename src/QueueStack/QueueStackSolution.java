@@ -390,4 +390,30 @@ public class QueueStackSolution {
         }
         return newNode;
     }
+
+
+//    Target Sum
+//    You are given a list of non-negative integers, a1, a2, ..., an, and a target, S. Now you have 2 symbols + and -. For each integer, you should choose one from + and - as its new symbol.
+    int count=0;
+    public int findTargetSumWays(int[] nums, int S) {
+        return DFSfindTargetSum(nums,S,0,0);
+
+    }
+
+    public int DFSfindTargetSum(int []nums,int sum,int depth,int curSum){
+        if(depth==nums.length){
+            if(curSum==sum){
+                count++;
+            }
+            return count;
+        }
+        curSum+=nums[depth];
+        depth++;
+        DFSfindTargetSum(nums,sum,depth,curSum);
+        depth--;
+        curSum-=2*nums[depth];
+        depth++;
+        DFSfindTargetSum(nums,sum,depth,curSum);
+        return count;
+    }
 }

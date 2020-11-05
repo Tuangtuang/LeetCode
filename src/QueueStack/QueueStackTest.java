@@ -75,4 +75,13 @@ public class QueueStackTest {
         System.out.println(queueStackSolution.numIslandsDFS(island));
     }
 
+
+    public void testFindTargetSumWays(){
+        System.out.println("\nTest Target Sum...");
+        QueueStackSolution queueStackSolution=new QueueStackSolution();
+        int []nums=new int[]{1, 1, 1, 1, 1};
+        int S=3;
+        System.out.println(queueStackSolution.findTargetSumWays(nums,S));
+    }
+
 }

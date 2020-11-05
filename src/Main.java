@@ -64,6 +64,7 @@ public class Main {
         queueStackTest.testDailyTemperatures();
         queueStackTest.testEvalRPN();
         queueStackTest.testNumIslandsDFS();
+        queueStackTest.testFindTargetSumWays();
 
         MinStackTest minStackTest =new MinStackTest();
         minStackTest.testMinStack();
