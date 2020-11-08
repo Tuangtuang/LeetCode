@@ -84,4 +84,11 @@ public class QueueStackTest {
         System.out.println(queueStackSolution.findTargetSumWays(nums,S));
     }
 
+    public void testDecodeString(){
+        System.out.println("\nTest Decode String...");
+        QueueStackSolution queueStackSolution=new QueueStackSolution();
+        String test = "3[a2[c]]";
+        System.out.println(queueStackSolution.decodeString(test));
+    }
+
 }

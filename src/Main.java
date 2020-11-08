@@ -65,6 +65,7 @@ public class Main {
         queueStackTest.testEvalRPN();
         queueStackTest.testNumIslandsDFS();
         queueStackTest.testFindTargetSumWays();
+        queueStackTest.testDecodeString();
 
         MinStackTest minStackTest =new MinStackTest();
         minStackTest.testMinStack();

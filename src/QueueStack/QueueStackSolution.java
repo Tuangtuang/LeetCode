@@ -435,4 +435,41 @@ public class QueueStackSolution {
         return res;
 
     }
+
+
+//    Decode String
+//    The encoding rule is: k[encoded_string], where the encoded_string inside the square brackets is being repeated exactly k times. Note that k is guaranteed to be a positive integer.
+//    O(n)
+    public String decodeString(String s) {
+        char [] sArray=s.toCharArray();
+        Deque<Character> reslist = new LinkedList<>();
+        for(int i=0;i<s.length();i++){
+            if(sArray[i]!=']'){
+                reslist.add(sArray[i]);
+            }else {
+                StringBuffer repeatedString=new StringBuffer();
+                while (reslist.getLast()!='['){
+                    repeatedString.append(reslist.removeLast());
+                }
+//                pop [
+                reslist.removeLast();
+                int repeatedTimes=0;
+                int count=0;
+                while (!reslist.isEmpty()&&Character.isDigit(reslist.getLast())){
+                    repeatedTimes+=(reslist.removeLast()-'0')* Math.pow(10,count);
+                    count++;
+                }
+                for(int k=0;k<repeatedTimes;k++){
+                    for(int p=repeatedString.length()-1;p>=0;p--){
+                        reslist.add(repeatedString.charAt(p));
+                    }
+                }
+            }
+        }
+        StringBuffer res=new StringBuffer();
+        for(Character c:reslist){
+            res.append(c);
+        }
+        return res.toString();
+    }
 }
