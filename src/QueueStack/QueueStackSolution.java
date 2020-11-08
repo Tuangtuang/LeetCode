@@ -472,4 +472,45 @@ public class QueueStackSolution {
         }
         return res.toString();
     }
+
+//    An image is represented by a 2-D array of integers, each integer representing the pixel value of the image (from 0 to 65535).
+//
+//    Given a coordinate (sr, sc) representing the starting pixel (row and column) of the flood fill, and a pixel value newColor, "flood fill" the image.
+//    O(n*m)
+    public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+        if(image==null||image.length==0){
+            return null;
+        }
+        if(image[0]==null||image[0].length==0){
+            return null;
+        }
+        int originalColor = image[sr][sc];
+        int row=image.length;
+        int col=image[0].length;
+        boolean[][] visited = new boolean[row][col];
+        DFSFloodFill(image,visited,row,col,sr,sc,originalColor,newColor);
+        return image;
+    }
+
+    public void DFSFloodFill(int [][]image, boolean [][]visited,int row,int col,int rowIndex,int colIndex, int originalColor,int newColor){
+        if(array2DOutBound(rowIndex,colIndex,image)||image[rowIndex][colIndex]!=originalColor||visited[rowIndex][colIndex]){
+            return;
+        }
+        if(image[rowIndex][colIndex]==originalColor){
+            image[rowIndex][colIndex]=newColor;
+            visited[rowIndex][colIndex]=true;
+        }
+        DFSFloodFill(image,visited,row,col,rowIndex-1,colIndex,originalColor,newColor);
+        DFSFloodFill(image,visited,row,col,rowIndex+1,colIndex,originalColor,newColor);
+        DFSFloodFill(image,visited,row,col,rowIndex,colIndex-1,originalColor,newColor);
+        DFSFloodFill(image,visited,row,col,rowIndex,colIndex+1,originalColor,newColor);
+    }
+
+    public boolean array2DOutBound(int rowIndex,int colIndex,int [][]arr){
+        if(rowIndex>=arr.length||rowIndex<0||colIndex>=arr[0].length||colIndex<0){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
