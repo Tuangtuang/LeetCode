@@ -67,6 +67,7 @@ public class Main {
         queueStackTest.testFindTargetSumWays();
         queueStackTest.testDecodeString();
         queueStackTest.testFloodFill();
+        queueStackTest.testUpdateMatrix();
 
         MinStackTest minStackTest =new MinStackTest();
         minStackTest.testMinStack();

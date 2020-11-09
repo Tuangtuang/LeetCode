@@ -106,4 +106,20 @@ public class QueueStackTest {
         }
     }
 
+
+    public void testUpdateMatrix(){
+        System.out.println("\nTest Update Matrix...");
+        QueueStackSolution queueStackSolution=new QueueStackSolution();
+        int [][]arr=new int[][]{
+                {0,0,0},{0,1,0},{1,1,1}
+        };
+        arr=queueStackSolution.updateMatrix(arr);
+        for(int i=0;i<arr.length;i++){
+            for(int j=0;j<arr[0].length;j++){
+                System.out.print(arr[i][j]+" ");
+            }
+            System.out.print("\n");
+        }
+    }
+
 }
