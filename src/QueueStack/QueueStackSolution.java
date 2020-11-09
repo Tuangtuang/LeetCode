@@ -578,7 +578,7 @@ public class QueueStackSolution {
 //    Initially, all the rooms start locked (except for room 0).
 //    You can walk back and forth between rooms freely.
 //    Return true if and only if you can enter every room.
-//    Note: 1) No need to record path 2)遇到打开的房间，需要把该房间有钥匙的房间号都加入到队列中
+//    Note: 1) No need to record path 2)遇到打开的房间，需要把该房间有钥匙的房间号都加入到队列中 3) 初始化判断，注意[[]]是true!
 //    O(n*m) O(n*m)
     public boolean canVisitAllRooms(List<List<Integer>> rooms) {
         if(rooms==null||rooms.isEmpty()){
