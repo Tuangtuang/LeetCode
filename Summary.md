@@ -560,6 +560,73 @@ int BFS(Node root, Node target) {
       }
   ```
 
+
+
+## Number of Island
+
+- ```java
+  public int numIslands(char[][] grid) {
+          if (grid == null || grid.length == 0 || grid[0].length == 0) {
+              return 0;
+          }
+          int rows = grid.length;
+          int cols = grid[0].length;
+          int count = 0;
+          boolean[][] visited = new boolean[rows][cols];
+          for (int i = 0; i < rows; i++) {
+              for (int j = 0; j < cols; j++) {
+                  if (visited[i][j] == false && grid[i][j] == '1') {
+                      // BFS
+                      visited[i][j] = true;
+                      BFS(visited, grid, i, j, rows, cols);
+                      count++;
+                  }
+              }
+          }
+          return count;
+      }
+  
+      public void BFS(boolean[][] visited, char[][] grid, int rowIndex, int colIndex, int rows, int cols) {
+          Queue<Integer> queue = new LinkedList<>();
+          int pos = rowIndex * cols + colIndex;
+          queue.offer(pos);
+          while (!queue.isEmpty()) {
+              int curPos = queue.poll();
+              int i = curPos / cols;
+              int j = curPos % cols;
+              // up
+              if (!outBound(rows, cols, i - 1, j) && !visited[i - 1][j] && grid[i - 1][j] == '1') {
+                  queue.offer((i - 1) * cols + j);
+                  visited[i - 1][j] = true;
+              }
+              // down
+              if (!outBound(rows, cols, i + 1, j) && !visited[i + 1][j] && grid[i + 1][j] == '1') {
+                  queue.offer((i + 1) * cols + j);
+                  visited[i + 1][j] = true;
+              }
+              // left
+              if (!outBound(rows, cols, i, j - 1) && !visited[i][j - 1] && grid[i][j - 1] == '1') {
+                  queue.offer(i * cols + j - 1);
+                  visited[i][j - 1] = true;
+              }
+              // right
+              if (!outBound(rows, cols, i, j + 1) && !visited[i][j + 1] && grid[i][j + 1] == '1') {
+                  queue.offer(i * cols + j + 1);
+                  visited[i][j + 1] = true;
+              }
+          }
+      }
+  
+  public boolean outBound(int row, int col, int i, int j) {
+          if (i >= 0 && i < row && j >= 0 && j < col) {
+              return false;
+          }
+          return true;
+      }
+  ```
+
+- 
+
 # Stack and DFS
 
 ## Stack
@@ -662,7 +729,7 @@ int BFS(Node root, Node target) {
         }
     ```
 
-## BFS
+## DFS
 
 ### Template 1
 
@@ -711,4 +778,44 @@ boolean DFS(Node cur, Node target, Set<Node> visited) {
   }
   ```
 
+### DFS Number of Island
+
+- ```java
+  public int numIslandsDFS(char[][] grid) {
+          if (grid == null || grid.length == 0 || grid[0].length == 0) {
+              return 0;
+          }
+          int rows = grid.length;
+          int cols = grid[0].length;
+          int res = 0;
+          boolean[][] visited = new boolean[rows][cols];
+          for (int i = 0; i < rows; i++) {
+              for (int j = 0; j < cols; j++) {
+                  if (!visited[i][j] && grid[i][j] == '1') {
+                      DFSIsland(grid, visited, i, j, rows, cols);
+                      res++;
+                  }
+              }
+          }
+          return res;
+      }
   
+      public void DFSIsland(char[][] grid, boolean[][] visited, int rowIndex, int colIndex, int row, int col) {
+          if (rowIndex >= row || colIndex >= col || rowIndex < 0 || colIndex < 0 || grid[rowIndex][colIndex] == '0' || visited[rowIndex][colIndex] == true) {
+              return;
+          }
+          visited[rowIndex][colIndex] = true;
+  //        right
+          DFSIsland(grid, visited, rowIndex + 1, colIndex, row, col);
+  //        left
+          DFSIsland(grid, visited, rowIndex - 1, colIndex, row, col);
+  //        up
+          DFSIsland(grid, visited, rowIndex, colIndex - 1, row, col);
+  //        down
+          DFSIsland(grid, visited, rowIndex, colIndex + 1, row, col);
+  
+      }
+  ```
+
+  
+
