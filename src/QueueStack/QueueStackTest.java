@@ -1,5 +1,8 @@
 package QueueStack;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @program: LeetCode
  * @description: test queue stack
@@ -122,4 +125,24 @@ public class QueueStackTest {
         }
     }
 
+
+    public void testCanVisitAllRooms(){
+        System.out.println("\nTest Can Visit All Rooms...");
+        QueueStackSolution queueStackSolution=new QueueStackSolution();
+        List<List<Integer>> input=new ArrayList<>();
+        int [][]arr = new int[][]{
+                {1,3},
+                {3,0,1},
+                {2},
+                {0},
+        };
+        for(int i=0;i<arr.length;i++){
+            ArrayList<Integer> tmp = new ArrayList<>();
+            for(int j=0;j<arr[i].length;j++){
+                tmp.add(arr[i][j]);
+            }
+            input.add(tmp);
+        }
+        System.out.println(queueStackSolution.canVisitAllRooms(input));
+    }
 }

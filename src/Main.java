@@ -68,6 +68,7 @@ public class Main {
         queueStackTest.testDecodeString();
         queueStackTest.testFloodFill();
         queueStackTest.testUpdateMatrix();
+        queueStackTest.testCanVisitAllRooms();
 
         MinStackTest minStackTest =new MinStackTest();
         minStackTest.testMinStack();

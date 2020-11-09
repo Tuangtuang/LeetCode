@@ -572,5 +572,47 @@ public class QueueStackSolution {
         return matrix;
     }
 
+//    Keys and Rooms
+//    There are N rooms and you start in room 0.  Each room has a distinct number in 0, 1, 2, ..., N-1, and each room may have some keys to access the next room.
+//    Formally, each room i has a list of keys rooms[i], and each key rooms[i][j] is an integer in [0, 1, ..., N-1] where N = rooms.length.  A key rooms[i][j] = v opens the room with number v.
+//    Initially, all the rooms start locked (except for room 0).
+//    You can walk back and forth between rooms freely.
+//    Return true if and only if you can enter every room.
+//    Note: 1) No need to record path 2)遇到打开的房间，需要把该房间有钥匙的房间号都加入到队列中
+//    O(n*m) O(n*m)
+    public boolean canVisitAllRooms(List<List<Integer>> rooms) {
+        if(rooms==null||rooms.isEmpty()){
+            return true;
+        }
+        if(rooms.get(0)==null){
+//            room 0 cannot get the key of any room
+            return false;
+        }
+        int[] path = new int[rooms.size()];
+        for(int i=0;i<path.length;i++){
+            path[i]=-1;
+        }
+//      BFS
+        Queue<Integer> q = new LinkedList<>();
+        for(Integer item:rooms.get(0)){
+            q.add(item);
+        }
+        while (!q.isEmpty()){
+            int index = q.poll();
+            if(path[index]==-1){
+//                have the key to room[index]
+                path[index]=0;
+                for (Integer item : rooms.get(index)) {
+                    q.add(item);
+                }
+            }
+        }
+        for(int i=1;i<path.length;i++){
+            if(path[i]==-1){
+                return false;
+            }
+        }
+        return true;
+    }
 
 }
