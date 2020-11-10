@@ -1,4 +1,6 @@
 import ArrayString.ArrayStringTest;
+import BinaryTree.BinaryTreeSolution;
+import BinaryTree.BinaryTreeTest;
 import LinkedList.LinkedListTest;
 import QueueStack.QueueStackTest;
 import QueueStack.MinStackTest;
@@ -43,7 +45,7 @@ public class Main {
         arrayStringTest.testFindDisappearedNumbers();
 
 //        Linked list
-        LinkedListTest linkedListTest=new LinkedListTest();
+        LinkedListTest linkedListTest = new LinkedListTest();
         linkedListTest.testHasCycle();
         linkedListTest.testDetectCycle();
         linkedListTest.testRemoveNthFromEnd();
@@ -56,7 +58,7 @@ public class Main {
         linkedListTest.testRotateRight();
 
 //        queue stack
-        QueueStackTest queueStackTest=new QueueStackTest();
+        QueueStackTest queueStackTest = new QueueStackTest();
         queueStackTest.testNumIslands();
         queueStackTest.testOpenLock();
         queueStackTest.testNumSquares();
@@ -70,7 +72,15 @@ public class Main {
         queueStackTest.testUpdateMatrix();
         queueStackTest.testCanVisitAllRooms();
 
-        MinStackTest minStackTest =new MinStackTest();
+        MinStackTest minStackTest = new MinStackTest();
         minStackTest.testMinStack();
+
+//        Binary Tree
+        BinaryTreeTest binaryTreeTest = new BinaryTreeTest();
+        binaryTreeTest.preorderTraversalTest();
+        binaryTreeTest.postorderTraversalTest();
+        binaryTreeTest.testLevelOrder();
+        binaryTreeTest.testHasPathSum();
+
     }
 }

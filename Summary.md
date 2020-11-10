@@ -813,9 +813,155 @@ boolean DFS(Node cur, Node target, Set<Node> visited) {
           DFSIsland(grid, visited, rowIndex, colIndex - 1, row, col);
   //        down
           DFSIsland(grid, visited, rowIndex, colIndex + 1, row, col);
-  
       }
   ```
 
   
 
+# Binary Tree
+
+## PreOrder/InOrder/PostOrder
+
+- recurrsion
+
+- iteration
+
+  - PostOrder
+
+    - 注意区分，有孩子和parent，通过preVisit区分
+
+    - ```java
+      public List<Integer> postorderTraversal(TreeNode root) {
+              List<Integer> reslut = new ArrayList<>();
+              if (root == null) {
+                  return reslut;
+              }
+              TreeNode p = root;
+              TreeNode pVisit = null;
+              Stack<TreeNode> stk = new Stack<>();
+              stk.add(p);
+      
+              while (!stk.isEmpty()) {
+                  //只要你有左孩子，就将左孩子压入栈中
+                  if (p != null && p.left != null) {
+                      stk.add(p.left);
+                      p = p.left;
+                  } else {
+                      //栈顶元素，先出栈，可能还有右孩子
+                      p = stk.peek();
+                      if (p.right == null || p.right == pVisit) {
+                          //如果没有右孩子或右孩子已经访问过了，出栈
+                          reslut.add(p.val);
+                          //这个很重要，考虑一下只有右孩子的树，得不断的回溯
+                          pVisit = p;
+                          //没有新节点加入，继续进行出栈操作
+                          p = null;
+                          stk.pop();
+                      } else {
+                          //如果有右孩子，右孩子入栈
+                          pVisit = p.right;
+                          stk.add(p.right);
+                          p = p.right;
+                      }
+                  }
+              }
+              return reslut;
+          }
+      ```
+
+      
+
+## Level Order
+
+- Use q
+
+- tagNode
+
+- Null
+
+- ```java
+  public List<List<Integer>> levelOrder(TreeNode root) {
+          List<List<Integer>> res = new ArrayList<>();
+          if(root==null){
+              return res;
+          }
+          Queue<TreeNode> q = new LinkedList<>();
+          TreeNode tagNode = new TreeNode(-1);
+          q.add(root);
+          q.add(tagNode);
+          List<Integer> line=new ArrayList<>();
+          while (!q.isEmpty()){
+              TreeNode cur = q.poll();
+              if(cur==tagNode){
+                  res.add(line);
+                  line = new ArrayList<>();
+                  if(!q.isEmpty()){
+                      q.add(tagNode);
+                  }
+              } else{
+                  line.add(cur.val);
+                  if(cur.left!=null){
+                      q.add(cur.left);
+                  }
+                  if(cur.right!=null){
+                      q.add(cur.right);
+                  }
+  
+              }
+          }
+          return res;
+      }
+  ```
+
+## Solve Tree Problems Recursively
+
+### "Top-down" Solution
+
+- We will visit the node **first to come up with some values, and pass these values to its children** when calling the function recursively.
+
+- ```
+  1. return specific value for null node
+  2. update the answer if needed                      // answer <-- params
+  3. left_ans = top_down(root.left, left_params)      // left_params <-- root.val, params
+  4. right_ans = top_down(root.right, right_params)   // right_params <-- root.val, params 
+  5. return the answer if needed                      // answer <-- left_ans, right_ans
+  ```
+
+- Example:
+
+  - We know that the depth of the root node is `1`. For each node, **if we know its depth, we will know the depth of its children**. Therefore, if we pass the depth of the node as a parameter when calling the function recursively, all the nodes will know their depth. And for leaf nodes, we can use the depth to update the final answer. Here is the pseudocode for the recursive function `maximum_depth(root, depth)`:
+
+  - ```
+    1. return if root is null
+    2. if root is a leaf node:
+    3.      answer = max(answer, depth)         // update the answer if needed
+    4. maximum_depth(root.left, depth + 1)      // call the function recursively for left child
+    5. maximum_depth(root.right, depth + 1)     // call the function recursively for right child
+    ```
+
+  - 
+
+### "Bottom-up" Solution
+
+- In each recursive call, we will firstly call the function **recursively for all the children nodes and then come up with the answer according to the returned values and the value of the current node itself**. 
+
+- ```
+  1. return specific value for null node
+  2. left_ans = bottom_up(root.left)          // call function recursively for left child
+  3. right_ans = bottom_up(root.right)        // call function recursively for right child
+  4. return answers                           // answer <-- left_ans, right_ans, root.val
+  ```
+
+- Example:
+
+  - For a single node of the tree, what will be the maximum depth `x` of the subtree rooted at itself?
+  - If we know the maximum depth `l` of the subtree rooted at its **left** child and the maximum depth `r` of the subtree rooted at its **right** child, can we answer the previous question? Of course yes, **we can choose the maximum between them and add 1 to get the maximum depth of the subtree rooted at the current node**. That is `x = max(l, r) + 1`.
+
+  - ```
+    1. return 0 if root is null                 // return 0 for null node
+    2. left_depth = maximum_depth(root.left)
+    3. right_depth = maximum_depth(root.right)
+    4. return max(left_depth, right_depth) + 1  // return depth of the subtree rooted
+    ```
+
+    
