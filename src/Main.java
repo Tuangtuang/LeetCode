@@ -81,6 +81,7 @@ public class Main {
         binaryTreeTest.postorderTraversalTest();
         binaryTreeTest.testLevelOrder();
         binaryTreeTest.testHasPathSum();
+        binaryTreeTest.testBuildTree();
 
     }
 }

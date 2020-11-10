@@ -135,4 +135,40 @@ public class BinaryTreeSolution {
         return leftResult||rightResult;
 
     }
+
+//    Construct Binary Tree from Inorder and Postorder Traversal
+//    Given inorder and postorder traversal of a tree, construct the binary tree.
+//    1) 最后一位-1，注意数组越界 2）在post order中找左右子树的方法，通过下标加减
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+
+        if(inorder==null||postorder==null){
+            return null;
+        }
+        if(inorder.length!=postorder.length){
+            return null;
+        }
+        return buildTreeHelper(inorder, postorder, 0, inorder.length-1, 0, postorder.length-1);
+    }
+
+    public TreeNode buildTreeHelper(int []inorder, int []postorder,int startInorder,int endInorder,int startPostOrder,int endPostOrder){
+        if(startInorder>endInorder||startPostOrder>endPostOrder){
+            return null;
+        }
+        TreeNode root = new TreeNode(postorder[endPostOrder]);
+//        find root val in inorder and divide the inorder
+        int i=0;
+        for(;i<inorder.length;i++){
+            if(inorder[i]==root.val){
+                break;
+            }
+        }
+//        build left tree
+        root.left=buildTreeHelper(inorder,postorder,startInorder,i-1,startPostOrder,startPostOrder+i-startInorder-1);
+//        build right tree
+        root.right = buildTreeHelper(inorder, postorder, i + 1, endInorder,startPostOrder+i-startInorder,endPostOrder-1);
+        return root;
+
+    }
+
+
 }
