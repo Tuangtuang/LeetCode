@@ -82,6 +82,7 @@ public class Main {
         binaryTreeTest.testLevelOrder();
         binaryTreeTest.testHasPathSum();
         binaryTreeTest.testBuildTree();
+        binaryTreeTest.testConnect();
 
     }
 }

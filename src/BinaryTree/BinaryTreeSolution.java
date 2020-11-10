@@ -96,6 +96,7 @@ public class BinaryTreeSolution {
     }
 
 //  想到调整递归的参数，helper函数；本题涉及到两棵子树的对称关系
+//    bottom up
     public boolean isSymmetric(TreeNode root) {
         if(root==null){
             return true;
@@ -138,6 +139,7 @@ public class BinaryTreeSolution {
 
 //    Construct Binary Tree from Inorder and Postorder Traversal
 //    Given inorder and postorder traversal of a tree, construct the binary tree.
+//    top-down recursion
 //    1) 最后一位-1，注意数组越界 2）在post order中找左右子树的方法，通过下标加减
     public TreeNode buildTree(int[] inorder, int[] postorder) {
 
@@ -169,6 +171,34 @@ public class BinaryTreeSolution {
         return root;
 
     }
+
+//    Populating Next Right Pointers in Each Node
+//    Recursion(top-down)
+//    问题1）左子树的最右边需要和右子树的最左边连接，此时next=parent.next.left
+//    2）parent.next.left可能是null,此时不需要为右子树最右边，不需要连接
+//    3）考虑输入是[]的情况，别忘了加判断
+//    时间复杂度：O(n) 空间：O(1)
+    public Node connect(Node root) {
+        if(root==null){
+            return root;
+        }
+        if(root.left==null&&root.right==null){
+            return root;
+        }
+
+        root.left.next=root.right;
+        if(root.next!=null){
+            root.right.next=root.next.left;
+        }else{
+            root.right.next=null;
+        }
+
+        connect(root.left);
+        connect(root.right);
+        return root;
+    }
+
+
 
 
 }
