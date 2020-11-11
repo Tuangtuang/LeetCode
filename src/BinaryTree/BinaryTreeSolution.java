@@ -198,6 +198,49 @@ public class BinaryTreeSolution {
         return root;
     }
 
+//  问题1）先建右边的树再建左边的树，eg：【2,1,3,0,7,9,1,2,null,1,0,null,null,8,8,null,null,null,null,7】扫描时如果右边的树没建好，无法找到应该有的左子树的next
+//    2）不是full binary tree，可能会缺孩子，next可能再右边的右边，需要扫描parent的同层，找到parent.child.next
+//    top-bottom
+    public Node connect2(Node root) {
+        if(root==null){
+            return null;
+        }
+//        leaves
+        if(root.left==null&&root.right==null){
+            return root;
+        }
+//        search next
+        Node p=root;
+        Node curNext=null;
+        while (p!=null){
+            p=p.next;
+            if(p!=null&&p.left!=null){
+                curNext = p.left;
+                break;
+            }
+            if(p!=null&&p.right!=null){
+                curNext = p.right;
+                break;
+            }
+        }
+        if(root.left!=null&&root.right!=null){
+            root.left.next = root.right;
+            root.right.next = curNext;
+        }
+
+        if(root.left!=null&&root.right==null){
+            root.left.next=curNext;
+        }
+
+        if(root.left==null){
+            root.right.next = curNext;
+        }
+
+
+        connect2(root.right);
+        connect2(root.left);
+        return root;
+    }
 
 
 

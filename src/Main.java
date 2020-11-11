@@ -83,6 +83,7 @@ public class Main {
         binaryTreeTest.testHasPathSum();
         binaryTreeTest.testBuildTree();
         binaryTreeTest.testConnect();
+        binaryTreeTest.testConnect2();
 
     }
 }

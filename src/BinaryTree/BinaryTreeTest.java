@@ -75,4 +75,12 @@ public class BinaryTreeTest {
         binaryTreeSolution.connect(root);
     }
 
+    public void testConnect2(){
+        System.out.println("\nTest Connect 2...");
+        BinaryTreeSolution binaryTreeSolution=new BinaryTreeSolution();
+        Integer[] arr = new Integer[]{2,1,3,0,7,9,1,2,null,1,0,null,null,8,8,null,null,null,null,7};
+        Node root = Node.InitTree(arr);
+        binaryTreeSolution.connect2(root);
+    }
+
 }
