@@ -83,4 +83,14 @@ public class BinaryTreeTest {
         binaryTreeSolution.connect2(root);
     }
 
+    public void testLowestCommonAncestor(){
+        System.out.println("\nTest Lowest Common Ancestor...");
+        BinaryTreeSolution binaryTreeSolution=new BinaryTreeSolution();
+        Integer[] arr = new Integer[]{3, 5, 1, 6, 2, 0, 8, null, null, 7, 4};
+        TreeNode root = TreeNode.InitTree(arr);
+        TreeNode ancestor=binaryTreeSolution.lowestCommonAncestor(root, root.left, root.left.right.right);
+        System.out.println(ancestor.val);
+
+    }
+
 }

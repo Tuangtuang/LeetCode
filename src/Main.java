@@ -84,6 +84,7 @@ public class Main {
         binaryTreeTest.testBuildTree();
         binaryTreeTest.testConnect();
         binaryTreeTest.testConnect2();
+        binaryTreeTest.testLowestCommonAncestor();
 
     }
 }

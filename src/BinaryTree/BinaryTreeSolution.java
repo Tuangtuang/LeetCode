@@ -235,10 +235,33 @@ public class BinaryTreeSolution {
         if(root.left==null){
             root.right.next = curNext;
         }
-
-
         connect2(root.right);
         connect2(root.left);
+        return root;
+    }
+
+//    Lowest Common Ancestor of a Binary Tree
+//    思路：1）在left subtree中找lowestCommonAncestor，没找到说明在右边
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if(root==null){
+            return null;
+        }
+        if(root==p||root==q){
+            return root;
+        }
+//        查找CommonAncestor是否在左边
+        TreeNode leftCommonAncestor = lowestCommonAncestor(root.left, p, q);
+//        查找CommonAncestor是否在右边
+        TreeNode rightCommonAncestor = lowestCommonAncestor(root.right, p, q);
+//        左边没有，一定在右边
+        if(leftCommonAncestor==null){
+            return rightCommonAncestor;
+        }
+//        右边没有，一定在左边
+        if(rightCommonAncestor==null){
+            return leftCommonAncestor;
+        }
+//        都没有，CommonAncestor就是根结点
         return root;
     }
 
