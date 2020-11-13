@@ -4,6 +4,7 @@ import BinaryTree.BinaryTreeTest;
 import LinkedList.LinkedListTest;
 import QueueStack.QueueStackTest;
 import QueueStack.MinStackTest;
+import Recursion.RecursionTest;
 
 public class Main {
 
@@ -85,6 +86,10 @@ public class Main {
         binaryTreeTest.testConnect();
         binaryTreeTest.testConnect2();
         binaryTreeTest.testLowestCommonAncestor();
+
+//        recursion
+        RecursionTest recursionTest = new RecursionTest();
+        recursionTest.testSwapPairs();
 
     }
 }

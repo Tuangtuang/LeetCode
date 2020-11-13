@@ -964,4 +964,75 @@ boolean DFS(Node cur, Node target, Set<Node> visited) {
     4. return max(left_depth, right_depth) + 1  // return depth of the subtree rooted
     ```
 
-    
+# Recursion
+
+## Recursion Principal
+
+### Reverse String
+
+- ```java
+  class Solution {
+      public void reverseString(char[] s) {
+          helper(s,0,s.length-1);
+      }
+      
+      public void helper(char[]s, int start, int end){
+          if(start>end){
+              return;
+          }
+          // swap 
+          char tmp=s[start];
+          s[start]=s[end];
+          s[end]=tmp;
+          helper(s,start+1,end-1);
+          return;
+      }
+  }
+  ```
+
+## Recursion Function
+
+- We define the problem as the function *F*(*X*) to implement, where {X}*X* is the input of the function which also defines the scope of the problem.
+
+- Then, in the function *F*(*X*), we will:
+
+  ![image-20201113194912946](/Users/tangyuqi/Library/Application Support/typora-user-images/image-20201113194912946.png)
+
+###  Swap Pair
+
+- Given a linked list, swap every two adjacent nodes and return its head.
+
+- ```java
+  public ListNode swapPairs(ListNode head) {
+  ////        0 or 1 node
+  //        if(head==null||head.next==null){
+  //            return head;
+  //        }
+  ////        only 2 node
+  ////        former head
+  //        ListNode p=head;
+  ////        former head.next.next
+  //        ListNode q=head.next.next;
+  ////        second node.next should be previous one
+  //        head.next.next=head;
+  ////        new head is the next node
+  //        head=head.next;
+  ////        former head now is the second one, it should be pointed to former head.next.next
+  //        p.next=q;
+  ////        return之后需要将后两个节点和前两个节点连接上，
+  ////        比如：1234，34交换完成，变为43之后，需要修改上一层21的尾部节点，几将1.next指向4，而不是3
+  //        head.next.next=swapPairs(q);
+  //        return head;
+          if(head==null||head.next==null){
+              return head;
+          }
+          ListNode firstNode=head;
+          ListNode secondNode=head.next;
+          firstNode.next = swapPairs(secondNode.next);
+          secondNode.next=firstNode;
+  //        new head is second node
+          return secondNode;
+      }
+  ```
+
+- 
