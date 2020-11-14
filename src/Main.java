@@ -90,6 +90,7 @@ public class Main {
 //        recursion
         RecursionTest recursionTest = new RecursionTest();
         recursionTest.testSwapPairs();
+        recursionTest.testReverseList();
 
     }
 }

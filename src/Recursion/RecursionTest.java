@@ -48,4 +48,21 @@ public class RecursionTest {
         head=recursionSolution.swapPairs(head);
         printLinkedList(head);
     }
+
+    public void testReverseList(){
+        System.out.println("\nTest Reverse List...");
+        RecursionSolution linkedListSolution=new RecursionSolution();
+        int []nums=new int[]{1,2,3};
+        ListNode head=createLinkedList(nums,-1);
+//        while (head!=null){
+//            System.out.print(head.val+" ");
+//            head=head.next;
+//        }
+        head = linkedListSolution.reverseList(head);
+        while (head!=null){
+            System.out.print(head.val+" ");
+            head=head.next;
+        }
+        System.out.println();
+    }
 }
