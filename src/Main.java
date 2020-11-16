@@ -91,6 +91,8 @@ public class Main {
         RecursionTest recursionTest = new RecursionTest();
         recursionTest.testSwapPairs();
         recursionTest.testReverseList();
+        recursionTest.testFib();
+        recursionTest.testMyPow();
 
     }
 }

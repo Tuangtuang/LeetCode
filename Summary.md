@@ -1040,3 +1040,88 @@ boolean DFS(Node cur, Node target, Set<Node> visited) {
 - `recurrence relation`: the relationship between the result of a problem and the result of its subproblems.
 - `base case`: the case where one can compute the answer directly without any further recursion calls. Sometimes, the base cases are also called *bottom cases*, since they are often the cases where the problem has been reduced to the minimal scale, *i.e.* the bottom, if we consider that dividing the problem into subproblems is in a top-down manner.
 
+## Duplicate Calculation in Recursion(Memoriztion)
+
+- Recursion is often an intuitive and powerful way to implement an algorithm. However, it might bring some undesired penalty to the performance, *e.g.* duplicate calculations, if we do not use it wisely. 
+- [Memoization](https://en.wikipedia.org/wiki/Memoization) is an optimization technique used primarily to **speed up** computer programs by **storing** the results of expensive function calls and returning the cached result when the same inputs occur again. 
+
+## Time Complexity - Recursion
+
+- O(*T*)=*R*∗O(*s*)
+- R: **the number of recursion** **invocations** 递归调用的次数
+- O(s): **the time complexity of calculation** 子问题的复杂度
+- Example:
+  - print reverse string
+    - the function would be recursively invoked `n` times
+    - At the end of each recursion, we simply print the leading character, therefore the time complexity of this particular operation is constant,O(1)
+    - O(printReverse)=*n*∗O(1)=O(*n*).
+  - Execution tree
+    
+    - Fib
+    
+      - ![image-20201116201738247](/Users/tangyuqi/Library/Application Support/typora-user-images/image-20201116201738247.png)
+    
+      - In a full binary tree with `n` levels, the total number of nodes would be 2^n - 1.
+      - As a result, we can estimate that the time complexity for `f(n)` would be O(2^n).
+  
+  - Memorization
+    - With memoization, we save the result of Fibonacci number for each index `n`. 
+    - We are assured that the calculation for each Fibonacci number would occur only once. And we know, from the recurrence relation, the Fibonacci number `f(n)` would depend on all `n-1` precedent Fibonacci numbers. As a result, the recursion to calculate `f(n)` would be invoked `n-1` times to calculate all the precedent numbers that it depends on. 
+    - Now, we can simply apply the formula we introduced in the beginning of this chapter to calculate the time complexity, which is O(1) * n = O(*n*).
+
+## Space Complexity - Recursion
+
+- There are mainly two parts of the space consumption that one should bear in mind when calculating the space complexity of a recursive algorithm: 
+  - `recursion related` 
+    - the memory cost that is incurred directly by the recursion i.e. **the stack to keep track of recursive function calls**
+      - The returning address of the function call. Once the function call is completed, the program must know where to return to, *i.e.* the line of code after the function call.
+      - The parameters that are passed to the function call. 
+      - The local variables within the function call.
+    - **For a recursive algorithm, if there is no other memory consumption, then this recursion incurred space will be the space upper-bound of the algorithm.**
+      - For example, in the exercise of [printReverse](https://leetcode.com/explore/learn/card/recursion-i/250/principle-of-recursion/1439/), we don't have extra memory usage outside the recursive call, since we simply print a character. For each recursive call, let's assume it can use space up to a constant value. And the recursive calls will chain up to `n` times, where `n` is the size of the input string. So the space complexity of this recursive algorithm is O(*n*).
+  - `non-recursion related space.`
+    - the memory space that is not directly related to recursion, which typically includes the space (normally in heap) that is allocated for the global variables.
+    - **memoization**
+
+## Tail Recursion
+
+- **Tail recursion** is a recursion where the recursive call is the final instruction in the recursion function. And there should be only **one** recursive call in the function.
+
+- ```java
+  public class Main {
+      
+    private static int helper_non_tail_recursion(int start, int [] ls) {
+      if (start >= ls.length) {
+        return 0;
+      }
+      // not a tail recursion because it does some computation after the recursive call returned.
+      return ls[start] + helper_non_tail_recursion(start+1, ls);
+    }
+  
+    public static int sum_non_tail_recursion(int [] ls) {
+      if (ls == null || ls.length == 0) {
+        return 0;
+      }
+      return helper_non_tail_recursion(0, ls);
+    }
+  
+    //---------------------------------------------
+  
+    private static int helper_tail_recursion(int start, int [] ls, int acc) {
+      if (start >= ls.length) {
+        return acc;
+      }
+      // this is a tail recursion because the final instruction is the recursive call.
+      return helper_tail_recursion(start+1, ls, acc+ls[start]);
+    }
+      
+    public static int sum_tail_recursion(int [] ls) {
+      if (ls == null || ls.length == 0) {
+        return 0;
+      }
+      return helper_tail_recursion(0, ls, 0);
+    }
+  }
+  ```
+
+- 

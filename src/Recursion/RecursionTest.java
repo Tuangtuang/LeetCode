@@ -65,4 +65,19 @@ public class RecursionTest {
         }
         System.out.println();
     }
+
+    public void testFib(){
+        System.out.println("\nTest Fib...");
+        int res=recursionSolution.fib(3);
+        System.out.println(res);
+    }
+
+
+    public void testMyPow(){
+        System.out.println("\nTest My Pow...");
+        double res = recursionSolution.myPow(0.1, 2147483647);
+        System.out.println(res);
+    }
+
+
 }
