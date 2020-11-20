@@ -1,6 +1,8 @@
 package Recursion;
 
 
+import java.util.List;
+
 public class RecursionTest {
     RecursionSolution recursionSolution=new RecursionSolution();
 
@@ -77,6 +79,16 @@ public class RecursionTest {
         System.out.println("\nTest My Pow...");
         double res = recursionSolution.myPow(0.1, 2147483647);
         System.out.println(res);
+    }
+
+
+    public void testGenerateTrees(){
+        System.out.println("\nTest Generate Trees...");
+        List<TreeNode> res = recursionSolution.generateTrees(2);
+        for(TreeNode t:res){
+            TreeOperation.show(t);
+            System.out.println();
+        }
     }
 
 

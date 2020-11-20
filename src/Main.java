@@ -93,6 +93,7 @@ public class Main {
         recursionTest.testReverseList();
         recursionTest.testFib();
         recursionTest.testMyPow();
+        recursionTest.testGenerateTrees();
 
     }
 }

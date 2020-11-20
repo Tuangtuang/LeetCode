@@ -1,6 +1,7 @@
 package Recursion;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class RecursionSolution {
@@ -210,6 +211,111 @@ public class RecursionSolution {
             double tmp = myPow(x, (n - 1) / 2);
             return tmp * tmp * x;
         }
+    }
+
+//    Merge Two Sorted Lists
+//    Recursion
+//    问题1)递归关系，l1.next=mergeTwoLists(l1.next,l2);递归回来之后需要和上层的末尾节点连接
+//    时间复杂度1）O(n) 2)空间复杂度O(n)
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        if(l1==null&&l2==null){
+            return null;
+        }
+        if(l1==null){
+            return l2;
+        }
+        if(l2==null){
+            return l1;
+        }
+        if(l1.val<l2.val){
+            l1.next=mergeTwoLists(l1.next,l2);
+            return l1;
+        } else{
+            l2.next=mergeTwoLists(l1,l2.next);
+            return l2;
+        }
+    }
+
+//    K-th Symbol in Grammar
+//    复杂度：时间O(n),空间O(n)
+//    递推：f(n,k)=f(n-1,k), if k<=node(which is 2^(n-1))/2, 前半部分是上一行的照抄
+//               =inverse(f(n-1,k-node)), if k>node, 后半部分是上一行取反
+//    问题1）下标从1开始，注意解决后半部分的下标
+    public int kthGrammar(int N, int K) {
+        return kthGrammar(N,K,(int)Math.pow(2,N-1));
+    }
+
+    public int kthGrammar(int n, int k, int nodeCount){
+        if(k<1||k>nodeCount){
+            return -1;
+        }
+        if(n<1){
+            return -1;
+        }
+        if(n==1){
+            return 0;
+        }
+
+        if(k<=nodeCount/2){
+            return kthGrammar(n-1,k,nodeCount/2);
+        }else{
+            return inverse(kthGrammar(n-1,k-nodeCount/2,nodeCount/2));
+        }
+    }
+
+    public int inverse(int x){
+        if(x==0){
+            return 1;
+        }
+        if(x==1){
+            return 0;
+        }
+        return -1;
+    }
+
+
+//    Unique Binary Search Trees I
+//    当前节点为i
+//    [1,i-1]left tree roots list; [i+1,n]right tree roots list
+//    循环走left tree root lists 和right tree root list，分别分配给root的左右
+//    时间复杂卡特兰数
+    public List<TreeNode> generateTrees(int n) {
+//        corner case
+        if(n==0){
+            return new LinkedList<>();
+        }
+        LinkedList[][] cache = new LinkedList[n + 1][n + 1];
+        return buildTree(1,n,cache);
+    }
+
+
+    public LinkedList<TreeNode> buildTree(int start, int end,LinkedList [][]cache){
+        LinkedList<TreeNode> res=new LinkedList<>();
+        if(start>end){
+            res.add(null);
+            return res;
+        }
+//        已经算过了以start到end所有i为根节点的树
+        if(cache[start][end]!=null){
+            return cache[start][end];
+        }
+//        分割子问题
+        for(int i=start;i<=end;i++){
+            LinkedList<TreeNode> leftList=buildTree(start,i-1,cache);
+
+            LinkedList<TreeNode> rightList=buildTree(i+1,end,cache);
+//          合并子问题的解
+            for(TreeNode k:leftList){
+                for(TreeNode p:rightList){
+                    TreeNode root=new TreeNode(i);
+                    root.left=k;
+                    root.right=p;
+                    res.add(root);
+                }
+            }
+        }
+        cache[start][end]=res;
+        return res;
     }
 
 
