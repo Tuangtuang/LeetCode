@@ -94,6 +94,8 @@ public class Main {
         recursionTest.testFib();
         recursionTest.testMyPow();
         recursionTest.testGenerateTrees();
+        recursionTest.testIsValidBST();
+        
 
     }
 }

@@ -1124,4 +1124,62 @@ boolean DFS(Node cur, Node target, Set<Node> visited) {
   }
   ```
 
+
+## Divide and Conquer Intro
+
+- A divide-and-conquer algorithm works by ***recursively*** breaking the problem down into ***two\*** or more subproblems of the same or related type, until these subproblems become simple enough to be solved directly. 
+
+### Differernce between recursive algorithms and D&C
+
+- We break the problem down into **two or more** subproblems in the divide-and-conquer algorithm, rather than a single smaller subproblem. 
+
+- Step
+
+  1. **Divide.** Divide the problem {S}*S* into a set of subproblems: {S1,S2....Sn} where n≥2, *i.e.* there are usually more than one subproblem.
+
+  2. **Conquer.** Solve each subproblem recursively. 
+
+  3. **Combine.** Combine the results of each subproblem.
+
+     ![image-20201120164751395](/Users/tangyuqi/Library/Application Support/typora-user-images/image-20201120164751395.png)
+
+### Example of D&C
+
+-  Merge Sort(Up-Bottom Approach)
+
+  - Divide the given unsorted list into several sublists. (**Divide**)
+  - Sort each of the sublists recursively. (**Conquer**)
+  - Merge the sorted sublists to produce new sorted list. (**Combine**)
+  - ![image-20201120165155118](/Users/tangyuqi/Library/Application Support/typora-user-images/image-20201120165155118.png)
+
+  - The recursion in **step (2)** would reach the base case where the input list is either empty or contains a single element (see the nodes in blue from the above figure).
+  - Now, we have reduced the problem down to a merge problem, which is much simpler to solve. Merging two sorted lists can be done in ***linear time*** **complexity** {O(N)}*O*(*N*), where {N}*N* is the total lengths of the two lists to merge.
+
+- Merge Sort(Bottom-Up Solution)
+  - In the **bottom up** approach, we divide the list into sublists of a single element at the beginning. Each of the sublists is then sorted already. Then from this point on, we merge the sublists two at a time until a single list remains.
+
+- Complexity
+  - The overall **time complexity** of the merge sort algorithm is O*(*N*log*N)
+  - We recursively divide the input list into two sublists, until a sublist with single element remains. This dividing step computes the midpoint of each of the sublists, which takes O(1) time. This step is repeated N*N* times until a single element remains, therefore the total time complexity is O*(*N).
+     
+  - Then, we repetitively merge the sublists, until one single list remains. The recursion tree in ***Fig. 1\*** or ***Fig. 2\*** above is useful for visualizing how the recurrence is iterated. As shown in the recursion tree, there are a total of N*N* elements on each level. Therefore, it takes O*(*N*) time for the merging process to complete on each level. And since there are a total of logN levels, the overall complexity of the merge process is O*(*N*logN)
+  - The **space complexity** of the merge sort algorithm is O(N)*O*(*N*)
+
+### D&C template
+
+- ```python
+  def divide_and_conquer( S ):
+      # (1). Divide the problem into a set of subproblems.
+      [S1, S2, ... Sn] = divide(S)
+  
+      # (2). Solve the subproblem recursively,
+      #   obtain the results of subproblems as [R1, R2... Rn].
+      rets = [divide_and_conquer(Si) for Si in [S1, S2, ... Sn]]
+      [R1, R2,... Rn] = rets
+  
+      # (3). combine the results from the subproblems.
+      #   and return the combined result.
+      return combine([R1, R2,... Rn])
+  ```
+
 - 

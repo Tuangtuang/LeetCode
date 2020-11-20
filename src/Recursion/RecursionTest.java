@@ -92,4 +92,10 @@ public class RecursionTest {
     }
 
 
+    public void testIsValidBST(){
+        System.out.println("\nTest Is Valid BST...");
+        TreeNode t = TreeNode.InitTree(new Integer[]{10, 5, 15, null, null, 6, 20});
+        System.out.println(recursionSolution.isValidBST(t));
+    }
+
 }

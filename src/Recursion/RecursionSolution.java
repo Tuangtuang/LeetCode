@@ -1,6 +1,7 @@
 package Recursion;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -318,5 +319,105 @@ public class RecursionSolution {
         return res;
     }
 
+
+    //     merge sort
+//     recursion time logN
+//     in every recursion, we have a merge, O(n)
+//     total O(logN)
+    public int[] sortArray(int[] nums) {
+        if(nums==null){
+            return null;
+        }
+        if(nums.length==0||nums.length==1){
+            return nums;
+        }
+        int mid=(0+nums.length)/2;
+//         sort the left one
+        int []left=sortArray(Arrays.copyOfRange(nums, 0, mid));
+//         sort the right one
+        int []right=sortArray(Arrays.copyOfRange(nums, mid, nums.length));
+//         merge the two ordered lists
+        return merge(left,right);
+
+    }
+
+    public int[] merge(int []leftList, int []rightList){
+        if(leftList==null){
+            return rightList;
+        }
+        if(rightList==null){
+            return leftList;
+        }
+        int []res=new int[leftList.length+rightList.length];
+        int i=0,j=0,k=0;
+        while(i<leftList.length&&j<rightList.length){
+            if(leftList[i]<rightList[j]){
+                res[k]=leftList[i];
+                i++;
+                k++;
+            }else{
+                res[k]=rightList[j];
+                j++;
+                k++;
+            }
+        }
+//         left list remain
+        while(i<leftList.length){
+            res[k]=leftList[i];
+            i++;
+            k++;
+        }
+//         right list remain
+        while(j<rightList.length){
+            res[k]=rightList[j];
+            j++;
+            k++;
+        }
+        return res;
+    }
+
+
+//    Validate Binary Search Tree
+//    Divide and Conquer
+//    问题1）设置upper bound和lower bound 来保证所有左边的数都小于root.val和保证所有右边的数都大于root.val，注意upper和lower的更新
+    public boolean isValidBST(TreeNode root) {
+        if(root==null||root.left==null&&root.right==null){
+            return true;
+        }
+        if(root.left==null&&root.right.val<=root.val){
+            return false;
+        }
+        if(root.right==null&&root.left.val>=root.val){
+            return false;
+        }
+//        divide to left and right
+        return isValidBSTHelper(root.left,root.val,null)&&isValidBSTHelper(root.right,null,root.val);
+
+    }
+
+    public  boolean isValidBSTHelper(TreeNode root, Integer upperBound, Integer lowerBound){
+        if(root==null){
+            return true;
+        }
+        if(root.left!=null&&root.left.val>=root.val){
+            return false;
+        }
+        if(root.right!=null&&root.right.val<=root.val){
+            return false;
+        }
+//        all the numbers in the left tree must be less than root.val
+//        all the numbers in the right tree must be larger than root.val
+        if(upperBound!=null&&root.val>=upperBound||lowerBound!=null&&root.val<=lowerBound){
+            return false;
+        }
+//          left sub-problem
+//        the upper bound is the new root val, the lower bound is the same as the last level
+        boolean isValidLeft=isValidBSTHelper(root.left,root.val,lowerBound);
+//          right sub-problem
+//        the lower bound is the new root val, the upper bound is the same as the last level
+        boolean isValidRight=isValidBSTHelper(root.right,upperBound,root.val);
+//          combine left and right
+        return isValidLeft&&isValidRight;
+    }
 
 }
