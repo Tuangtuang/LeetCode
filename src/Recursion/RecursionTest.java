@@ -98,4 +98,12 @@ public class RecursionTest {
         System.out.println(recursionSolution.isValidBST(t));
     }
 
+    public void testSearchMatrix(){
+        System.out.println("\nTest Search Matrix...");
+        int [][]arr=new int[1][3];
+        arr[0][0]=1;
+        arr[0][1]=3;
+        arr[0][2]=5;
+        System.out.println(recursionSolution.searchMatrix(arr,1));
+    }
 }

@@ -420,4 +420,44 @@ public class RecursionSolution {
         return isValidLeft&&isValidRight;
     }
 
+
+//  问题1）递归，注意下标变化，对于mid对应的行列，需要分别划给第一，第三象限
+    public boolean searchMatrix(int[][] matrix, int target) {
+        if(matrix==null||matrix.length==0){
+            return false;
+        }
+        if(matrix[0]==null){
+//             only with col
+            return false;
+        }
+
+        return  searchMatrixHelper(matrix,target,0,0,matrix.length-1,matrix[0].length-1);
+    }
+
+    public boolean searchMatrixHelper(int [][]matrix, int target, int start_x,int start_y,int end_x,int end_y){
+        if(start_x<0||start_y<0||start_x>=matrix.length||start_y>=matrix[0].length){
+            return false;
+        }
+        if(end_x<0||end_y<0||end_x>=matrix.length||end_y>=matrix[0].length){
+            return false;
+        }
+        if(start_x>end_x||start_y>end_y){
+            return false;
+        }
+        int midRow=(start_x+end_x)/2;
+        int midCol=(start_y+end_y)/2;
+        if(matrix[midRow][midCol]==target){
+            return true;
+        } else if(matrix[midRow][midCol]<target){
+            return searchMatrixHelper(matrix,target,midRow+1,midCol+1,end_x,end_y)||
+                    searchMatrixHelper(matrix,target,start_x,midCol+1,midRow,end_y)||
+                    searchMatrixHelper(matrix,target,midRow+1,start_y,end_x,midCol);
+        } else{
+            return searchMatrixHelper(matrix,target,start_x,start_y,midRow-1,midCol-1)||
+                    searchMatrixHelper(matrix,target,start_x,midCol,midRow-1,end_y)||
+                    searchMatrixHelper(matrix,target,midRow,start_y,end_x,midCol-1);
+        }
+
+    }
+
 }

@@ -95,7 +95,8 @@ public class Main {
         recursionTest.testMyPow();
         recursionTest.testGenerateTrees();
         recursionTest.testIsValidBST();
-        
+        recursionTest.testSearchMatrix();
+
 
     }
 }
