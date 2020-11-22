@@ -97,6 +97,7 @@ public class Main {
         recursionTest.testIsValidBST();
         recursionTest.testSearchMatrix();
         recursionTest.testQueen2();
+        recursionTest.testSolveSudoku();
 
 
     }

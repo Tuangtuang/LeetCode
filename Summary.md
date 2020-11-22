@@ -1209,3 +1209,78 @@ boolean DFS(Node cur, Node target, Set<Node> visited) {
 ## Backtracking
 
 - https://leetcode.com/explore/learn/card/recursion-ii/472/backtracking/2654/
+
+### N 皇后问题
+
+```java
+int count;
+    //  N-Queens II
+    public int totalNQueens(int n) {
+        if (n <= 0) {
+            return 0;
+        }
+        if (n == 1) {
+            return 1;
+        }
+        int[] solution = new int[n];
+//        n max is 9, -10 表示不可达
+        for(int i=0;i<n;i++){
+            solution[i]=-10;
+        }
+        totalNQueensHelper(0, n, solution);
+        return count;
+    }
+
+
+    public void totalNQueensHelper(int row, int n, int[] res) {
+//        找到一个解
+        if (row >= n) {
+            count++;
+        } else {
+//            尝试放第row行的每个位置
+            for (int col = 0; col < n; col++) {
+//                 can be placed
+                if (is_not_under_attack(row, col, res)) {
+//                    表示[row,col]行放上了一个皇后
+                    res[row] = col;
+                    totalNQueensHelper(row + 1, n, res);
+//                    取下来，尝试下一个位置
+                    res[row] = -10;
+                }
+            }
+        }
+        return;
+    }
+
+    //     check whther under attack
+    public boolean is_not_under_attack(int x, int y, int[] res) {
+        for (int i = 0; i < res.length; i++) {
+//            i表示横坐标，res[i]表示纵坐标
+//            横纵坐标差值相同，表示对角线
+//            y == res[i]表示同一列
+            if (Math.abs(i - x) == Math.abs(y - res[i]) || y == res[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+```
+
+### Backtracking Template
+
+```python
+def backtrack(candidate):
+    if find_solution(candidate):
+        output(candidate)
+        return
+    # iterate all possible candidates.
+    for next_candidate in list_of_candidates:
+        if is_valid(next_candidate):
+            # try this partial candidate solution
+            place(next_candidate)
+            # given the candidate, explore further.
+            backtrack(next_candidate)
+            # backtrack
+            remove(next_candidate)
+```
+

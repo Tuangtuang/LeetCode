@@ -1,9 +1,6 @@
 package Recursion;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class RecursionSolution {
 
@@ -461,8 +458,8 @@ public class RecursionSolution {
     }
 
 
-
     int count;
+
     //  N-Queens II
     public int totalNQueens(int n) {
         if (n <= 0) {
@@ -473,8 +470,8 @@ public class RecursionSolution {
         }
         int[] solution = new int[n];
 //        n max is 9, -10 表示不可达
-        for(int i=0;i<n;i++){
-            solution[i]=-10;
+        for (int i = 0; i < n; i++) {
+            solution[i] = -10;
         }
         totalNQueensHelper(0, n, solution);
         return count;
@@ -503,13 +500,85 @@ public class RecursionSolution {
 
     //     check whther under attack
     public boolean is_not_under_attack(int x, int y, int[] res) {
-
         for (int i = 0; i < res.length; i++) {
 //            i表示横坐标，res[i]表示纵坐标
 //            横纵坐标差值相同，表示对角线
 //            y == res[i]表示同一列
             if (Math.abs(i - x) == Math.abs(y - res[i]) || y == res[i]) {
                 return false;
+            }
+        }
+        return true;
+    }
+
+
+    //    数独
+    public void solveSudoku(char[][] board) {
+        solveSudokuHelper(board, 0, 0);
+    }
+
+    public boolean solveSudokuHelper(char[][] board, int row, int col) {
+//        行末，换行
+        if (col >= 9) {
+            row++;
+            col=0;
+        }
+//          完成
+        if (row >= 9) {
+            return true;
+        }
+
+        if (board[row][col] != '.') {
+            return solveSudokuHelper(board, row, col + 1);
+        }
+
+        for (char tar = '1'; tar <= '9'; tar++) {
+            board[row][col] = tar;
+//            可以放tar并且，接下来有解
+            if (check_line(board, tar, row, col)
+                    && check_col(board, tar, row, col)
+                    && check_grid(board, tar, row, col)
+                    && solveSudokuHelper(board, row, col + 1))
+            {
+                return true;
+
+            }
+//            放不了，恢复原样
+            board[row][col] = '.';
+        }
+
+        return false;
+    }
+
+    public boolean check_line(char[][] board, char target, int row, int col) {
+        for (int j = 0; j < 9; j++) {
+            if (board[row][j] == target && j!=col) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    public boolean check_col(char[][] board, char target, int row, int col) {
+        for (int i = 0; i < 9; i++) {
+            if (board[i][col] == target && i!=row) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    public boolean check_grid(char[][] board, char target, int row, int col) {
+//         get start point
+        int x = (row / 3) * 3;
+        int y = (col / 3) * 3;
+        for (int i = x; i < x + 3; i++) {
+            for (int j = y; j < y + 3; j++) {
+                if (board[i][j] == target && i!=row && j!=col) {
+                    return false;
+                }
             }
         }
         return true;
