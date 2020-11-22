@@ -98,6 +98,7 @@ public class Main {
         recursionTest.testSearchMatrix();
         recursionTest.testQueen2();
         recursionTest.testSolveSudoku();
+        recursionTest.testCombine();
 
 
     }

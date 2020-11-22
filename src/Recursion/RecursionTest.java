@@ -1,6 +1,7 @@
 package Recursion;
 
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class RecursionTest {
@@ -135,5 +136,17 @@ public class RecursionTest {
             System.out.println();
         }
 
+    }
+
+    public void testCombine(){
+        System.out.println("\nTest Combine...");
+        List<List<Integer>> res = new LinkedList<>();
+        res = recursionSolution.combine(4, 2);
+        for(List<Integer> i:res){
+            for(Integer j:i){
+                System.out.print(j+" ");
+            }
+            System.out.println();
+        }
     }
 }

@@ -17,5 +17,12 @@ char c = (char) i;
 Arrays.copyOfRange(nums, start, end)
 ```
 
+## List
 
+### LinkedList
 
+- 没有removeLast方法
+
+### ArrayList
+
+- 没有removeLast方法

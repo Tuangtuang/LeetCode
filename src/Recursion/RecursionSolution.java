@@ -521,7 +521,7 @@ public class RecursionSolution {
 //        行末，换行
         if (col >= 9) {
             row++;
-            col=0;
+            col = 0;
         }
 //          完成
         if (row >= 9) {
@@ -538,8 +538,7 @@ public class RecursionSolution {
             if (check_line(board, tar, row, col)
                     && check_col(board, tar, row, col)
                     && check_grid(board, tar, row, col)
-                    && solveSudokuHelper(board, row, col + 1))
-            {
+                    && solveSudokuHelper(board, row, col + 1)) {
                 return true;
 
             }
@@ -552,7 +551,7 @@ public class RecursionSolution {
 
     public boolean check_line(char[][] board, char target, int row, int col) {
         for (int j = 0; j < 9; j++) {
-            if (board[row][j] == target && j!=col) {
+            if (board[row][j] == target && j != col) {
                 return false;
             }
         }
@@ -562,7 +561,7 @@ public class RecursionSolution {
 
     public boolean check_col(char[][] board, char target, int row, int col) {
         for (int i = 0; i < 9; i++) {
-            if (board[i][col] == target && i!=row) {
+            if (board[i][col] == target && i != row) {
                 return false;
             }
         }
@@ -576,9 +575,50 @@ public class RecursionSolution {
         int y = (col / 3) * 3;
         for (int i = x; i < x + 3; i++) {
             for (int j = y; j < y + 3; j++) {
-                if (board[i][j] == target && i!=row && j!=col) {
+                if (board[i][j] == target && i != row && j != col) {
                     return false;
                 }
+            }
+        }
+        return true;
+    }
+
+
+    List<List<Integer>> res = new LinkedList<>();
+    List<Integer> a = new ArrayList<>();
+
+    public List<List<Integer>> combine(int n, int k) {
+        ArrayDeque<Integer> tmp = new ArrayDeque<>();
+        combineHelper(n, k, 0, tmp);
+        return res;
+    }
+
+    public void combineHelper(int n, int k, int level, ArrayDeque<Integer> temp) {
+//        total number in the list must <k
+        if (level >= k) {
+//            find one solution
+            res.add(new LinkedList<>(temp));
+            return;
+        }
+        for (int i = 1; i <= n; i++) {
+            if (isValid(i, temp)) {
+//                add current i
+                temp.add(i);
+//                find next
+                combineHelper(n, k, level + 1, temp);
+//                remove added one
+                temp.removeLast();
+            }
+        }
+    }
+
+    public boolean isValid(int i, ArrayDeque<Integer> res) {
+        if (res.size() == 0) {
+            return true;
+        }
+        for (Integer item : res) {
+            if (item >= i) {
+                return false;
             }
         }
         return true;
