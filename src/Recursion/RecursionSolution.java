@@ -214,108 +214,108 @@ public class RecursionSolution {
         }
     }
 
-//    Merge Two Sorted Lists
+    //    Merge Two Sorted Lists
 //    Recursion
 //    问题1)递归关系，l1.next=mergeTwoLists(l1.next,l2);递归回来之后需要和上层的末尾节点连接
 //    时间复杂度1）O(n) 2)空间复杂度O(n)
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-        if(l1==null&&l2==null){
+        if (l1 == null && l2 == null) {
             return null;
         }
-        if(l1==null){
+        if (l1 == null) {
             return l2;
         }
-        if(l2==null){
+        if (l2 == null) {
             return l1;
         }
-        if(l1.val<l2.val){
-            l1.next=mergeTwoLists(l1.next,l2);
+        if (l1.val < l2.val) {
+            l1.next = mergeTwoLists(l1.next, l2);
             return l1;
-        } else{
-            l2.next=mergeTwoLists(l1,l2.next);
+        } else {
+            l2.next = mergeTwoLists(l1, l2.next);
             return l2;
         }
     }
 
-//    K-th Symbol in Grammar
+    //    K-th Symbol in Grammar
 //    复杂度：时间O(n),空间O(n)
 //    递推：f(n,k)=f(n-1,k), if k<=node(which is 2^(n-1))/2, 前半部分是上一行的照抄
 //               =inverse(f(n-1,k-node)), if k>node, 后半部分是上一行取反
 //    问题1）下标从1开始，注意解决后半部分的下标
     public int kthGrammar(int N, int K) {
-        return kthGrammar(N,K,(int)Math.pow(2,N-1));
+        return kthGrammar(N, K, (int) Math.pow(2, N - 1));
     }
 
-    public int kthGrammar(int n, int k, int nodeCount){
-        if(k<1||k>nodeCount){
+    public int kthGrammar(int n, int k, int nodeCount) {
+        if (k < 1 || k > nodeCount) {
             return -1;
         }
-        if(n<1){
+        if (n < 1) {
             return -1;
         }
-        if(n==1){
+        if (n == 1) {
             return 0;
         }
 
-        if(k<=nodeCount/2){
-            return kthGrammar(n-1,k,nodeCount/2);
-        }else{
-            return inverse(kthGrammar(n-1,k-nodeCount/2,nodeCount/2));
+        if (k <= nodeCount / 2) {
+            return kthGrammar(n - 1, k, nodeCount / 2);
+        } else {
+            return inverse(kthGrammar(n - 1, k - nodeCount / 2, nodeCount / 2));
         }
     }
 
-    public int inverse(int x){
-        if(x==0){
+    public int inverse(int x) {
+        if (x == 0) {
             return 1;
         }
-        if(x==1){
+        if (x == 1) {
             return 0;
         }
         return -1;
     }
 
 
-//    Unique Binary Search Trees I
+    //    Unique Binary Search Trees I
 //    当前节点为i
 //    [1,i-1]left tree roots list; [i+1,n]right tree roots list
 //    循环走left tree root lists 和right tree root list，分别分配给root的左右
 //    时间复杂卡特兰数
     public List<TreeNode> generateTrees(int n) {
 //        corner case
-        if(n==0){
+        if (n == 0) {
             return new LinkedList<>();
         }
         LinkedList[][] cache = new LinkedList[n + 1][n + 1];
-        return buildTree(1,n,cache);
+        return buildTree(1, n, cache);
     }
 
 
-    public LinkedList<TreeNode> buildTree(int start, int end,LinkedList [][]cache){
-        LinkedList<TreeNode> res=new LinkedList<>();
-        if(start>end){
+    public LinkedList<TreeNode> buildTree(int start, int end, LinkedList[][] cache) {
+        LinkedList<TreeNode> res = new LinkedList<>();
+        if (start > end) {
             res.add(null);
             return res;
         }
 //        已经算过了以start到end所有i为根节点的树
-        if(cache[start][end]!=null){
+        if (cache[start][end] != null) {
             return cache[start][end];
         }
 //        分割子问题
-        for(int i=start;i<=end;i++){
-            LinkedList<TreeNode> leftList=buildTree(start,i-1,cache);
+        for (int i = start; i <= end; i++) {
+            LinkedList<TreeNode> leftList = buildTree(start, i - 1, cache);
 
-            LinkedList<TreeNode> rightList=buildTree(i+1,end,cache);
+            LinkedList<TreeNode> rightList = buildTree(i + 1, end, cache);
 //          合并子问题的解
-            for(TreeNode k:leftList){
-                for(TreeNode p:rightList){
-                    TreeNode root=new TreeNode(i);
-                    root.left=k;
-                    root.right=p;
+            for (TreeNode k : leftList) {
+                for (TreeNode p : rightList) {
+                    TreeNode root = new TreeNode(i);
+                    root.left = k;
+                    root.right = p;
                     res.add(root);
                 }
             }
         }
-        cache[start][end]=res;
+        cache[start][end] = res;
         return res;
     }
 
@@ -325,51 +325,51 @@ public class RecursionSolution {
 //     in every recursion, we have a merge, O(n)
 //     total O(logN)
     public int[] sortArray(int[] nums) {
-        if(nums==null){
+        if (nums == null) {
             return null;
         }
-        if(nums.length==0||nums.length==1){
+        if (nums.length == 0 || nums.length == 1) {
             return nums;
         }
-        int mid=(0+nums.length)/2;
+        int mid = (0 + nums.length) / 2;
 //         sort the left one
-        int []left=sortArray(Arrays.copyOfRange(nums, 0, mid));
+        int[] left = sortArray(Arrays.copyOfRange(nums, 0, mid));
 //         sort the right one
-        int []right=sortArray(Arrays.copyOfRange(nums, mid, nums.length));
+        int[] right = sortArray(Arrays.copyOfRange(nums, mid, nums.length));
 //         merge the two ordered lists
-        return merge(left,right);
+        return merge(left, right);
 
     }
 
-    public int[] merge(int []leftList, int []rightList){
-        if(leftList==null){
+    public int[] merge(int[] leftList, int[] rightList) {
+        if (leftList == null) {
             return rightList;
         }
-        if(rightList==null){
+        if (rightList == null) {
             return leftList;
         }
-        int []res=new int[leftList.length+rightList.length];
-        int i=0,j=0,k=0;
-        while(i<leftList.length&&j<rightList.length){
-            if(leftList[i]<rightList[j]){
-                res[k]=leftList[i];
+        int[] res = new int[leftList.length + rightList.length];
+        int i = 0, j = 0, k = 0;
+        while (i < leftList.length && j < rightList.length) {
+            if (leftList[i] < rightList[j]) {
+                res[k] = leftList[i];
                 i++;
                 k++;
-            }else{
-                res[k]=rightList[j];
+            } else {
+                res[k] = rightList[j];
                 j++;
                 k++;
             }
         }
 //         left list remain
-        while(i<leftList.length){
-            res[k]=leftList[i];
+        while (i < leftList.length) {
+            res[k] = leftList[i];
             i++;
             k++;
         }
 //         right list remain
-        while(j<rightList.length){
-            res[k]=rightList[j];
+        while (j < rightList.length) {
+            res[k] = rightList[j];
             j++;
             k++;
         }
@@ -377,87 +377,142 @@ public class RecursionSolution {
     }
 
 
-//    Validate Binary Search Tree
+    //    Validate Binary Search Tree
 //    Divide and Conquer
 //    问题1）设置upper bound和lower bound 来保证所有左边的数都小于root.val和保证所有右边的数都大于root.val，注意upper和lower的更新
     public boolean isValidBST(TreeNode root) {
-        if(root==null||root.left==null&&root.right==null){
+        if (root == null || root.left == null && root.right == null) {
             return true;
         }
-        if(root.left==null&&root.right.val<=root.val){
+        if (root.left == null && root.right.val <= root.val) {
             return false;
         }
-        if(root.right==null&&root.left.val>=root.val){
+        if (root.right == null && root.left.val >= root.val) {
             return false;
         }
 //        divide to left and right
-        return isValidBSTHelper(root.left,root.val,null)&&isValidBSTHelper(root.right,null,root.val);
+        return isValidBSTHelper(root.left, root.val, null) && isValidBSTHelper(root.right, null, root.val);
 
     }
 
-    public  boolean isValidBSTHelper(TreeNode root, Integer upperBound, Integer lowerBound){
-        if(root==null){
+    public boolean isValidBSTHelper(TreeNode root, Integer upperBound, Integer lowerBound) {
+        if (root == null) {
             return true;
         }
-        if(root.left!=null&&root.left.val>=root.val){
+        if (root.left != null && root.left.val >= root.val) {
             return false;
         }
-        if(root.right!=null&&root.right.val<=root.val){
+        if (root.right != null && root.right.val <= root.val) {
             return false;
         }
 //        all the numbers in the left tree must be less than root.val
 //        all the numbers in the right tree must be larger than root.val
-        if(upperBound!=null&&root.val>=upperBound||lowerBound!=null&&root.val<=lowerBound){
+        if (upperBound != null && root.val >= upperBound || lowerBound != null && root.val <= lowerBound) {
             return false;
         }
 //          left sub-problem
 //        the upper bound is the new root val, the lower bound is the same as the last level
-        boolean isValidLeft=isValidBSTHelper(root.left,root.val,lowerBound);
+        boolean isValidLeft = isValidBSTHelper(root.left, root.val, lowerBound);
 //          right sub-problem
 //        the lower bound is the new root val, the upper bound is the same as the last level
-        boolean isValidRight=isValidBSTHelper(root.right,upperBound,root.val);
+        boolean isValidRight = isValidBSTHelper(root.right, upperBound, root.val);
 //          combine left and right
-        return isValidLeft&&isValidRight;
+        return isValidLeft && isValidRight;
     }
 
 
-//  问题1）递归，注意下标变化，对于mid对应的行列，需要分别划给第一，第三象限
+    //  问题1）递归，注意下标变化，对于mid对应的行列，需要分别划给第一，第三象限
     public boolean searchMatrix(int[][] matrix, int target) {
-        if(matrix==null||matrix.length==0){
+        if (matrix == null || matrix.length == 0) {
             return false;
         }
-        if(matrix[0]==null){
+        if (matrix[0] == null) {
 //             only with col
             return false;
         }
 
-        return  searchMatrixHelper(matrix,target,0,0,matrix.length-1,matrix[0].length-1);
+        return searchMatrixHelper(matrix, target, 0, 0, matrix.length - 1, matrix[0].length - 1);
     }
 
-    public boolean searchMatrixHelper(int [][]matrix, int target, int start_x,int start_y,int end_x,int end_y){
-        if(start_x<0||start_y<0||start_x>=matrix.length||start_y>=matrix[0].length){
+    public boolean searchMatrixHelper(int[][] matrix, int target, int start_x, int start_y, int end_x, int end_y) {
+        if (start_x < 0 || start_y < 0 || start_x >= matrix.length || start_y >= matrix[0].length) {
             return false;
         }
-        if(end_x<0||end_y<0||end_x>=matrix.length||end_y>=matrix[0].length){
+        if (end_x < 0 || end_y < 0 || end_x >= matrix.length || end_y >= matrix[0].length) {
             return false;
         }
-        if(start_x>end_x||start_y>end_y){
+        if (start_x > end_x || start_y > end_y) {
             return false;
         }
-        int midRow=(start_x+end_x)/2;
-        int midCol=(start_y+end_y)/2;
-        if(matrix[midRow][midCol]==target){
+        int midRow = (start_x + end_x) / 2;
+        int midCol = (start_y + end_y) / 2;
+        if (matrix[midRow][midCol] == target) {
             return true;
-        } else if(matrix[midRow][midCol]<target){
-            return searchMatrixHelper(matrix,target,midRow+1,midCol+1,end_x,end_y)||
-                    searchMatrixHelper(matrix,target,start_x,midCol+1,midRow,end_y)||
-                    searchMatrixHelper(matrix,target,midRow+1,start_y,end_x,midCol);
-        } else{
-            return searchMatrixHelper(matrix,target,start_x,start_y,midRow-1,midCol-1)||
-                    searchMatrixHelper(matrix,target,start_x,midCol,midRow-1,end_y)||
-                    searchMatrixHelper(matrix,target,midRow,start_y,end_x,midCol-1);
+        } else if (matrix[midRow][midCol] < target) {
+            return searchMatrixHelper(matrix, target, midRow + 1, midCol + 1, end_x, end_y) ||
+                    searchMatrixHelper(matrix, target, start_x, midCol + 1, midRow, end_y) ||
+                    searchMatrixHelper(matrix, target, midRow + 1, start_y, end_x, midCol);
+        } else {
+            return searchMatrixHelper(matrix, target, start_x, start_y, midRow - 1, midCol - 1) ||
+                    searchMatrixHelper(matrix, target, start_x, midCol, midRow - 1, end_y) ||
+                    searchMatrixHelper(matrix, target, midRow, start_y, end_x, midCol - 1);
         }
 
+    }
+
+
+
+    int count;
+    //  N-Queens II
+    public int totalNQueens(int n) {
+        if (n <= 0) {
+            return 0;
+        }
+        if (n == 1) {
+            return 1;
+        }
+        int[] solution = new int[n];
+//        n max is 9, -10 表示不可达
+        for(int i=0;i<n;i++){
+            solution[i]=-10;
+        }
+        totalNQueensHelper(0, n, solution);
+        return count;
+    }
+
+
+    public void totalNQueensHelper(int row, int n, int[] res) {
+//        找到一个解
+        if (row >= n) {
+            count++;
+        } else {
+//            尝试放第row行的每个位置
+            for (int col = 0; col < n; col++) {
+//                 can be placed
+                if (is_not_under_attack(row, col, res)) {
+//                    表示[row,col]行放上了一个皇后
+                    res[row] = col;
+                    totalNQueensHelper(row + 1, n, res);
+//                    取下来，尝试下一个位置
+                    res[row] = -10;
+                }
+            }
+        }
+        return;
+    }
+
+    //     check whther under attack
+    public boolean is_not_under_attack(int x, int y, int[] res) {
+
+        for (int i = 0; i < res.length; i++) {
+//            i表示横坐标，res[i]表示纵坐标
+//            横纵坐标差值相同，表示对角线
+//            y == res[i]表示同一列
+            if (Math.abs(i - x) == Math.abs(y - res[i]) || y == res[i]) {
+                return false;
+            }
+        }
+        return true;
     }
 
 }

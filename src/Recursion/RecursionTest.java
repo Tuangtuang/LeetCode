@@ -106,4 +106,10 @@ public class RecursionTest {
         arr[0][2]=5;
         System.out.println(recursionSolution.searchMatrix(arr,1));
     }
+
+    public void testQueen2(){
+        System.out.println("\nTest Queen 2...");
+        System.out.println(recursionSolution.totalNQueens(4));
+
+    }
 }

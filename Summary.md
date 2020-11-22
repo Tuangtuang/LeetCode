@@ -1161,7 +1161,7 @@ boolean DFS(Node cur, Node target, Set<Node> visited) {
 - Complexity
   - The overall **time complexity** of the merge sort algorithm is O*(*N*log*N)
   - We recursively divide the input list into two sublists, until a sublist with single element remains. This dividing step computes the midpoint of each of the sublists, which takes O(1) time. This step is repeated N*N* times until a single element remains, therefore the total time complexity is O*(*N).
-     
+    
   - Then, we repetitively merge the sublists, until one single list remains. The recursion tree in ***Fig. 1\*** or ***Fig. 2\*** above is useful for visualizing how the recurrence is iterated. As shown in the recursion tree, there are a total of N*N* elements on each level. Therefore, it takes O*(*N*) time for the merging process to complete on each level. And since there are a total of logN levels, the overall complexity of the merge process is O*(*N*logN)
   - The **space complexity** of the merge sort algorithm is O(N)*O*(*N*)
 
@@ -1182,4 +1182,30 @@ boolean DFS(Node cur, Node target, Set<Node> visited) {
       return combine([R1, R2,... Rn])
   ```
 
-- 
+
+## Master Theorem
+
+- https://leetcode.com/explore/learn/card/recursion-ii/470/divide-and-conquer/2871/
+
+- ```C++
+   function dac( n ):
+     if n < k:  // k: some constant
+       Solve "n" directly without recursion
+     else:
+       [1]. divide the problem "n" into "b" subproblems of equal size.
+         - then the size of each subproblem would be "n/b"
+       [2]. call the function "dac()" recursively "a" times on the subproblems
+       [3]. combine the results from the subproblems
+  ```
+
+- If we define the time complexity of the above recursion algorithm as $T(n)$, then we can express it as follows:
+
+  $T(n)=aT(n/b)+f(n)$
+
+  - *f*(*n*) is the time complexity that it takes to divide the problems into subproblems and also to combine the results from the subproblems. We can further represent $f(n)$ as $O(n^d)  d≥0$. 
+
+  ![image-20201121205752097](/Users/tangyuqi/Library/Application Support/typora-user-images/image-20201121205752097.png)
+
+## Backtracking
+
+- https://leetcode.com/explore/learn/card/recursion-ii/472/backtracking/2654/
