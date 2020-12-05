@@ -1284,3 +1284,28 @@ def backtrack(candidate):
             remove(next_candidate)
 ```
 
+## Recursion to Iteration
+
+To convert a recursion approach to an iteration one, we could perform the following two steps:
+
+1. We **use a stack or queue data structure** within the function, to replace the role of the system call stack. At each occurrence of recursion, we simply push the parameters as a new element into the data structure that we created, instead of invoking a recursion.
+2. In addition, we **create a loop** over the data structure that we created before. The chain invocation of recursion would then be replaced with the iteration within the loop.
+
+## Divide-and-Conquer VS Backtracking
+
+### Divide and Conquer
+
+- A divide-and-conquer algorithm works by ***recursively*** breaking the problem down into two or more subproblems of the same or related type, until these subproblems become simple enough to be solved directly 
+
+### Backtracking
+
+- Backtracking is a general algorithm for finding all (or some) solutions to some computational problems (notably constraint satisfaction problems), which incrementally builds candidates to the solution and abandons a candidate ("backtracks") as soon as it determines that the candidate cannot leads to a valid solution.
+
+### Difference
+
+- Often the case, the divide-and-conquer problem has a **sole** solution, while the backtracking problem has **unknown** number of solutions.
+
+- Each step in the divide-and-conquer problem is **indispensable** to build the final solution, while many steps in backtracking problem might not be useful to build the solution, but serve as **atttempts** to search for the potential solutions. 
+
+- When building the solution in the divide-and-conquer algorithm, we have a clear and **predefined** path, though there might be several different manners to build the path. While in the backtracking problems, one does not know in advance the ***exact path*** to the solution. 
+

@@ -149,4 +149,35 @@ public class RecursionTest {
             System.out.println();
         }
     }
+
+
+    public void testgenerateParentheses(){
+        System.out.println("\nTest Generate Parentheses...");
+        List<String> res = recursionSolution.generateParenthesis(3);
+        for(String i:res){
+            System.out.println(i);
+        }
+    }
+
+
+    public void testPermutation(){
+        System.out.println("\nTest Permutation...");
+        int []nums=new int[]{1,2,3};
+        List<List<Integer>> res = new LinkedList<>();
+        res = recursionSolution.permute(nums);
+        for(List<Integer> l:res){
+            for(Integer item:l){
+                System.out.print(item+" ");
+            }
+            System.out.println();
+        }
+    }
+
+    public void testBinaryWatch(){
+        System.out.println("\nTest Binary Watch...");
+        List<String> res = recursionSolution.readBinaryWatch(2);
+        for(String item:res){
+            System.out.println(item);
+        }
+    }
 }

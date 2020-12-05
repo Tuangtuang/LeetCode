@@ -624,4 +624,243 @@ public class RecursionSolution {
         return true;
     }
 
+
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        if (p == null && q == null) {
+            return true;
+        }
+        if (!isSameNode(p, q)) {
+            return false;
+        }
+        ArrayDeque<TreeNode> queueP = new ArrayDeque<TreeNode>();
+        ArrayDeque<TreeNode> queueQ = new ArrayDeque<TreeNode>();
+        queueP.addFirst(p);
+        queueQ.addFirst(q);
+        while (!queueP.isEmpty()) {
+            TreeNode curP = queueP.removeFirst();
+            TreeNode curQ = queueQ.removeFirst();
+            if (!isSameNode(curP, curQ)) {
+                return false;
+            }
+//            case: curP is not null, curQ is null is returned
+//            so we can make sure, if curP is not null, curQ must be not null
+            if (curP != null) {
+//                compare left child,
+//                if not same, return
+                if (!isSameNode(curP.left, curQ.left)) {
+                    return false;
+                }
+//                case curP.left is not null, curQ.left is null is returned on the last line
+                if (curP.left != null) {
+                    queueP.addLast(curP.left);
+                    queueQ.addLast(curQ.left);
+                }
+                if (!isSameNode(curP.right, curQ.right)) {
+                    return false;
+                }
+                if (curP.right != null) {
+                    queueP.addLast(curP.right);
+                    queueQ.addLast(curQ.right);
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean isSameNode(TreeNode p, TreeNode q) {
+        if (p == null && q == null) {
+            return true;
+        }
+        if (p == null || q == null) {
+            return false;
+        }
+        if (p.val != q.val) {
+            return false;
+        }
+        return true;
+    }
+
+
+    //    Generate Parentheses
+    public List<String> generateParenthesis(int n) {
+        List<String> res = new LinkedList<>();
+        generate(res, 0, 0, n, "");
+        return res;
+    }
+
+    public void generate(List<String> res, int left, int right, int n, String cur) {
+        if (cur.length() == n * 2) {
+            res.add(cur);
+            return;
+        }
+
+        if (left < n) {
+            generate(res, left + 1, right, n, cur + "(");
+        }
+        if (right < left) {
+            generate(res, left, right + 1, n, cur + ")");
+        }
+    }
+
+    //    Permutations
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> ans = new LinkedList<>();
+        List<Integer> temp = new LinkedList();
+        boolean[] visited = new boolean[nums.length];
+        permuteHelper(nums, 0, temp, ans, visited);
+        return ans;
+    }
+
+
+    public void permuteHelper(int[] nums, int start, List<Integer> cur, List<List<Integer>> res, boolean[] visited) {
+        if (start >= nums.length) {
+            res.add(new LinkedList(cur));
+            return;
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            if (!visited[i]) {
+                cur.add(nums[i]);
+                visited[i] = true;
+                permuteHelper(nums, start + 1, cur, res, visited);
+                cur.remove(cur.size() - 1);
+                visited[i] = false;
+            }
+
+        }
+
+        return;
+    }
+
+
+    public List<String> letterCombinations(String digits) {
+//         init phone board
+        String[] mappings = initMapping();
+        List<String> ans = new LinkedList<>();
+//         corner case
+        if (digits.length() == 0) {
+            return ans;
+        }
+        StringBuilder cur = new StringBuilder();
+        letterCombinationsHelper(digits, 0, mappings, ans, cur);
+        return ans;
+
+    }
+
+    public void letterCombinationsHelper(String digits, int curPos, String[] mappings, List<String> res, StringBuilder cur) {
+        if (curPos >= digits.length()) {
+//             find a word
+            res.add((cur.toString()));
+            return;
+        }
+//         get the letters related  to the number
+        String letters = mappings[digits.charAt(curPos) - '0'];
+        for (int i = 0; i < letters.length(); i++) {
+//             put letter
+            cur.append(letters.charAt(i));
+//             next letter in the word
+            letterCombinationsHelper(digits, curPos + 1, mappings, res, cur);
+//             delete the letter in the cur level, find next one
+            cur.deleteCharAt(cur.length() - 1);
+        }
+
+    }
+
+    public String[] initMapping() {
+        String[] mapping = new String[10];
+        for (int i = 2; i <= 6; i++) {
+            StringBuilder temp = new StringBuilder();
+            for (char c = (char) ((int) 'a' + (i - 2) * 3); c <= (int) 'a' + (i - 2) * 3 + 2; c++) {
+                temp.append(c);
+            }
+            mapping[i] = temp.toString();
+        }
+        mapping[7] = "pqrs";
+        mapping[8] = "tuv";
+        mapping[9] = "wxyz";
+
+        return mapping;
+    }
+
+//    Binary Watch
+int []hourChoice=new int[]{1,2,4,8};
+    boolean []visitedHour=new boolean[4];
+    int []minuteChoice=new int[]{1,2,4,8,16,32};
+    boolean []visitedMinute=new boolean[6];
+    public List<String> readBinaryWatch(int num) {
+        List<String> res=new LinkedList<>();
+        if(num==0){
+            res.add("0:00");
+            return res;
+        }
+        for(int i=0;i<=num;i++){
+//            if choose all numbers in the hours, the hours will exceed 11
+//            if choose all numbers in the minutes, the minutes will exceed 59
+            if(i>=4||num-i>=6){
+                continue;
+            }
+//            why use set
+//            can be redundant when choose 1,2 and 2,1
+            Set<Integer> hours=new HashSet<>();
+            getHours(i,0,0,hours);
+            Set<Integer> minutes=new HashSet<>();
+            getMinutes(num-i,0,0,minutes);
+//            multiple theory
+            for(Integer h:hours){
+                for(Integer m:minutes){
+                    StringBuilder temp=new StringBuilder(h+":");
+                    if(m<10){
+                        temp.append("0"+m);
+                    }else{
+                        temp.append(""+m);
+                    }
+                    res.add(temp.toString());
+                }
+            }
+        }
+        return res;
+    }
+
+//    combination of hours
+//    in 1,2,4,8 select "numberHour" numbers
+    public void getHours(int numHour, int curNum, int curHour, Set<Integer> hourList){
+        if(curNum>=numHour){
+            if(curHour<=11){
+                hourList.add(curHour);
+            }
+            return;
+        }
+        for(int i=0;i<hourChoice.length;i++){
+            if(!visitedHour[i]){
+                curHour+=hourChoice[i];
+                visitedHour[i]=true;
+                getHours(numHour,curNum+1,curHour,hourList);
+                curHour-=hourChoice[i];
+                visitedHour[i]=false;
+            }
+        }
+        return;
+    }
+
+//    combination of minutes
+//    in 1,2,4,8,16,32, select "numMinute" numbers
+    public void getMinutes(int numMinute, int curNum, int curMinute, Set<Integer> miniuteList){
+        if(curNum>=numMinute){
+            if(curMinute<=59){
+                miniuteList.add(curMinute);
+            }
+            return;
+        }
+        for(int i=0;i<minuteChoice.length;i++){
+            if(!visitedMinute[i]){
+                curMinute+=minuteChoice[i];
+                visitedMinute[i]=true;
+                getMinutes(numMinute,curNum+1,curMinute,miniuteList);
+                curMinute-=minuteChoice[i];
+                visitedMinute[i]=false;
+            }
+        }
+        return;
+    }
+
 }

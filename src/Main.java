@@ -6,6 +6,8 @@ import QueueStack.QueueStackTest;
 import QueueStack.MinStackTest;
 import Recursion.RecursionTest;
 
+import java.util.*;
+
 public class Main {
 
     //LeetCode English, login in Github account TuangTuang
@@ -99,7 +101,14 @@ public class Main {
         recursionTest.testQueen2();
         recursionTest.testSolveSudoku();
         recursionTest.testCombine();
+        recursionTest.testgenerateParentheses();
+        recursionTest.testPermutation();
+        recursionTest.testBinaryWatch();
 
-
+        StringBuilder s = new StringBuilder("haha");
+        String temp=s.substring(0,1);
+        List<String> res = new LinkedList<>();
+        Collections.sort(res);
+        System.out.println(s.toString());
     }
 }
