@@ -36,7 +36,7 @@ Arrays.copyOfRange(nums, start, end)
 
 - 没有removeLast方法
 
-## String Builder
+## StringBuilder
 
 - Detete
 
@@ -55,4 +55,5 @@ Arrays.copyOfRange(nums, start, end)
     System.out.println(s.toString());//haha
     ```
 
-    
+## ArrayDeque
+

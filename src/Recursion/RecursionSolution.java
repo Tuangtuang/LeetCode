@@ -890,4 +890,48 @@ int []hourChoice=new int[]{1,2,4,8};
         return;
     }
 
+
+    char []vowelList=new char[]{'a','e','i','o','u'};
+    public int countVowelStrings(int n) {
+//        'A' randomly pick a char<'a'
+        countVowelStringsHelper(n,0,'A');
+        return count;
+    }
+
+    public void countVowelStringsHelper(int num, int curNum, char lastChar){
+//        find a solution
+        if(curNum>=num){
+            count++;
+            return ;
+        }
+        for(int i=0;i<vowelList.length;i++){
+            if(isValid(lastChar,vowelList[i])){
+//                last char is the new one
+                lastChar=vowelList[i];
+//                count next level
+                countVowelStringsHelper(num,curNum+1,lastChar);
+//                recover the last char
+                if(i-1>=0){
+                    lastChar=vowelList[i-1];
+                }else{
+                    lastChar='A';
+                }
+            }
+
+        }
+        return ;
+    }
+
+    public boolean isValid(char lastChar, char c){
+//        only care about last char
+//        ascending
+        if(lastChar=='A'){
+            return true;
+        }
+        if(lastChar>c){
+            return false;
+        }
+        return true;
+    }
+
 }
