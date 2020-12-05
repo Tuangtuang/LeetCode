@@ -25,6 +25,13 @@ Arrays.copyOfRange(nums, start, end)
 
 - 没有removeLast方法
 
+- remove
+
+- ```java
+  List<Integer> arr = new LinkedList<>();
+  arr.remove(index)
+  ```
+
 ### ArrayList
 
 - 没有removeLast方法

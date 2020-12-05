@@ -863,4 +863,31 @@ int []hourChoice=new int[]{1,2,4,8};
         return;
     }
 
+
+    public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
+        List<List<Integer>> res=new ArrayList<>();
+        List<Integer> path=new ArrayList<>();
+        path.add(0);
+        allPathsSourceTargetHelper(graph,0,graph.length-1,path,res);
+        return res;
+    }
+
+    public void allPathsSourceTargetHelper(int [][] graph, int curPos, int targetPos, List<Integer> curPath, List<List<Integer>> res){
+        if(curPos==targetPos){
+            res.add(new ArrayList<Integer>(curPath));
+            return;
+        }
+//        i start with 0
+//        for every line in graph, we should try every node in this line
+        for(int i=0;i<graph[curPos].length;i++){
+//             add a node to the path
+            curPath.add(graph[curPos][i]);
+//             find next node
+            allPathsSourceTargetHelper(graph,graph[curPos][i],targetPos,curPath,res);
+//             remove cur node try new start
+            curPath.remove(curPath.size()-1);
+        }
+        return;
+    }
+
 }
