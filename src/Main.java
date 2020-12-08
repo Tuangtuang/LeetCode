@@ -106,12 +106,6 @@ public class Main {
         recursionTest.testPermutation();
         recursionTest.testBinaryWatch();
 
-        StringBuilder s = new StringBuilder("haha");
-        String temp=s.substring(0,1);
-        List<String> res = new LinkedList<>();
-        Collections.sort(res);
-        System.out.println(s.toString());
-
 
     }
 }

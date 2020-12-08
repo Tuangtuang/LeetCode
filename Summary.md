@@ -1309,3 +1309,19 @@ To convert a recursion approach to an iteration one, we could perform the follow
 
 - When building the solution in the divide-and-conquer algorithm, we have a clear and **predefined** path, though there might be several different manners to build the path. While in the backtracking problems, one does not know in advance the ***exact path*** to the solution. 
 
+# 动态规划之子序列问题解题模板
+
+## **一个一维的 dp 数组**
+
+**在子数组`array[0..i]`中，以\**`array[i]`\**结尾的目标子序列（最长递增子序列）的长度是`dp[i]`**。
+
+## **一个二维的 dp 数组**‘
+
+### **涉及两个字符串/数组时**
+
+**在子数组`arr1[0..i]`和子数组`arr2[0..j]`中，我们要求的子序列（最长公共子序列）长度为`dp[i][j]`**
+
+### **只涉及一个字符串/数组时**
+
+**在子数组`array[i..j]`中，我们要求的子序列（最长回文子序列）的长度为`dp[i][j]`**
+
