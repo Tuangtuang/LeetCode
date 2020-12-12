@@ -135,4 +135,22 @@ Arrays.copyOfRange(nums, start, end)
           }
       ```
 
-    - 
+
+# PriorityQueue
+
+- ```java
+  PriorityQueue<Integer> q=new PriorityQueue<>();
+  q.add(1);
+  q.poll()
+  ```
+
+# Map
+
+```java
+Map<Integer, Integer> m = new HashMap<>();
+m.containsKey(key);
+m.containsValue(value);
+m.put(key,value);
+m.get(key);
+```
+

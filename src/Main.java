@@ -6,6 +6,8 @@ import QueueStack.QueueStackTest;
 import QueueStack.MinStackTest;
 import Recursion.RecursionTest;
 import com.sun.jmx.remote.internal.ArrayQueue;
+import sun.misc.Queue;
+import Sort.SortTest;
 
 import java.util.*;
 
@@ -47,6 +49,7 @@ public class Main {
         arrayStringTest.testHeightChecker();
         arrayStringTest.testThirdMax();
         arrayStringTest.testFindDisappearedNumbers();
+        arrayStringTest.testMaxLength();
 
 //        Linked list
         LinkedListTest linkedListTest = new LinkedListTest();
@@ -89,6 +92,7 @@ public class Main {
         binaryTreeTest.testConnect();
         binaryTreeTest.testConnect2();
         binaryTreeTest.testLowestCommonAncestor();
+        binaryTreeTest.testReConstructBinaryTree();
 
 //        recursion
         RecursionTest recursionTest = new RecursionTest();
@@ -106,6 +110,16 @@ public class Main {
         recursionTest.testPermutation();
         recursionTest.testBinaryWatch();
 
+
+        SortTest sortTest=new SortTest();
+        sortTest.testSortInList();
+
+//        StringBuilder sb = new StringBuilder();
+//        PriorityQueue<Integer> q=new PriorityQueue<Integer>();
+//        ArrayList<Integer> l = new ArrayList<>();
+//        Map<Integer, Integer> m = new HashMap<>();
+
+//
 
     }
 }

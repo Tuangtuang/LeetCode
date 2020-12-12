@@ -1309,19 +1309,44 @@ To convert a recursion approach to an iteration one, we could perform the follow
 
 - When building the solution in the divide-and-conquer algorithm, we have a clear and **predefined** path, though there might be several different manners to build the path. While in the backtracking problems, one does not know in advance the ***exact path*** to the solution. 
 
-# 动态规划之子序列问题解题模板
+# 动态规划
 
-## **一个一维的 dp 数组**
+## 子序列问题解题模板
 
-**在子数组`array[0..i]`中，以\**`array[i]`\**结尾的目标子序列（最长递增子序列）的长度是`dp[i]`**。
+### **一个一维的 dp 数组**
 
-## **一个二维的 dp 数组**‘
+- **在子数组`array[0..i]`中，以\**`array[i]`\**结尾的目标子序列（最长递增子序列）的长度是`dp[i]`**。
 
-### **涉及两个字符串/数组时**
+### **一个二维的 dp 数组**
 
-**在子数组`arr1[0..i]`和子数组`arr2[0..j]`中，我们要求的子序列（最长公共子序列）长度为`dp[i][j]`**
+#### **涉及两个字符串/数组时**
 
-### **只涉及一个字符串/数组时**
+- **在子数组`arr1[0..i]`和子数组`arr2[0..j]`中，我们要求的子序列（最长公共子序列）长度为`dp[i][j]`**
 
-**在子数组`array[i..j]`中，我们要求的子序列（最长回文子序列）的长度为`dp[i][j]`**
+#### **只涉及一个字符串/数组时**
+
+- **在子数组`array[i..j]`中，我们要求的子序列（最长回文子序列）的长度为`dp[i][j]`**
+
+
+
+## 买卖股票
+
+### 选择
+
+- 每一天有三种选择：买，卖，不操作
+
+### 状态
+
+- 天数i
+- 交易次数k
+- 手里有没有股票0/1
+
+- Dp(i,k,0)表示第i天，交易k次，手里没有股票时的最大收益
+
+### Base Case:
+
+- dp(i,0,1)=-infinite, 第i天，没有交易，手里有股票是不可能的
+- dp(i,0,0)=0, 第i天，没有交易，手机没有股票，收益是0
+- dp(0,k,1)=-infinite, 第0天，交易还没开始，手里不可能有股票
+- dp(0,k,0)=0, 第0天，没有交易，手里没有股票，收益是0
 

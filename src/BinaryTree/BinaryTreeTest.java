@@ -93,4 +93,13 @@ public class BinaryTreeTest {
 
     }
 
+
+    public void testReConstructBinaryTree(){
+        System.out.println("Test ReConstruct Binary Tree...");
+        BinaryTreeSolution binaryTreeSolution=new BinaryTreeSolution();
+        int pre[]=new int[]{1,2,4,3};
+        int in[]=new int[]{4,2,1,3};
+        binaryTreeSolution.reConstructBinaryTree(pre, in);
+    }
+
 }

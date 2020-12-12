@@ -265,7 +265,35 @@ public class BinaryTreeSolution {
         return root;
     }
 
+//  牛客，重建二叉树
+    public TreeNode reConstructBinaryTree(int [] pre,int [] in) {
+        return reConstructBinaryTreeHelper(pre,0,pre.length-1,in,0,in.length-1);
+    }
 
+    public TreeNode reConstructBinaryTreeHelper(int [] pre,int preStart, int preEnd,
+                                                int [] in, int inStart, int inEnd) {
+// TODO 注意点：递归出口写作最前面，而不是new TreeNode 写在最前面
+        if(preStart>preEnd){
+            return null;
+        }
+        if(inStart>inEnd){
+            return null;
+        }
+        TreeNode root=new TreeNode(pre[preStart]);
+        int mid=0;
+        for(int i=inStart;i<=inEnd;i++){
+            if(in[i]==pre[preStart]){
+                mid=i;
+                break;
+            }
+        }
+        root.left = reConstructBinaryTreeHelper(pre, preStart+1 ,preStart+(mid-inStart),
+                in, inStart, mid-1);
+        root.right = reConstructBinaryTreeHelper(pre, preStart+1+(mid-inStart), preEnd,
+                in, mid+1, inEnd);
+        return root;
+
+    }
 
 
 

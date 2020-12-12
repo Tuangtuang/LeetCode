@@ -927,4 +927,29 @@ public class ArrayStringSolution {
         }
         return res;
     }
+
+//    牛客，最大不重复子串，hash+slide window
+    public int maxLength (int[] arr) {
+        // write code here
+
+        if(arr==null||arr.length==0){
+            return 0;
+        }
+        if(arr.length==1){
+            return 1;
+        }
+        Map<Integer,Integer> map=new HashMap<>();
+        int i=0,j=0;
+        int maxLength=0;
+        while(j<arr.length){
+            if(map.containsKey(arr[j])){
+//             i从之前出现位置的下一位开始计算
+                i=Integer.max(map.get(arr[j])+1,i);
+            }
+            map.put(arr[j],j);
+            maxLength=Integer.max(maxLength,j-i+1);
+            j++;
+        }
+        return maxLength;
+    }
 }

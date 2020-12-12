@@ -252,4 +252,79 @@ public class DynamicProgrammingSolution {
         }
         return dp[row][col];
     }
+
+
+    //     dp[i][j],对于前i个数字，当前和为j时，能不能恰好组成j
+//     dp[0][j]=false;
+//     dp[i][0]=true;
+//     dp[i][j]=dp[i-1][j] or dp[i-1][j-nums[i-1]] if nums[i-1]+j<=sum/2
+    // = dp[i-1][j] nums[i-1]+j>sum/2
+    // https://labuladong.gitbook.io/algo/dong-tai-gui-hua-xi-lie/1.3-bei-bao-lei-xing-wen-ti/bei-bao-zi-ji
+//    416. Partition Equal Subset Sum
+    public boolean canPartition(int[] nums) {
+        if(nums==null){
+            return false;
+        }
+        if(nums.length==1||nums.length==0){
+            return false;
+        }
+//         get sum of the list
+        int sum=0;
+        for(int i=0;i<nums.length;i++){
+            sum+=nums[i];
+        }
+        if(sum%2==1){
+            return false;
+        }
+
+//         start dp
+        boolean [][]dp=new boolean [nums.length+1][sum/2+1];
+        for (int i = 0; i <= nums.length; i++){
+            dp[i][0] = true;
+        }
+        for(int i=1;i<dp.length;i++){
+            for(int j=1;j<dp[0].length;j++){
+                if(nums[i-1]>j){
+                    dp[i][j]=dp[i-1][j];
+                }else{
+                    dp[i][j]=dp[i-1][j]|dp[i-1][j-nums[i-1]];
+                }
+            }
+        }
+        return dp[nums.length][sum/2];
+    }
+
+
+    //     dp(i,j)用前i种coin，凑出j元的方法数
+//     dp(0,j)=0
+//     dp(i,0)=1
+//     dp(i,j)=dp(i-1,j)+dp(i,j-conins[i-1])
+//    518. Coin Change 2
+    public int change(int amount, int[] coins) {
+//         凑0元，只有一种方法，所有的硬币都不选
+        if(amount==0){
+            return 1;
+        }
+        if(coins==null||coins.length==0){
+            return 0;
+        }
+        int row=coins.length+1;
+        int col=amount+1;
+        int [][]dp=new int [row][col];
+        for(int i=0;i<dp.length;i++){
+//             凑0元，不论用前几种coin，都只有一种方法：全不选
+            dp[i][0]=1;
+        }
+        for(int i=1;i<row;i++){
+            for(int j=1;j<col;j++){
+                if(j-coins[i-1]>=0){
+                    dp[i][j]=dp[i-1][j]+dp[i][j-coins[i-1]];
+                }else{
+                    dp[i][j]=dp[i-1][j];
+                }
+            }
+        }
+        return dp[row-1][col-1];
+    }
+
 }

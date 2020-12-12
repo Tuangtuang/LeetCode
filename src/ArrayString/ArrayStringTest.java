@@ -313,4 +313,11 @@ public class ArrayStringTest {
         }
         System.out.print("\n");
     }
+
+    public void testMaxLength(){
+        System.out.println("\nTest Max Length..");
+        int []arr = new int[]{2,3,4,5};
+        ArrayStringSolution arrayStringSolution = new ArrayStringSolution();
+        System.out.println(arrayStringSolution.maxLength(arr));
+    }
 }
