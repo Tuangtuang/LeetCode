@@ -1,15 +1,14 @@
 import ArrayString.ArrayStringTest;
-import BinaryTree.BinaryTreeSolution;
 import BinaryTree.BinaryTreeTest;
+import Design.LRUCacheTest;
 import LinkedList.LinkedListTest;
 import QueueStack.QueueStackTest;
 import QueueStack.MinStackTest;
 import Recursion.RecursionTest;
-import com.sun.jmx.remote.internal.ArrayQueue;
-import sun.misc.Queue;
 import Sort.SortTest;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Main {
 
@@ -50,6 +49,7 @@ public class Main {
         arrayStringTest.testThirdMax();
         arrayStringTest.testFindDisappearedNumbers();
         arrayStringTest.testMaxLength();
+        arrayStringTest.testUpperBound();
 
 //        Linked list
         LinkedListTest linkedListTest = new LinkedListTest();
@@ -114,12 +114,9 @@ public class Main {
         SortTest sortTest=new SortTest();
         sortTest.testSortInList();
 
-//        StringBuilder sb = new StringBuilder();
-//        PriorityQueue<Integer> q=new PriorityQueue<Integer>();
-//        ArrayList<Integer> l = new ArrayList<>();
-//        Map<Integer, Integer> m = new HashMap<>();
-
-//
+        LRUCacheTest lruCacheTest = new LRUCacheTest();
+        lruCacheTest.testLRUCache();
+        
 
     }
 }

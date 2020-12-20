@@ -152,5 +152,7 @@ m.containsKey(key);
 m.containsValue(value);
 m.put(key,value);
 m.get(key);
+m.remove(key);
+m.remove(key,value);
 ```
 

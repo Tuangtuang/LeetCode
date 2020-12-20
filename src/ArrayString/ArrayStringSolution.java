@@ -952,4 +952,69 @@ public class ArrayStringSolution {
         }
         return maxLength;
     }
+
+
+//    牛客，容器盛水问题
+//    https://www.nowcoder.com/practice/31c1aed01b394f0b8b7734de0324e00f?tpId=190&&tqId=36005&rp=1&ru=/ta/job-code-high-rd&qru=/ta/job-code-high-rd/question-ranking
+    public long maxWater (int[] arr) {
+        // write code here
+        int []leftMax=new int [arr.length];
+        int []rightMax=new int [arr.length];
+//         为每个位置找左边的最大值
+        for(int i=1;i<arr.length;i++){
+            leftMax[i]=arr[i-1]>leftMax[i-1]?arr[i-1]:leftMax[i-1];
+        }
+//         为每个位置找右边的最大值
+        for(int i=arr.length-2;i>=0;i--){
+            rightMax[i]=arr[i+1]>rightMax[i+1]?arr[i+1]:rightMax[i+1];
+        }
+//         每个位置能存放的就是左右两边最大值中较小的一个，减去他本身的高度
+        long sum=0;
+        for(int i=1;i<arr.length-1;i++){
+            if(arr[i]>Integer.min(leftMax[i],rightMax[i])){
+                continue;
+            }
+            sum+=(Integer.min(leftMax[i],rightMax[i])-arr[i]);
+        }
+        return sum;
+    }
+
+
+//    牛客，二分查找变体
+    public int upper_bound_ (int n, int v, int[] a) {
+        // write code here
+        if(v>a[n-1]){
+            return n+1;
+        }
+        int low=0,high=n-1;
+
+        int resIndex=-1;
+        while(low<=high){
+            int mid=(low+high)/2;
+            if(v<a[mid]){
+                if(mid==0||mid>=1&&v>a[mid-1]){
+                    resIndex=mid;
+                    break;
+                }
+                high=mid-1;
+            }else if(v==a[mid]){
+                resIndex=mid;
+                break;
+            }else{
+                if(mid==n-1||mid<=n-2&&v<a[mid+1]){
+                    resIndex=mid+1;
+                    break;
+                }
+                low=mid+1;
+            }
+        }
+        while(resIndex>=1){
+            if(a[resIndex-1]==a[resIndex]){
+                resIndex--;
+            }else{
+                break;
+            }
+        }
+        return resIndex+1;
+    }
 }

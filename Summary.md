@@ -1202,8 +1202,10 @@ boolean DFS(Node cur, Node target, Set<Node> visited) {
 
   $T(n)=aT(n/b)+f(n)$
 
-  - *f*(*n*) is the time complexity that it takes to divide the problems into subproblems and also to combine the results from the subproblems. We can further represent $f(n)$ as $O(n^d)  d≥0$. 
+  - 将规模为n的问题分成a个规模为n/b的子问题，将a个子问题合并需要f(n)
 
+  - *f*(*n*) is the time complexity that it takes to divide the problems into subproblems and also to combine the results from the subproblems. We can further represent $f(n)$ as $O(n^d)  d≥0$. 
+  
   ![image-20201121205752097](/Users/tangyuqi/Library/Application Support/typora-user-images/image-20201121205752097.png)
 
 ## Backtracking
@@ -1349,4 +1351,266 @@ To convert a recursion approach to an iteration one, we could perform the follow
 - dp(i,0,0)=0, 第i天，没有交易，手机没有股票，收益是0
 - dp(0,k,1)=-infinite, 第0天，交易还没开始，手里不可能有股票
 - dp(0,k,0)=0, 第0天，没有交易，手里没有股票，收益是0
+
+### 状态转移方程
+
+- $dp(i,k,0)=max\{dp(i-1,k,0), dp(i-1,k,1)+price[i]\}$
+- 第i天，交易次数为k，没有股票=max{（第i-1天，交易次数k，没有股票），（第i-1天，交易次数为k，持有股票，但是在第i天卖了）}
+- $dp(i,k,1)=max\{dp(i-1,k,1), dp(i-1,k-1,0)-price[i]\}$
+- 第i天，交易次数为k，持有股票=max{（第i-1天，交易次数k，持有股票），（第i-1天，交易次数为k-1，没有股票，但是在第i天买入了股票）}
+
+### 第一题，k = 1
+
+- k==1, 所以可以减少一个状态
+- Base Case
+  - dp(0,0)=0; On the 0th day, the transaction doesn't start.profit=0
+  - dp(0,1)=-price[0]; Impossible, when we not start, we have stock
+
+- 状态转移方程
+
+  - $dp(i,1)=max\{dp(i-1,1), dp(i-1,0)-prices[i]\}$
+
+    ​		 $ =max\{dp(i-1,1),-prices[i]\}$
+
+    - dp(i-1,0)恒等于0，因为只允许做一次交易，第i次才开始买，所以之前一定都没买也没卖，收益一定是0
+
+  - $dp(i,0)=max\{dp(i-1,0), dp(i-1,1)+price[i]\}$
+
+- Goal
+
+  - the max # of the matrix
+
+- Code
+
+  - ```java
+    //     121. Best Time to Buy and Sell Stock
+    //		 dp(i,j) on the ith day, when we have/ don't have stock, the max profit
+    //     Base Case
+    //     dp(0,0)=0; on the 0th day, the transaction doesn't start.profit=0
+    //     dp(0,1)=-1; impossible, when we not start, we have stock
+    //     dp(i,1)=max{dp(i-1,1),dp(i-1,0)-prices[i]}=max{dp(i-1,1),-prices[i]}
+    //     dp(i,0)=max{dp(i-1,0),dp(i-1,1)+price[i]}
+    //     Goal: the max of the matrix
+        public int maxProfit(int[] prices) {
+            if(prices==null||prices.length==0){
+                return 0;
+            }
+            int [][]dp=new int [prices.length+1][2];
+            int maxProfit=0;
+            dp[0][0]=0;
+            dp[0][1]=-prices[0];
+            for(int i=1;i<dp.length;i++){
+                dp[i][1]=Integer.max(dp[i-1][1],-prices[i-1]);
+                dp[i][0]=Integer.max(dp[i-1][0],dp[i-1][1]+prices[i-1]);
+                maxProfit=Integer.max(maxProfit,dp[i][0]);
+            }
+            return maxProfit;
+        }
+    ```
+
+  - 状态压缩
+
+    - ```java
+      public int maxProfit(int[] prices) {
+              if(prices==null||prices.length==0){
+                  return 0;
+              }
+              // int [][]dp=new int [prices.length+1][2];
+              int maxProfit=0;
+              // dp[0][0]=0;
+              // dp[0][1]=-prices[0];
+              int dp_i0=0;
+              int dp_i1=Integer.MIN_VALUE;
+              for(int i=1;i<prices.length+1;i++){
+                  dp_i1=Integer.max(dp_i1,-prices[i-1]);
+                  dp_i0=Integer.max(dp_i0,dp_i1+prices[i-1]);
+                  maxProfit=Integer.max(maxProfit,dp_i0);
+              }
+              return maxProfit;
+          }
+      ```
+
+    - dp(i,j)只和dp(i-1,0)和dp(i-1,1)有关，状态压缩为两个
+
+### k = +infinity
+
+- 认为k和k-1是一样的
+
+- $dp(i,k,0) = max\{dp(i-1,k,0), dp(i-1,k,1)-prices[i]\}$
+
+- $dp(i,k,1) = max\{dp(i-1,k,1),dp(i-1,k-1,0)-prices[i]\}$
+
+  ​				$= max\{dp(i-1,k,1),dp(i-1,k,0)-prices[i]\}$
+
+- 可以省略一个状态k
+  - $dp(i,0) = max\{dp(i-1,0), dp(i-1,1)-prices[i]\}$
+  - $dp(i,1) = max\{dp(i-1,1),dp(i-1,0)+prices[i]\}$
+
+- Base Case
+
+  - $dp(0,0)=0$
+  - $dp(0,1)=-infinite$
+
+- Code
+
+  - ```java
+    public int maxProfit(int[] prices) {
+            if(prices==null||prices.length==0){
+                return 0;
+            }
+            int maxProfit=0;
+            int dp_i0=0;
+            int dp_i1=Integer.MIN_VALUE;
+            for(int i=1;i<prices.length+1;i++){
+                dp_i1=Integer.max(dp_i1,dp_i0-prices[i-1]);
+                dp_i0=Integer.max(dp_i0,dp_i1+prices[i-1]);
+                maxProfit=Integer.max(maxProfit,dp_i0);
+            }
+            return maxProfit;
+        }
+    ```
+
+### k = +infinity with cooldown
+
+- 每次 sell 之后要等一天才能继续交易
+- Base Case
+  - $dp(0,0)=0$
+  - $dp(0,1)=-infinite$
+- $dp(i,0) = max\{dp(i-1,0), dp(i-1,1)+prices[i]\}$
+- $dp(i,1) = max\{dp(i-1,1),dp(i-2,0)+prices[i]\}$
+
+- code
+
+  - ```java
+    public int maxProfit(int[] prices) {
+            if(prices==null||prices.length==0){
+                return 0;
+            }
+            // int maxProfit=0;
+            int dp_i0=0;
+            int dp_i1=Integer.MIN_VALUE;
+            int dp_i0_pre=0;
+            for(int i=1;i<prices.length+1;i++){
+                int temp=dp_i0;
+                dp_i1=Integer.max(dp_i1,dp_i0_pre-prices[i-1]);
+                dp_i0=Integer.max(dp_i0,dp_i1+prices[i-1]);
+                dp_i0_pre=temp;
+                // maxProfit=Integer.max(maxProfit,dp_i0);
+            }
+            return dp_i0;
+        }
+    ```
+
+### k = +fee
+
+- Base Case
+  - $dp(0,0)=0$
+  - $dp(0,1)=-infinite$
+- $dp(i,0) = max\{dp(i-1,0), dp(i-1,1)+prices[i]\}$
+- $dp(i,1) = max\{dp(i-1,1),dp(i-1,0)-prices[i]-fee\}$
+
+- Code
+
+  - ```java
+    public int maxProfit(int[] prices, int fee) {
+            if(prices==null||prices.length==0){
+                return 0;
+            }
+            int dpi0=0;
+            int dpi1=Integer.MIN_VALUE;
+            for(int i=0;i<prices.length;i++){
+                dpi0=Integer.max(dpi0,dpi1+prices[i]);
+                dpi1=Integer.max(dpi1,dpi0-prices[i]-fee);
+            }
+            return dpi0;
+        }
+    ```
+
+    
+
+### k=2
+
+- Base Case
+  - $dp(0,k,0)=0$
+  - $dp(0,k,1)=-infinite$
+
+- 状态转移方程
+
+  - $dp(i,k,0)=max\{dp(i-1,k,0),dp(i-1,k,1)+price(i)\}$
+
+  - $dp(i,k,1) = max\{dp(i-1,k,1),dp(i-1,k-1,0)-price(i)\}$
+
+- Code
+
+  - 需要穷举所有状态
+
+  - ```java
+    public int maxProfit(int[] prices) {
+            int [][][]dp=new int [prices.length+1][3][2];
+    //         base case
+    //         dp(0,k,0)=0
+    //         dp(0,k,1)=-infinite
+            dp[0][0][1]=Integer.MIN_VALUE;
+            dp[0][1][1]=Integer.MIN_VALUE;
+            dp[0][2][1]=Integer.MIN_VALUE;
+    //         start dp
+            for(int i=1;i<=prices.length;i++){
+                dp[i][1][0]=Integer.max(dp[i-1][1][0],dp[i-1][1][1]+prices[i-1]);
+                dp[i][2][0]=Integer.max(dp[i-1][2][0],dp[i-1][2][1]+prices[i-1]);
+                dp[i][1][1]=Integer.max(dp[i-1][1][1],dp[i-1][0][0]-prices[i-1]);
+                dp[i][2][1]=Integer.max(dp[i-1][2][1],dp[i-1][1][0]-prices[i-1]);
+            }
+            return dp[prices.length][2][0];
+            
+        }
+    ```
+
+  - 状态压缩
+
+    - ```java
+      public int maxProfit(int[] prices) {
+              int dp10=0;
+              int dp11=Integer.MIN_VALUE;
+              int dp20=0;
+              int dp21=Integer.MIN_VALUE;
+              for(int i=0;i<prices.length;i++){
+                  dp10=Integer.max(dp10,dp11+prices[i]);
+                  dp20=Integer.max(dp20,dp21+prices[i]);
+               // 	dp00恒等于0 
+                  dp11=Integer.max(dp11,-prices[i]);
+      				// 		最多交易两次手里有股票：前一次就有；前一次没有股票，最多交易次数是i-1=1时买入了        
+                  dp21=Integer.max(dp21,dp10-prices[i]);
+              }
+              return dp20;
+          }
+      ```
+
+### k arbitray
+
+```java
+public int maxProfit(int k, int[] prices) {
+        if(prices==null||prices.length==0){
+//             prices是空的或者无，肯定不会产生利润
+            return 0;
+        }
+//         dp[i][k][0]第i天，最大交易次数是k且手里没有股票时的最大收益
+        int [][][]dp=new int [prices.length+1][k+1][2];
+//         base case
+//         dp[0][k][1]=-infinite
+//         dp[0][k][0]=0
+        for(int i=0;i<k+1;i++){
+            dp[0][i][1]=Integer.MIN_VALUE;
+        }
+//         dp(i,k,0)=max{dp(i-1,k.0),dp(i-1,k,1)+prices(i-1)}
+//         dp(i,k,1)=max{dp(i-1,k,1),dp(i-1,k-1,0)-prices(i-1)}
+        for(int i=1;i<prices.length+1;i++){
+            for(int j=1;j<k+1;j++){
+                dp[i][j][0]=Integer.max(dp[i-1][j][0],dp[i-1][j][1]+prices[i-1]);
+                dp[i][j][1]=Integer.max(dp[i-1][j][1],dp[i-1][j-1][0]-prices[i-1]);
+            }
+        }
+        return dp[prices.length][k][0];
+        
+    }
+```
 

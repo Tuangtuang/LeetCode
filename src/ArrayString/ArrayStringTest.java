@@ -320,4 +320,14 @@ public class ArrayStringTest {
         ArrayStringSolution arrayStringSolution = new ArrayStringSolution();
         System.out.println(arrayStringSolution.maxLength(arr));
     }
+
+    public void testUpperBound(){
+        System.out.println("\nTest Upper Bound...");
+        int []arr=new int []{1,2,4,4,6};
+        int n=arr.length;
+        int target=5;
+        ArrayStringSolution arrayStringSolution = new ArrayStringSolution();
+        int res=arrayStringSolution.upper_bound_(n, target, arr);
+        System.out.println(res);
+    }
 }
