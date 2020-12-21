@@ -109,14 +109,16 @@ public class Main {
         recursionTest.testgenerateParentheses();
         recursionTest.testPermutation();
         recursionTest.testBinaryWatch();
-
+        recursionTest.testCombination();
 
         SortTest sortTest=new SortTest();
         sortTest.testSortInList();
 
         LRUCacheTest lruCacheTest = new LRUCacheTest();
         lruCacheTest.testLRUCache();
-        
 
+        linkedListTest.testReverseKGroup();
+        linkedListTest.testAddInList();
+//        Arrays.copyOfRange()
     }
 }

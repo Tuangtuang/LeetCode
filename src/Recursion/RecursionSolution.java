@@ -934,7 +934,27 @@ int []hourChoice=new int[]{1,2,4,8};
         return true;
     }
 
+    public List<ArrayList<Integer>> combine(int []arr){
+        List<ArrayList<Integer>> res = new ArrayList<>();
+        List<Integer> cur=new ArrayList<>();
+        combineHelper(arr,0,cur,res);
+        return res;
+    }
 
-    
+    public void combineHelper(int []arr, int start, List<Integer> cur, List<ArrayList<Integer>> res){
+        if(cur.isEmpty()==false){
+            ArrayList<Integer> temp=new ArrayList<Integer>(cur);
+            res.add(temp);
+        }
+        for(int i=start;i<arr.length;i++){
+//            arr[i]加进去
+            cur.add(arr[i]);
+//            i+1到最后的全组合
+            combineHelper(arr,i+1,cur,res);
+//            arr[i]不加进去
+            cur.remove(cur.size()-1);
+        }
+        return;
+    }
 
 }

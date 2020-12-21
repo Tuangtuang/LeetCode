@@ -1,6 +1,7 @@
 package Recursion;
 
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -178,6 +179,18 @@ public class RecursionTest {
         List<String> res = recursionSolution.readBinaryWatch(2);
         for(String item:res){
             System.out.println(item);
+        }
+    }
+
+    public void testCombination(){
+        System.out.println("\nTest Combination Test...");
+        int []arr=new int[]{1,2,3};
+        List<ArrayList<Integer>> res=recursionSolution.combine(arr);
+        for(ArrayList<Integer> curList:res){
+            for(Integer item:curList){
+                System.out.print(item+" ");
+            }
+            System.out.println();
         }
     }
 }

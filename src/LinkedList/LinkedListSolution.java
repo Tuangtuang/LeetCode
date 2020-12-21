@@ -363,4 +363,127 @@ public class LinkedListSolution {
         p.next=head;
         return newHead;
     }
+
+
+//    将给出的链表中的节点每\ k k 个一组翻转，返回翻转后的链表
+//    如果链表中的节点数不是\ k k 的倍数，将最后剩下的节点保持原样
+//    O(n^2)
+//    用while循环的时候要记得字节++i
+//    分请curTail和curHead
+//    https://www.nowcoder.com/practice/b49c3dc907814e9bbfa8437c251b028e?tpId=190&&tqId=35192&rp=1&ru=/ta/job-code-high-rd&qru=/ta/job-code-high-rd/question-ranking
+    public ListNode reverseKGroup (ListNode head, int k) {
+        // write code here
+//         count the # of node
+        int count=0;
+        ListNode p=head;
+        while(p!=null){
+            count++;
+            p=p.next;
+        }
+        int groupNumber=count/k;
+        int curGroup=1;
+        ListNode curHead=head;
+        ListNode curTail;
+        ListNode preTail=null;
+        ListNode nextHead;
+        while(curGroup<=groupNumber){
+//             找到当前组的tail
+            p=curHead;
+            for(int i=0;i<k-1;i++){
+                p=p.next;
+            }
+            curTail=p;
+//            定位找到下一组的head
+            nextHead=p.next;
+//            反转curHead到curTail的链表
+            reverse(curHead,curTail);
+//            前一组和将当前链表的头部连起来
+            if(curHead==head){
+                head=curTail;
+            }else{
+                preTail.next=curTail;
+            }
+//            更新前一组的尾部为当前组的尾部
+            preTail=curHead;
+//            更新下一组的头部
+            curHead=nextHead;
+//            最后一组，之后的不用翻转了
+            if(curGroup==groupNumber){
+                preTail.next=curHead;
+                break;
+            }
+            curGroup++;
+        }
+        return head;
+    }
+
+    public void reverse(ListNode head,ListNode tail){
+        ListNode p=head,pre=null;
+        while(p!=tail){
+            ListNode pNext=p.next;
+            p.next=pre;
+            pre=p;
+            p=pNext;
+        }
+        p.next=pre;
+    }
+
+//    两个链表生成想加链表
+//    牛客
+//    https://www.nowcoder.com/practice/c56f6c70fb3f4849bc56e33ff2a50b6b?tpId=190&&tqId=35219&rp=1&ru=/ta/job-code-high-rd&qru=/ta/job-code-high-rd/question-ranking
+    public ListNode addInList (ListNode head1, ListNode head2) {
+        // write code here
+        ListNode p1=reverseList(head1);
+        ListNode p2=reverseList(head2);
+        int carry=0;
+        ListNode newHead=null;
+        while(p1!=null&&p2!=null){
+            int curDigit=p1.val+p2.val+carry;
+            if(curDigit>=10){
+                curDigit=curDigit%10;
+                carry=1;
+            }else{
+                carry=0;
+            }
+            ListNode temp=new ListNode(curDigit);
+            temp.next=newHead;
+            newHead=temp;
+            p1=p1.next;
+            p2=p2.next;
+        }
+
+        while(p1!=null){
+            int curDigit=p1.val+carry;
+            if(curDigit>=10){
+                curDigit=curDigit%10;
+                carry=1;
+            }else{
+                carry=0;
+            }
+            ListNode temp=new ListNode(curDigit);
+            temp.next=newHead;
+            newHead=temp;
+            p1=p1.next;
+        }
+
+        while(p2!=null){
+            int curDigit=p2.val+carry;
+            if(curDigit>=10){
+                curDigit=curDigit%10;
+                carry=1;
+            }else{
+                carry=0;
+            }
+            ListNode temp=new ListNode(curDigit);
+            temp.next=newHead;
+            newHead=temp;
+            p2=p2.next;
+        }
+        if(carry!=0){
+            ListNode temp=new ListNode(carry);
+            temp.next=newHead;
+            newHead=temp;
+        }
+        return newHead;
+    }
 }

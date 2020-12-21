@@ -181,4 +181,31 @@ public class LinkedListTest {
         System.out.println();
     }
 
+    public void testReverseKGroup(){
+        System.out.println("\nTest Reverse KGroup...");
+        LinkedListSolution linkedListSolution=new LinkedListSolution();
+        int []nums=new int[]{1,2,3,4,5};
+        ListNode head=createLinkedList(nums,-1);
+        head=linkedListSolution.reverseKGroup(head,2);
+        while (head!=null){
+            System.out.print(head.val+" ");
+            head=head.next;
+        }
+        System.out.println();
+    }
+
+    public void testAddInList(){
+        System.out.println("\nTest Add In List...");
+        LinkedListSolution linkedListSolution = new LinkedListSolution();
+        int[] p1 = new int[]{9, 3, 7};
+        int []p2 =new int[]{6,3};
+        ListNode head1 = createLinkedList(p1, -1);
+        ListNode head2 = createLinkedList(p2, -1);
+        ListNode head=linkedListSolution.addInList(head1,head2);
+        while (head!=null){
+            System.out.print(head.val+" ");
+            head=head.next;
+        }
+    }
+
 }
