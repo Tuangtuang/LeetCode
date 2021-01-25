@@ -1311,13 +1311,293 @@ To convert a recursion approach to an iteration one, we could perform the follow
 
 - When building the solution in the divide-and-conquer algorithm, we have a clear and **predefined** path, though there might be several different manners to build the path. While in the backtracking problems, one does not know in advance the ***exact path*** to the solution. 
 
+
+
+# Binary Search
+
+## Binary Search Template I
+
+- ````java
+  int binarySearch(int[] nums, int target){
+    if(nums == null || nums.length == 0)
+      return -1;
+  
+    int left = 0, right = nums.length - 1;
+    while(left <= right){
+      // Prevent (left + right) overflow
+      int mid = left + (right - left) / 2;
+      if(nums[mid] == target){ return mid; }
+      else if(nums[mid] < target) { left = mid + 1; }
+      else { right = mid - 1; }
+    }
+  
+    // End Condition: left > right
+    return -1;
+  }
+  ````
+
+- Search Condition can be determined without comparing to the element's neighbors (or use specific elements around it)
+
+- No post-processing required because at each step, you are checking to see if the element has been found. If you reach the end, then you know the element is not found
+
+### Distinguishing Syntax
+
+- Initial Condition:` left = 0, right = length-1`
+- Termination: `left > right`
+- Searching Left: `right = mid-1`
+- Searching Right: `left = mid+1`
+
+## Square Root
+
+- Binary
+
+  ```java
+  public int mySqrt(int x) {
+          long left=0;
+        //   每个数的平方跟不会大于这个数字的一半+1
+          long right=x/2+1;
+          while(left<right){
+            // 右中值
+              long mid=(left+right+1)/2;
+              long square = mid * mid;
+              if(square<=x){
+                  left=mid;
+              }else{
+                  right=mid-1;
+              }
+          }
+          return (int)left;
+      }
+  ```
+
+## 二分查找找下界
+
+- 对于数组 `[1,2,3,5,5,5,6,7,9]`，令 `target=5`，则满足 `x ≥ target` 的下界的下标应该是 `3`，如下图所示：
+
+  ![image.png](https://pic.leetcode-cn.com/306c71552186f5b178a413074ee1b4417bb541f0e750128cdb4e3a6d06a26007-image.png)
+
+- 区间范围为 [left,right]，left、right 是区间的左右边界的下标
+  mid 是 [left,right] 的中间位置
+  初始时，left、right 分别指向数组的第一个和最后一个元素
+  当 left > right 时，表示区间为空
+
+- 不断右移 left，左移 right，使得所有「小于」target 的元素都在 left 左侧，所有「大于等于」target 的元素都在 right 右侧，那么当区间为空时，left 就是要查找的下界
+
+- 算法步骤：
+
+  - 若 nums[mid] >= target，说明 [mid,right] 区间的所有元素均「大于等于」target，因此 right 左移，有 right = mid-1
+    否则，说明 [left,mid] 区间的所有元素均「小于」target，因此 left 右移，有 left = mid+1
+    重复上述步骤，直到区间为空，表示找到了下界，返回 left。因此循环条件为 left <= right，表示“区间不为空”
+    注意，上述两个赋值语句均跳过了中间元素 mid
+
+  - ```javascript
+    func LowerBound(nums []int, target int) int {
+        left, right := 0, len(nums)-1
+        for left <= right {
+            mid := left + (right-left) >> 1
+            if nums[mid] >= target { // 这里的比较运算符与题目要求一致
+                right = mid - 1
+            } else {
+                left = mid + 1
+            }
+        }
+        return left // 返回下界的下标
+    
+    ```
+
+## 找上界
+
+- 定义满足 x ≤ target 的最后一个元素为「上界」。给定一个 target，要求返回升序数组中上界的下标。比如：对于数组 [0,1,2,3,4]，当 target=3 时，返回下标 2；当 target=5 时，返回下标 4。
+
+- 根据上界和下界的定义，我们可以发现：上界和「互补的」下界是相邻的，并且 上界 = 下界 - 1。比如 x ≤ target 的上界和 x > target 的下界相邻。因此，所有找上界的问题，都可以转换为「互补的」找下界的问题。
+
+- Find **Minimum** in Rotated Sorted Array
+
+  - Suppose an array of length `n` sorted in ascending order is **rotated** between `1` and `n` times. For example, the array `nums = [0,1,2,4,5,6,7]` might become:
+  - `[4,5,6,7,0,1,2]` if it was rotated `4` times.
+  - `[0,1,2,4,5,6,7]` if it was rotated `7` times.
+
+  - ```java
+    class Solution {
+        public int findMin(int[] nums) {
+            if(nums==null||nums.length==0){
+                return -1;
+            }
+            if(nums.length==1){
+                return nums[0];
+            }
+            int left=0,right=nums.length-1;
+            int size=nums.length-1;
+            // 结尾比开头大，一定没有转过
+            if(nums[right]>nums[left]){
+                return nums[left];
+            }
+            while(left<=right){
+                int mid=(left+right)/2;
+                // 比后一项大，该项一定是peek
+                if(nums[mid]>nums[mid+1]){
+                    return nums[mid+1];
+                }
+                // 前一项更大，前一项一定是peek
+                if(nums[mid-1]>nums[mid]){
+                    return nums[mid];
+                }
+    //             peek一定在mid之后
+                if(nums[mid]>nums[0]){
+                    left=mid+1;
+                }else{
+    //                 nums[mid]比开头小，peek一定在前面
+                    right=mid-1;
+                }
+            }
+            return -1;
+        }
+    }
+    ```
+
+    
+
+
+## Find Minimum in Rotated Sorted Array
+
+```java
+class Solution {
+    public int findMin(int[] nums) {
+        if(nums==null||nums.length==0){
+            return -1;
+        }
+        if(nums.length==1){
+            return nums[0];
+        }
+        int left=0,right=nums.length-1;
+        int size=nums.length-1;
+        // 结尾比开头大，一定没有转过
+        if(nums[right]>nums[left]){
+            return nums[left];
+        }
+        while(left<=right){
+            int mid=(left+right)/2;
+            // 比后一项大，该项一定是peek
+            if(nums[mid]>nums[mid+1]){
+                return nums[mid+1];
+            }
+            // 前一项更大，前一项一定是peek
+            if(nums[mid-1]>nums[mid]){
+                return nums[mid];
+            }
+//             peek一定在mid之后
+            if(nums[mid]>nums[0]){
+                left=mid+1;
+            }else{
+//                 nums[mid]比开头小，peek一定在前面
+                right=mid-1;
+            }
+        }
+        
+        return -1;
+    }
+}
+```
+
+## Median of Two Sorted Arrays
+
+- https://leetcode-cn.com/problems/median-of-two-sorted-arrays/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by-w-2/
+
+- ```java
+  class Solution {
+      public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+          int n = nums1.length;
+          int m = nums2.length;
+          if((m+n)%2==1){
+              return getKthSmall(nums1,0,n-1,nums2,0,m-1,(m+n)/2+1);
+          }else{
+              int left=getKthSmall(nums1,0,n-1,nums2,0,m-1,(m+n)/2);
+              int right=getKthSmall(nums1,0,n-1,nums2,0,m-1,(m+n)/2+1);
+              return (left+right)*0.5;
+          }
+      
+      }
+      
+      public int getKthSmall(int []nums1,int start1,int end1,
+                            int []nums2,int start2,int end2,
+                            int k){
+          
+          if(start1>end1){
+              return nums2[start2+k-1];
+          }
+          if(start2>end2){
+              return nums1[start1+k-1];
+          }
+          if(k==1){
+              return Integer.min(nums1[start1],nums2[start2]);
+          }
+  //         compare k/2 
+  //         如果k/2>当前长度，则取最后一位
+          int index1=start1+Integer.min(k/2,end1-start1+1)-1;
+          int index2=start2+Integer.min(k/2,end2-start2+1)-1;
+          if(nums1[index1]<nums2[index2]){
+  //             扔掉[0:index]
+  //             此时1中小于等于nums1[index]的一共有index个
+  //             B中小于等于nums1[index]最多有index-1个
+  //             所以此时nums1[index]最多是第k-1小的数
+  //             此时只要找第k-（index-start+1）小的数
+              return getKthSmall(nums1,index1+1,end1,nums2,start2,end2,k-(index1-start1+1));
+                  
+          }else{
+              return getKthSmall(nums1,start1,end1,nums2,index2+1,end2,k-(1+index2-start2));
+          }
+          
+      }
+  }
+  ```
+
+  
+
 # 动态规划
 
 ## 子序列问题解题模板
 
 ### **一个一维的 dp 数组**
 
-- **在子数组`array[0..i]`中，以\**`array[i]`\**结尾的目标子序列（最长递增子序列）的长度是`dp[i]`**。
+- **在子数组`array[0..i]`中，以array[i]结尾的目标子序列（最长递增子序列）的长度是`dp[i]`**。
+
+- Unique Binary Search Trees
+
+  - Given *n*, how many structurally unique **BST's** (binary search trees) that store values 1 ... *n*?
+
+  - ```java
+    class Solution {
+    //     dp[i]: # of binary trees with i nodes
+    //     assume ith node is root
+    //     from 0 to i-1 can be left subtree, from i+1 to n-1 can be right subtree
+    //     dp[n]=sum(dp[i-1]*dp[n-i]) i from 1 to n
+    //     base case:
+    //     dp[0]=1
+    //     dp[1]=1
+        
+        public int numTrees(int n) {
+            int []memo=new int [n+1];
+            return numTreesHelper(n,memo);
+        }
+        
+        public int numTreesHelper(int n, int []memo){
+            if(n==0||n==1){
+                return 1;
+            }
+            if(memo[n]!=0){
+                return memo[n];
+            }
+            int curRes=0;
+            for(int i=1;i<=n;i++){
+                curRes+=numTreesHelper(i-1,memo)*numTreesHelper(n-i,memo);
+            }
+            if(memo[n]==0){
+                memo[n]=curRes;
+            }
+            return curRes;
+        }
+    }
+    ```
 
 ### **一个二维的 dp 数组**
 
@@ -1329,7 +1609,40 @@ To convert a recursion approach to an iteration one, we could perform the follow
 
 - **在子数组`array[i..j]`中，我们要求的子序列（最长回文子序列）的长度为`dp[i][j]`**
 
+## 背包问题
 
+### 0-1背包问题
+
+- 给你一个可装载重量为 `W` 的背包和 `N` 个物品，每个物品有重量和价值两个属性。其中第 `i` 个物品的重量为 `wt[i]`，价值为 `val[i]`，现在让你用这个背包装物品，最多能装的价值是多少？
+
+  - 明确选择和状态
+    - 选择：装或者不装第i个物品
+    - 状态：背包容量，可选择的物品
+  - 定义DP数组
+    - **`dp[i][w]`的定义如下：对于前`i`个物品，当前背包的容量为`w`，这种情况下可以装的最大价值是`dp[i][w]`**
+
+  - 完成状态转换
+    - $dp[i][0]=0$
+    - 对于每一个物品，可以选或者不选
+      - $dp[i][j]=Max\{dp[i-1][j-w[i]]+p[i],dp[i-1][j]\}$
+
+- Leetcode 416
+
+### 完全背包问题
+
+- leetcode 518
+- 有一个背包，最大容量为 `amount`，有一系列物品 `coins`，每个物品的重量为 `coins[i]`，**每个物品的数量无限**。请问有多少种方法，能够把背包恰好装满？
+- 和0-1背包区别，每个物品的数量是无限的
+  - 状态和选择
+    - 「背包的容量」和「可选择的物品」
+    - 用或者不用第i种硬币
+  - dp数组
+    - 若只使用前 `i` 个物品，当背包容量为 `j` 时，有 `dp[i][j]` 种方法可以装满背包
+    - **若只使用** **`coins`** **中的前** **`i`** **个硬币的面值，若想凑出金额** **`j`**，**`dp[i][j]`** **种凑法**。
+    - $dp[i][0]=0$
+    - $dp[0][j]=0$
+    - $dp[i][j]=dp[i-1][j-nums[i]]+dp[i-1][j]$
+    - 对于凑j元，可以使用第i种硬币，也可以不使用第i种硬币
 
 ## 买卖股票
 
@@ -1614,3 +1927,145 @@ public int maxProfit(int k, int[] prices) {
     }
 ```
 
+## 正则匹配
+
+- 如果不考虑通配符`*`
+
+  - $s[i]==p[j]||p[j]=='.'$  匹配，i++，j++
+  - 否则不匹配
+  - 循环结束 $i!=j$ 则不匹配
+
+- 考虑通配符`*`
+
+  - 如果 $p[i+1]$ 是通配符`*`
+
+    - $s[i]==p[j]$
+      - $p[j]$ 可以匹配多个 $s[i]$ , 如s="aaa", p="a*"
+      - $p[j]$ 可以匹配0个 $s[i]$ , 如s="aa", p="a*aa"
+
+    - $s[i]!=p[j]$
+      - $p[j]$ 可以匹配0个 $s[i]$ , 如s="bb", p="a*bb"
+      - $p[j]$ 不匹配
+
+- 状态转移方程
+
+  - Base Case
+
+    ```java
+    dp[0][0]=true;
+    ```
+
+  - Recursion
+
+    ```python
+    if p[j]!='*':
+    	if s[i]==p[j] or p[j]=='.':
+      	dp[i][j]=dp[i-1][j-1]
+    	else:
+      	dp[i][j]=False
+    else:
+      if s[i]==p[j-1]:
+        # 可以匹配一次或者不匹配
+        #			匹配s的末尾字符，将该字符扔掉
+        #										不匹配任何字符
+        dp[i][j]=dp[i-1][j] or dp[i][j-2]
+      else:
+        # 只能不匹配仍和字符
+        dp[i][j]=dp[i][j-2]
+    
+    ```
+
+- Code
+
+  ```java
+  class Solution {
+      public boolean isMatch(String s, String p) {
+          int m = s.length();
+          int n = p.length();
+  
+          boolean[][] f = new boolean[m + 1][n + 1];
+          f[0][0] = true;
+          for (int i = 0; i <= m; ++i) {
+              for (int j = 1; j <= n; ++j) {
+                  if (p.charAt(j - 1) == '*') {
+                      f[i][j] = f[i][j - 2];
+                      if (matches(s, p, i, j - 1)) {
+                          f[i][j] = f[i][j] || f[i - 1][j];
+                      }
+                  } else {
+                      if (matches(s, p, i, j)) {
+                          f[i][j] = f[i - 1][j - 1];
+                      }
+                  }
+              }
+          }
+          return f[m][n];
+      }
+  
+      public boolean matches(String s, String p, int i, int j) {
+          if (i == 0) {
+              return false;
+          }
+          if (p.charAt(j - 1) == '.') {
+              return true;
+          }
+          return s.charAt(i - 1) == p.charAt(j - 1);
+      }
+  }
+  
+  
+  ```
+
+  
+
+# Hash Table
+
+## 哈希表整合队列
+
+### Top K Frequent Elements
+
+- https://leetcode.com/problems/top-k-frequent-elements/
+
+- ```java
+  class Solution {
+  //     TC O(n+n+k)
+  //     SC o(n+n)
+      public int[] topKFrequent(int[] nums, int k) {
+  //         corner cases
+          if(nums==null||nums.length==0){
+              return null;
+          }
+  //        value-frequecen map
+          Map<Integer,Integer> vf=new HashMap<>();
+  //        record frequent
+          for(int i=0;i<nums.length;i++){
+              vf.put(nums[i],vf.getOrDefault(nums[i],0)+1);
+          }
+  //         large heap according to frequent in vf
+          PriorityQueue<Integer> heap=new PriorityQueue(new Comparator<Integer>(){
+              @Override
+              public int compare(Integer o1, Integer o2) {
+                  if(vf.get(o1)>vf.get(o2)){
+                      return -1;
+                  }else if (vf.get(o1)==vf.get(o2)){
+                      return 0;
+                  }else{
+                      return 1;
+                  }
+              }
+          });
+  //         add data to heap
+          for(Integer key: vf.keySet()){
+              heap.add(key);
+          }
+  //         get the result
+          int []res=new int [k];
+          for(int i=0;i<k;i++){
+              res[i]=heap.poll();
+          }
+          return res;
+      }
+  }
+  ```
+
+- 

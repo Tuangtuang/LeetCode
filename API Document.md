@@ -16,8 +16,18 @@ char c = (char) i;
 ### Copy
 
 ```java
-Arrays.copyOfRange(nums, start, end)
+Arrays.copyOfRange(nums, start, end);
+
+Arrays.binarySearch(nums,target);
 ```
+
+### 转list
+
+```java
+return new ArrayList<Integer>(Arrays.asList(res));
+```
+
+
 
 ## List
 
@@ -35,6 +45,15 @@ Arrays.copyOfRange(nums, start, end)
 ### ArrayList
 
 - 没有removeLast方法
+
+- 转arrays
+
+  ```java
+  List<String> res=new ArrayList<>();
+  res.toArray(new String[res.size()]);
+  ```
+
+  
 
 ## StringBuilder
 
@@ -146,6 +165,8 @@ Arrays.copyOfRange(nums, start, end)
 
 # Map
 
+## 数据操作
+
 ```java
 Map<Integer, Integer> m = new HashMap<>();
 m.containsKey(key);
@@ -156,3 +177,31 @@ m.remove(key);
 m.remove(key,value);
 ```
 
+## 遍历
+
+```java
+Map<Integer, Integer> map = new HashMap<Integer, Integer>(); 
+//遍历map中的键 
+for (Integer key : map.keySet()) { 
+  System.out.println("Key = " + key); 
+} 
+//遍历map中的值 
+for (Integer value : map.values()) { 
+  System.out.println("Value = " + value); 
+}
+
+//遍历map中的key-value
+Map<Integer, Integer> map = new HashMap<Integer, Integer>(); 
+for (Map.Entry<Integer, Integer> entry : map.entrySet()) { 
+  System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue()); 
+}
+```
+
+## getOrDefault()方法的使用
+
+1. getOrDefault(key,default)
+   作用：如果存在相应的key则返回其对应的value，否则返回给定的默认值。
+2. key的值相同，使value的值加一。比如需要统计一个字符串中所含的字母及对应字母的个数。
+   方法：
+   （1）定义一个哈希表hash
+   （2）hash.put(c,hash.getOrDefault(c,0)+1); //若没有就是0，若有就是原有值增一。
