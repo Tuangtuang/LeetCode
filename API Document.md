@@ -205,3 +205,20 @@ for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
    方法：
    （1）定义一个哈希表hash
    （2）hash.put(c,hash.getOrDefault(c,0)+1); //若没有就是0，若有就是原有值增一。
+
+# String and char[]
+
+## String to char[]
+
+```java
+String s="test";
+char []str=s.toCharArray();
+```
+
+## char [] to String
+
+```java
+char []str=new str[10];
+String s=String.valueOf(str);
+```
+
