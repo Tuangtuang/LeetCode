@@ -313,46 +313,101 @@
 
 ## Slide Window(滑动窗口)
 
-- Examples:
+### 算法框架
 
-  - **Minimum Size Subarray Sum**
+```java
+int left = 0, right = 0;
 
-    - Given an array of **n** positive integers and a positive integer **s**, find the minimal length of a **contiguous** subarray of which the sum ≥ **s**. If there isn't one, return 0 instead.
+while (right < s.size()) {
+    // 增大窗口
+    window.add(s[right]);
+    //right++;
 
-    - ```
-      Input: s = 7, nums = [2,3,1,2,4,3]
-      Output: 2
-      Explanation: the subarray [4,3] has the minimal length under the problem constraint.
-      ```
+    while (window needs shrink) {
+        // 缩小窗口
+        window.remove(s[left]);
+        left++;
+    }
+  	right++
+}
+```
 
-    - ```Java
-      class Solution {
-          public int minSubArrayLen(int s, int[] nums) {
-             if(nums==null||nums.length==0){
-                  return 0;
+### Longest Repeating Character Replacement
+
+- https://leetcode.com/problems/longest-repeating-character-replacement/
+
+- ```java
+  class Solution {
+      public int characterReplacement(String s, int k) {
+          if(s==null||s.length()==0){
+              return 0;
+          }
+          
+          char [] alphabet=new char[26];
+          int maxDup=0;
+          int res=Integer.MIN_VALUE;
+          
+         int left=0,right=0;
+          // window size=k+maxDup
+          while(right<s.length()){
+  //             enlarge window
+              alphabet[s.charAt(right)-'A']++;
+              if(alphabet[s.charAt(right)-'A']>maxDup){
+                  maxDup=alphabet[s.charAt(right)-'A'];
               }
-              // 滑动窗口
-              int low=0,high=0,currSum=0,minLength=Integer.MAX_VALUE;
-              while(low<nums.length&&high<nums.length){
-                  if(currSum<s){
-                      currSum+=nums[high];
-                      high++;
-                  }else{
-                      minLength=Integer.min(high-low,minLength);
-                      currSum-=nums[low];
-                      low++;
-                  }
+  //             shrink window
+              while(right-left+1>maxDup+k){
+                  alphabet[s.charAt(left)-'A']--;
+                  left++;
               }
-              // 可能仍有多余项
-              while (currSum>=s){
+              res=Integer.max(res,right-left+1);
+              right++;
+          }
+          return res;
+      }
+  }
+  ```
+
+
+
+### **Minimum Size Subarray Sum**
+
+- Given an array of **n** positive integers and a positive integer **s**, find the minimal length of a **contiguous** subarray of which the sum ≥ **s**. If there isn't one, return 0 instead.
+
+- ```
+  Input: s = 7, nums = [2,3,1,2,4,3]
+  Output: 2
+  Explanation: the subarray [4,3] has the minimal length under the problem constraint.
+  ```
+
+- ```Java
+  class Solution {
+      public int minSubArrayLen(int s, int[] nums) {
+         if(nums==null||nums.length==0){
+              return 0;
+          }
+          // 滑动窗口
+          int low=0,high=0,currSum=0,minLength=Integer.MAX_VALUE;
+          while(low<nums.length&&high<nums.length){
+              if(currSum<s){
+                  currSum+=nums[high];
+                  high++;
+              }else{
                   minLength=Integer.min(high-low,minLength);
                   currSum-=nums[low];
                   low++;
               }
-              return minLength==Integer.MAX_VALUE?0:minLength;
           }
+          // 可能仍有多余项
+          while (currSum>=s){
+              minLength=Integer.min(high-low,minLength);
+              currSum-=nums[low];
+              low++;
+          }
+          return minLength==Integer.MAX_VALUE?0:minLength;
       }
-      ```
+  }
+  ```
 
 ## Circular Array
 
