@@ -784,6 +784,12 @@ int BFS(Node root, Node target) {
         }
     ```
 
+### 单调栈问题
+
+- 在一个数组中找左右两边第一个大于、小于、等于的数这种问题可以使用单调栈来解决。
+- https://leetcode-cn.com/problems/sum-of-subarray-minimums/solution/dan-diao-zhan-zuo-you-liang-bian-di-yi-g-ww3n/
+- 题目：42，84，daily temperature
+
 ## DFS
 
 ### Template 1
